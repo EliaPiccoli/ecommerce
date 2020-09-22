@@ -87,7 +87,7 @@ public class DBUser {
             st.setString(8, user.getEmail());
 
             int update = st.executeUpdate();
-            if(update == 0) new SQLException("update was unsuccesful");
+            if(update == 0) throw new SQLException("update was unsuccesful");
         }
         catch(SQLException e){
             System.out.println(e);
@@ -103,7 +103,7 @@ public class DBUser {
             st.setDate(1, fidelityCard.getDataEmissione());
             st.setInt(2, fidelityCard.getSaldo());
             int update = st.executeUpdate();
-            if(update == 0) new SQLException("update was unsuccesful");
+            if(update == 0) throw new SQLException("update was unsuccesful");
         }
         catch(SQLException e){
             System.out.println(e);
@@ -113,7 +113,7 @@ public class DBUser {
         //get fidelity card id to insert user
         try(PreparedStatement st = con.prepareStatement("SELECT id FROM cartaFed ORDER BY id DESC LIMIT 1;")){
             ResultSet rs = st.executeQuery();
-            if(rs.next() == false) new SQLException("Something went TERRIBLY wrong");
+            if(rs.next() == false) throw new SQLException("Something went TERRIBLY wrong");
             else fidelityCard_id = rs.getInt("id");
         }
         catch(SQLException e){
@@ -134,7 +134,7 @@ public class DBUser {
             st.setString(9, user.getEmail());
 
             int update = st.executeUpdate();
-            if(update == 0) new SQLException("update was unsuccesful");
+            if(update == 0) throw new SQLException("update was unsuccesful");
         }
         catch(SQLException e){
             System.out.println(e);
