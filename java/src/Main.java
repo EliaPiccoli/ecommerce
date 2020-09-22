@@ -14,7 +14,6 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Class.forName("org.postgresql.Driver");
-        System.out.println("DIOBOIA");
 
         try{
             FXMLLoader login = new FXMLLoader(getClass().getResource("/Login.fxml"));

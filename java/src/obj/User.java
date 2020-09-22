@@ -11,10 +11,10 @@ public class User {
     String cap;
     String telefono;
     String password;
-    Integer cartaFed;
+    FidelityCard cartaFedelta;
     String ruolo;
 
-    public User(String email, String matricola, String nome, String cognome, String indirizzo, String citta, String cap, String telefono, String password, Integer cartaFed, String ruolo){
+    public User(String email, String matricola, String nome, String cognome, String indirizzo, String citta, String cap, String telefono, String password, FidelityCard cartaFed, String ruolo){
         this.email=email;
         this.matricola=matricola;
         this.nome=nome;
@@ -24,12 +24,11 @@ public class User {
         this.cap=cap;
         this.telefono=telefono;
         this.password=password;
-        this.cartaFed=cartaFed;
+        this.cartaFedelta=cartaFed;
         this.ruolo=ruolo;
     }
 
-    public void setUser(String matricola, String nome, String cognome, String indirizzo, String citta, String cap, String telefono, String password, Integer cartaFed, String ruolo){
-        this.matricola=matricola;
+    public void setUser(String nome, String cognome, String indirizzo, String citta, String cap, String telefono, String password, FidelityCard cartaFed, String ruolo){
         this.nome=nome;
         this.cognome=cognome;
         this.indirizzo=indirizzo;
@@ -37,7 +36,7 @@ public class User {
         this.cap=cap;
         this.telefono=telefono;
         this.password=password;
-        this.cartaFed=cartaFed;
+        this.cartaFedelta=cartaFed;
         this.ruolo=ruolo;
     }
 
@@ -77,8 +76,8 @@ public class User {
         return password;
     }
 
-    public Integer getCartaFed() {
-        return cartaFed;
+    public FidelityCard getCartaFed() {
+        return cartaFedelta;
     }
 
     public String getRuolo() {

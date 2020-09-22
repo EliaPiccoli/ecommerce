@@ -11,10 +11,10 @@
 
 <AnchorPane prefHeight="422.0" prefWidth="622.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SignUpController">
    <children>
-      <Button fx:id="registerButton" layoutX="233.0" layoutY="361.0" mnemonicParsing="false" onAction="#registerButtonPushed" prefHeight="37.0" prefWidth="139.0" style="    -fx-background-color:         #090a0c,         linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),         linear-gradient(#20262b, #191d22),         radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));     -fx-background-radius: 5,4,3,5;     -fx-background-insets: 0,1,2,0;     -fx-text-fill: white;     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Register" textFill="WHITE" />
-      <TextField fx:id="name" layoutX="93.0" layoutY="33.0" promptText="Luca" />
-      <TextField fx:id="email" layoutX="351.0" layoutY="135.0" prefHeight="27.0" prefWidth="258.0" promptText="luca.rossi@gmail.com" />
-      <Label fx:id="" layoutX="22.0" layoutY="38.0" prefHeight="17.0" prefWidth="53.0" text="Name" textFill="#270cc3">
+      <Button onAction="#RegisterButtonPushed" fx:id="RegisterButton" layoutX="233.0" layoutY="361.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="139.0" style="    -fx-background-color:         #090a0c,         linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),         linear-gradient(#20262b, #191d22),         radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));     -fx-background-radius: 5,4,3,5;     -fx-background-insets: 0,1,2,0;     -fx-text-fill: white;     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Register" textFill="WHITE" />
+      <TextField fx:id="Name" layoutX="93.0" layoutY="33.0" promptText="Luca" />
+      <TextField fx:id="Email" layoutX="351.0" layoutY="135.0" prefHeight="27.0" prefWidth="258.0" promptText="luca.rossi@gmail.com" />
+      <Label layoutX="22.0" layoutY="38.0" prefHeight="17.0" prefWidth="53.0" text="Name" fx:id="" textFill="#270cc3">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font></Label>
@@ -26,7 +26,7 @@
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font></Label>
-      <PasswordField fx:id="password" layoutX="219.0" layoutY="200.0" promptText="Password" />
+      <PasswordField fx:id="Password" layoutX="219.0" layoutY="200.0" promptText="Password" />
       <Label layoutX="121.0" layoutY="206.0" text="Password" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
@@ -35,8 +35,8 @@
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font></Label>
-      <TextField fx:id="cardCode" layoutX="219.0" layoutY="244.0" promptText="A97H2" />
-      <CheckBox fx:id="termsOfService" contentDisplay="CENTER" layoutX="22.0" layoutY="315.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="218.0" text="I agree to the terms of service" textFill="#030303">
+      <TextField fx:id="CardCode" layoutX="219.0" layoutY="244.0" promptText="A97H2" />
+      <CheckBox contentDisplay="CENTER" layoutX="22.0" layoutY="315.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="218.0" text="I agree to the terms of service" textFill="#030303">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font></CheckBox>
@@ -46,14 +46,14 @@
       <Label fx:id="invalidAddress" layoutX="154.0" layoutY="107.0" text="This field is required*" textFill="#ee0000" visible="false" />
       <Label fx:id="invalidPassword" layoutX="154.0" layoutY="184.0" text="This field is required*" textFill="#ee0000" visible="false" />
       <Label fx:id="invalidMatch" layoutX="157.0" layoutY="227.0" text="Password do not match" textFill="#ee0000" visible="false" />
-      <TextField fx:id="address" layoutX="349.0" layoutY="33.0" prefHeight="27.0" prefWidth="258.0" promptText="Via Martino gualtieri, 10" />
+      <TextField fx:id="Address" layoutX="349.0" layoutY="33.0" prefHeight="27.0" prefWidth="258.0" promptText="Via Martino gualtieri, 10" />
       <Label layoutX="22.0" layoutY="86.0" prefHeight="17.0" prefWidth="53.0" text="Surname" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="surname" layoutX="93.0" layoutY="81.0" promptText="Rossi" />
-      <TextField fx:id="cap" layoutX="346.0" layoutY="81.0" prefHeight="27.0" prefWidth="77.0" promptText="37130" />
+      <TextField fx:id="Surname" layoutX="93.0" layoutY="81.0" promptText="Rossi" />
+      <TextField fx:id="Cap" layoutX="346.0" layoutY="81.0" prefHeight="27.0" prefWidth="77.0" promptText="37130" />
       <Label layoutX="276.0" layoutY="86.0" prefHeight="17.0" prefWidth="77.0" text="Postal Code" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
@@ -64,8 +64,8 @@
             <Font name="Open Sans Semibold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="city" layoutX="470.0" layoutY="81.0" prefHeight="27.0" prefWidth="139.0" promptText="Verona, Italy" />
-      <TextField fx:id="telNum" layoutX="93.0" layoutY="135.0" prefHeight="27.0" prefWidth="167.0" promptText="320 1634532" />
+      <TextField fx:id="City" layoutX="470.0" layoutY="81.0" prefHeight="27.0" prefWidth="139.0" promptText="Verona, Italy" />
+      <TextField fx:id="TelNum" layoutX="93.0" layoutY="135.0" prefHeight="27.0" prefWidth="167.0" promptText="320 1634532" />
       <Label layoutX="22.0" layoutY="140.0" prefHeight="17.0" prefWidth="53.0" text="Phone" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />

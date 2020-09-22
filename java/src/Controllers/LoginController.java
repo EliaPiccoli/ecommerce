@@ -42,24 +42,10 @@ public class LoginController {
                 ResultSet userResult = st.executeQuery();
                 if(userResult!=null){
                     userResult.next();
-                    System.out.println("Login effettuato con -> " + userResult.getString("email"));
 
-                    Parent tableViewParent;
-                    Scene tableViewScene;
-                    Stage window;
-
-                    if(userResult.getString("ruolo").equals("Cliente")){
-                        System.out.println("AAAAAAAAAA");
-                        tableViewParent =  FXMLLoader.load(getClass().getResource("/Home.fxml"));
-                        tableViewScene = new Scene(tableViewParent);
-                        window = (Stage)((Node)event.getSource()).getScene().getWindow();
-                    }
-                    else {
-                        System.out.println("BBBBBBBBB");
-                        tableViewParent =  FXMLLoader.load(getClass().getResource("/HomeAdminOrders.fxml"));
-                        tableViewScene = new Scene(tableViewParent);
-                        window = (Stage)((Node)event.getSource()).getScene().getWindow();
-                    }
+                    Parent tableViewParent = FXMLLoader.load(getClass().getResource((userResult.getString("ruolo").equals("Cliente")) ? "/Home.fxml" : "/HomeAdminOrders.fxml"));
+                    Scene tableViewScene = new Scene(tableViewParent);
+                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
                     window.setScene(tableViewScene);
                     window.show();

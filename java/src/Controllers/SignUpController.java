@@ -7,67 +7,67 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import java.awt.*;
 import java.io.IOException;
 import java.sql.*;
 
 import static java.lang.System.exit;
 
 public class SignUpController {
-    @FXML private Button registerButton;
-    @FXML private CheckBox termsOfService;
-    @FXML private TextField name;
-    @FXML private TextField surname;
-    @FXML private TextField address;
-    @FXML private TextField city;
-    @FXML private TextField cap;
-    @FXML private TextField telNum;
-    @FXML private TextField email;
-    @FXML private TextField password;
-    @FXML private TextField cardCode;
+    @FXML private Button RegisterButton;
+    @FXML private Checkbox termsOfService;
+    @FXML private TextField Name;
+    @FXML private TextField Surname;
+    @FXML private TextField Address;
+    @FXML private TextField City;
+    @FXML private TextField Cap;
+    @FXML private TextField TelNum;
+    @FXML private TextField Email;
+    @FXML private TextField Password;
+    @FXML private TextField CardCode;
 
     private boolean verifyTextField() {
-        if(name.getText() == null || name.getText().trim().isEmpty())
+        if(Name.getText() == null || Name.getText().trim().isEmpty())
             return false;
-        if(surname.getText() == null || surname.getText().trim().isEmpty())
+        if(Surname.getText() == null || Surname.getText().trim().isEmpty())
             return false;
-        if(address.getText() == null || address.getText().trim().isEmpty())
+        if(Address.getText() == null || Address.getText().trim().isEmpty())
             return false;
-        if(city.getText() == null || city.getText().trim().isEmpty())
+        if(City.getText() == null || City.getText().trim().isEmpty())
             return false;
-        if(cap.getText() == null || cap.getText().trim().isEmpty())
+        if(Cap.getText() == null || Cap.getText().trim().isEmpty())
             return false;
-        if(telNum.getText() == null || telNum.getText().trim().isEmpty())
+        if(TelNum.getText() == null || TelNum.getText().trim().isEmpty())
             return false;
-        if(email.getText() == null || email.getText().trim().isEmpty())
+        if(Email.getText() == null || Email.getText().trim().isEmpty())
             return false;
-        if(password.getText() == null || password.getText().trim().isEmpty())
+        if(Password.getText() == null || Password.getText().trim().isEmpty())
             return false;
         return true;
     }
 
     private boolean checkRightFormat() {
-        if(cap.getText().trim().length() != 5) {//il cap deve essere esattamente di 5 cifre
+        if(Cap.getText().trim().length() != 5) {//il cap deve essere esattamente di 5 cifre
             AlertBox.display("Error", "CAP must be numeric and composed by five numbers");
             return false;
         }
-        else if(telNum.getText().trim().length() > 11 || telNum.getText().length() < 10) { //il numero telefonico deve essere di 10-11 caratteri
+        else if(TelNum.getText().trim().length() > 11 || TelNum.getText().length() < 10) { //il numero telefonico deve essere di 10-11 caratteri
             AlertBox.display("Error", "Insert a valid telephone number");
             return false;
         }
-        else if(email.getText().trim().length() < 6) {//non è possibile inserire una email con meno di 6 caratteri
+        else if(Email.getText().trim().length() < 6) {//non è possibile inserire una email con meno di 6 caratteri
             AlertBox.display("Error", "Email must be at least 6 characters long");
             return false;
         }
-        else if(password.getText().trim().length() < 6) {//non è possibile inserire una password con meno di 6 caratteri
+        else if(Password.getText().trim().length() < 6) {//non è possibile inserire una password con meno di 6 caratteri
             AlertBox.display("Error", "Password must be at least 6 characters long");
             return false;
         }
         else {
             try {//testo se la stringa presa dal cap è effettivamente un numero o meno
-                if( Integer.parseInt(cap.getText().trim())<0) {
+                if( Integer.parseInt(Cap.getText().trim())<0) {
                     AlertBox.display("Error", "Cap must be positive");
                     return false;
                 }
@@ -79,7 +79,7 @@ public class SignUpController {
             }
 
             try {//testo se la stringa presa dal numero di telefono è effettivamente un numero o meno
-                if(Double.valueOf(telNum.getText().trim())<0) {
+                if(Double.valueOf(TelNum.getText().trim())<0) {
                     AlertBox.display("Error", "Telephone number must be positive");
                     return false;
                 }
@@ -93,7 +93,7 @@ public class SignUpController {
         return true;
     }
 
-    public void registerButtonPushed(ActionEvent event) throws IOException {
+    public void RegisterButtonPushed(ActionEvent event) throws IOException {
 
         if(!verifyTextField()) {
             AlertBox.display("Error","All field must be filled");
@@ -103,23 +103,23 @@ public class SignUpController {
 
         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
             try (PreparedStatement st = con.prepareStatement("SELECT * FROM utente WHERE email=? AND password=?")) {
-                st.setString(1, email.getText());
-                st.setString(2, password.getText());
+                st.setString(1, Email.getText());
+                st.setString(2, Password.getText());
 
-                System.out.println(email.getText());
-                System.out.println(password.getText());
+                System.out.println(Email.getText());
+                System.out.println(Password.getText());
                 ResultSet res = st.executeQuery();
                 if(!res.next()) {
                     try(PreparedStatement statement = con.prepareStatement("INSERT INTO utente(nome, cognome, indirizzo, citta, cap, email, telefono, password, cartafed, ruolo) VALUES(?,?,?,?,?,?,?,?,?,?)")) {
-                        statement.setString(1, name.getText());
-                        statement.setString(2, surname.getText());
-                        statement.setString(3, address.getText());
-                        statement.setString(4, city.getText());
-                        statement.setString(5, cap.getText());
-                        statement.setString(6, email.getText());
-                        statement.setString(7, telNum.getText());
-                        statement.setString(8, password.getText());
-                        statement.setInt(9, Integer.parseInt(cardCode.getText()));
+                        statement.setString(1, Name.getText());
+                        statement.setString(2, Surname.getText());
+                        statement.setString(3, Address.getText());
+                        statement.setString(4, City.getText());
+                        statement.setString(5, Cap.getText());
+                        statement.setString(6, Email.getText());
+                        statement.setString(7, TelNum.getText());
+                        statement.setString(8, Password.getText());
+                        statement.setInt(9, Integer.parseInt(CardCode.getText()));
                         statement.setString(10, "Cliente");
                         System.out.println(statement);
 

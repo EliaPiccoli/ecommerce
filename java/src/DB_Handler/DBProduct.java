@@ -54,16 +54,16 @@ public class DBProduct {
         }
     }
 
-    public void updateProduct(Integer id, String tipo, String nome, String marca, String descrizione, Integer quantita, Integer quantita_conf, BigDecimal prezzo){
+    public void updateProduct(Product prod){
         try(PreparedStatement st = con.prepareStatement("UPDATE prodotto SET tipo = ?, nome = ?, marca = ?, descrizione = ?, quantita = ?, quantita_conf = ?, prezzo = ? WHERE id = ?;")){
-            st.setString(1, tipo);
-            st.setString(1, nome);
-            st.setString(1, marca);
-            st.setString(1, descrizione);
-            st.setInt(1, quantita);
-            st.setInt(1, quantita_conf);
-            st.setBigDecimal(1, prezzo);
-            st.setInt(1, id);
+            st.setString(1, prod.getTipo());
+            st.setString(2, prod.getNome());
+            st.setString(3, prod.getMarca());
+            st.setString(4, prod.getDescrizione());
+            st.setInt(5, prod.getQuantita());
+            st.setInt(6, prod.getQuantita_conf());
+            st.setBigDecimal(7, prod.getPrezzo());
+            st.setInt(8, prod.getId());
             int update = st.executeUpdate();
             if(update == 0) new SQLException("update was unsuccesful");//TODO impara l'inglese
         }
@@ -75,12 +75,12 @@ public class DBProduct {
     public void insertProduct(String tipo, String nome, String marca, String descrizione, Integer quantita, Integer quantita_conf, BigDecimal prezzo){
         try(PreparedStatement st = con.prepareStatement("INSERT INTO prodotto (tipo, nome, marca, descrizione, quantita, quantita_conf, prezzo) VALUES(?, ?, ?, ?, ?, ?, ?);")){
             st.setString(1, tipo);
-            st.setString(1, nome);
-            st.setString(1, marca);
-            st.setString(1, descrizione);
-            st.setInt(1, quantita);
-            st.setInt(1, quantita_conf);
-            st.setBigDecimal(1, prezzo);
+            st.setString(2, nome);
+            st.setString(3, marca);
+            st.setString(4, descrizione);
+            st.setInt(5, quantita);
+            st.setInt(6, quantita_conf);
+            st.setBigDecimal(7, prezzo);
             int insert = st.executeUpdate();
             if(insert == 0) new SQLException("insert was unsuccesful");//TODO impara l'esperanto
         }
