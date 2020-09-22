@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="183.0" prefWidth="615.0" style="-fx-background-color: #bdc3c7; -fx-border-color: #02048a;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="60.0" layoutY="105.0" prefHeight="28.0" prefWidth="438.0" text="Ops, this email already used, try again !" textFill="#02048a">
+         <font>
+            <Font name="Constantia" size="22.0" />
+         </font>
+      </Label>
+      <Separator layoutY="73.0" prefHeight="3.0" prefWidth="615.0" style="-fx-background-color: #02048a;" />
+      <Label layoutX="27.0" layoutY="14.0" text="Info" textFill="#02048a">
+         <font>
+            <Font name="Constantia" size="45.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
