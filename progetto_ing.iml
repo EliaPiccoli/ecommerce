@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/java/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/java/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/java/lib" />
+      <excludeFolder url="file://$MODULE_DIR$/java/out" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
