@@ -13,60 +13,60 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ClientProfileModifierController {
-    @FXML private Button CancelButton;
-    @FXML private Button SaveButton;
+    @FXML private Button cancelButton;
+    @FXML private Button saveButton;
 
-    @FXML private TextField Name;
-    @FXML private TextField Surname;
-    @FXML private TextField Address;
-    @FXML private TextField City;
-    @FXML private TextField Cap;
-    @FXML private TextField Phone;
-    @FXML private TextField TelNum;
-    @FXML private TextField Email;
-    @FXML private TextField Password;
-    @FXML private TextField CardCode;
+    @FXML private TextField name;
+    @FXML private TextField surname;
+    @FXML private TextField address;
+    @FXML private TextField city;
+    @FXML private TextField cap;
+    @FXML private TextField phone;
+    @FXML private TextField telNum;
+    @FXML private TextField email;
+    @FXML private TextField password;
+    @FXML private TextField cardCode;
 
     private boolean vefifyTextField() {
-        if(Name.getText() == null || Name.getText().trim().isEmpty())
+        if(name.getText() == null || name.getText().trim().isEmpty())
             return false;
-        if(Surname.getText() == null || Surname.getText().trim().isEmpty())
+        if(surname.getText() == null || surname.getText().trim().isEmpty())
             return false;
-        if(Address.getText() == null || Address.getText().trim().isEmpty())
+        if(address.getText() == null || address.getText().trim().isEmpty())
             return false;
-        if(City.getText() == null || City.getText().trim().isEmpty())
+        if(city.getText() == null || city.getText().trim().isEmpty())
             return false;
-        if(Cap.getText() == null || Cap.getText().trim().isEmpty())
+        if(cap.getText() == null || cap.getText().trim().isEmpty())
             return false;
-        if(Phone.getText() == null || Phone.getText().trim().isEmpty())
+        if(phone.getText() == null || phone.getText().trim().isEmpty())
             return false;
-        if(Email.getText() == null || Email.getText().trim().isEmpty())
+        if(email.getText() == null || email.getText().trim().isEmpty())
             return false;
-        if(Password.getText() == null || Password.getText().trim().isEmpty())
+        if(password.getText() == null || password.getText().trim().isEmpty())
             return false;
         return true;
     }
 
     private boolean checkRightFormat() {
-        if(Cap.getText().trim().length() != 5) {//il cap deve essere esattamente di 5 cifre
+        if(cap.getText().trim().length() != 5) {//il cap deve essere esattamente di 5 cifre
             AlertBox.display("Error", "CAP must be numeric and composed by five numbers");
             return false;
         }
-        else if(TelNum.getText().trim().length() > 11 || TelNum.getText().length() < 10) { //il numero telefonico deve essere di 10-11 caratteri
+        else if(telNum.getText().trim().length() > 11 || telNum.getText().length() < 10) { //il numero telefonico deve essere di 10-11 caratteri
             AlertBox.display("Error", "Insert a valid telephone number");
             return false;
         }
-        else if(Email.getText().trim().length() < 6) {//non è possibile inserire una email con meno di 6 caratteri
+        else if(email.getText().trim().length() < 6) {//non è possibile inserire una email con meno di 6 caratteri
             AlertBox.display("Error", "Email must be at least 6 characters long");
             return false;
         }
-        else if(Password.getText().trim().length() < 6) {//non è possibile inserire una password con meno di 6 caratteri
+        else if(password.getText().trim().length() < 6) {//non è possibile inserire una password con meno di 6 caratteri
             AlertBox.display("Error", "Password must be at least 6 characters long");
             return false;
         }
         else {
             try {//testo se la stringa presa dal cap è effettivamente un numero o meno
-                if( Integer.parseInt(Cap.getText().trim())<0) {
+                if( Integer.parseInt(cap.getText().trim())<0) {
                     AlertBox.display("Error", "Cap must be positive");
                     return false;
                 }
@@ -78,7 +78,7 @@ public class ClientProfileModifierController {
             }
 
             try {//testo se la stringa presa dal numero di telefono è effettivamente un numero o meno
-                if(Double.valueOf(Phone.getText().trim())<0) {
+                if(Double.valueOf(phone.getText().trim())<0) {
                     AlertBox.display("Error", "Telephone number must be positive");
                     return false;
                 }
