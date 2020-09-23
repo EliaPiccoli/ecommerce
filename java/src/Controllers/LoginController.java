@@ -22,22 +22,21 @@ public class LoginController {
     @FXML private Button loginButton;
     @FXML private Button signUpButton;
 
-    public void SignUpButtonPushed(ActionEvent event) throws IOException
-    {
-        Parent tableViewParent =  FXMLLoader.load(getClass().getResource("/SignUp.fxml"));
+    public void SignUpButtonPushed(ActionEvent event) throws IOException {
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("/SignUp.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();
     }
 
     public void LoginButtonPushed(ActionEvent event) throws IOException, ClassNotFoundException {
-        String email=emailField.getText();
-        String pw=pwField.getText();
+        String email = emailField.getText();
+        String pw = pwField.getText();
 
         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
             DBUser dbUserConnector = new DBUser(con);
-            if(dbUserConnector.checkUser(email, pw)) {
+            if (dbUserConnector.checkUser(email, pw)) {
                 User usr = dbUserConnector.getUser(email);
                 Parent tableViewParent = FXMLLoader.load(getClass().getResource((usr.getRuolo().equals("Cliente")) ? "/Home.fxml" : "/HomeAdminOrders.fxml"));
                 Scene tableViewScene = new Scene(tableViewParent);

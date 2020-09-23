@@ -19,77 +19,71 @@ import java.sql.*;
 import static java.lang.System.exit;
 
 public class SignUpController {
-    @FXML private Button RegisterButton;
+    @FXML private Button registerButton;
     @FXML private Checkbox termsOfService;
-    @FXML private TextField Name;
-    @FXML private TextField Surname;
-    @FXML private TextField Address;
-    @FXML private TextField City;
-    @FXML private TextField Cap;
-    @FXML private TextField TelNum;
-    @FXML private TextField Email;
-    @FXML private TextField Password;
-    @FXML private TextField CardCode;
+    @FXML private TextField name;
+    @FXML private TextField surname;
+    @FXML private TextField address;
+    @FXML private TextField city;
+    @FXML private TextField cap;
+    @FXML private TextField telNum;
+    @FXML private TextField email;
+    @FXML private TextField password;
+    @FXML private TextField cardCode;
 
     private boolean verifyTextField() {
-        if(Name.getText() == null || Name.getText().trim().isEmpty())
+        if (name.getText() == null || name.getText().trim().isEmpty())
             return false;
-        if(Surname.getText() == null || Surname.getText().trim().isEmpty())
+        if (surname.getText() == null || surname.getText().trim().isEmpty())
             return false;
-        if(Address.getText() == null || Address.getText().trim().isEmpty())
+        if (address.getText() == null || address.getText().trim().isEmpty())
             return false;
-        if(City.getText() == null || City.getText().trim().isEmpty())
+        if (city.getText() == null || city.getText().trim().isEmpty())
             return false;
-        if(Cap.getText() == null || Cap.getText().trim().isEmpty())
+        if (cap.getText() == null || cap.getText().trim().isEmpty())
             return false;
-        if(TelNum.getText() == null || TelNum.getText().trim().isEmpty())
+        if (telNum.getText() == null || telNum.getText().trim().isEmpty())
             return false;
-        if(Email.getText() == null || Email.getText().trim().isEmpty())
+        if (email.getText() == null || email.getText().trim().isEmpty())
             return false;
-        if(Password.getText() == null || Password.getText().trim().isEmpty())
+        if (password.getText() == null || password.getText().trim().isEmpty())
             return false;
         return true;
     }
 
     private boolean checkRightFormat() {
-        if(Cap.getText().trim().length() != 5) {//il cap deve essere esattamente di 5 cifre
-            AlertBox.display("Error", "CAP must be numeric and composed by five numbers");
+        if (cap.getText().trim().length() != 5) {//il cap deve essere esattamente di 5 cifre
+            AlertBox.display("Error", "CAP must be numeric and composed by five numbers", false);
             return false;
-        }
-        else if(TelNum.getText().trim().length() > 11 || TelNum.getText().length() < 10) { //il numero telefonico deve essere di 10-11 caratteri
-            AlertBox.display("Error", "Insert a valid telephone number");
+        } else if (telNum.getText().trim().length() > 11 || telNum.getText().length() < 10) { //il numero telefonico deve essere di 10-11 caratteri
+            AlertBox.display("Error", "Insert a valid telephone number", false);
             return false;
-        }
-        else if(Email.getText().trim().length() < 6) {//non è possibile inserire una email con meno di 6 caratteri
-            AlertBox.display("Error", "Email must be at least 6 characters long");
+        } else if (email.getText().trim().length() < 6) {//non è possibile inserire una email con meno di 6 caratteri
+            AlertBox.display("Error", "Email must be at least 6 characters long", false);
             return false;
-        }
-        else if(Password.getText().trim().length() < 6) {//non è possibile inserire una password con meno di 6 caratteri
-            AlertBox.display("Error", "Password must be at least 6 characters long");
+        } else if (password.getText().trim().length() < 6) {//non è possibile inserire una password con meno di 6 caratteri
+            AlertBox.display("Error", "Password must be at least 6 characters long", false);
             return false;
-        }
-        else {
+        } else {
             try {//testo se la stringa presa dal cap è effettivamente un numero o meno
-                if( Integer.parseInt(Cap.getText().trim())<0) {
-                    AlertBox.display("Error", "Cap must be positive");
+                if (Integer.parseInt(cap.getText().trim()) < 0) {
+                    AlertBox.display("Error", "Cap must be positive", false);
                     return false;
                 }
 
-            }
-            catch(NumberFormatException e){
-                AlertBox.display("Error", "Insert a valid numeric CAP");
+            } catch (NumberFormatException e) {
+                AlertBox.display("Error", "Insert a valid numeric CAP", false);
                 return false;
             }
 
             try {//testo se la stringa presa dal numero di telefono è effettivamente un numero o meno
-                if(Double.valueOf(TelNum.getText().trim())<0) {
-                    AlertBox.display("Error", "Telephone number must be positive");
+                if (Double.valueOf(telNum.getText().trim()) < 0) {
+                    AlertBox.display("Error", "Telephone number must be positive", false);
                     return false;
                 }
 
-            }
-            catch(NumberFormatException e){
-                AlertBox.display("Error", "Insert a valid numeric telephone number");
+            } catch (NumberFormatException e) {
+                AlertBox.display("Error", "Insert a valid numeric telephone number", false);
                 return false;
             }
         }
@@ -98,33 +92,33 @@ public class SignUpController {
 
     public void RegisterButtonPushed(ActionEvent event) throws IOException {
 
-        if(!verifyTextField()) {
-            AlertBox.display("Error","All field must be filled");
+        if (!verifyTextField()) {
+            AlertBox.display("Error", "All field must be filled", false);
             return;
         }
-        if(!checkRightFormat()) return;
+        if (!checkRightFormat()) return;
 
         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
             DBUser dbUserConnector = new DBUser(con);
-            if(!dbUserConnector.checkUser(Email.getText(), Password.getText())) {
-                boolean insert = dbUserConnector.insertUser(new User(Email.getText(), Name.getText(), Surname.getText(), Address.getText(), City.getText(), Cap.getText(), TelNum.getText(), Password.getText(), "Cliente"));
-                if(insert) {
+            if (!dbUserConnector.checkUser(email.getText(), password.getText())) {
+                boolean insert = dbUserConnector.insertUser(new User(email.getText(), name.getText(), surname.getText(), address.getText(), city.getText(), cap.getText(), telNum.getText(), password.getText(), "Cliente"));
+                if (insert) {
                     System.out.println("User added to db");
-                    Parent tableViewParent =  FXMLLoader.load(getClass().getResource("/Home.fxml"));
+                    Parent tableViewParent = FXMLLoader.load(getClass().getResource("/Home.fxml"));
                     Scene tableViewScene = new Scene(tableViewParent);
-                    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     window.setScene(tableViewScene);
                     window.show();
                 } else {
-                    AlertBox.display("Error","Couldn't add user to db");
+                    AlertBox.display("Error", "Couldn't add user to db", false);
                     return;
                 }
             } else {
-                AlertBox.display("Error","Email already taken");
+                AlertBox.display("Error", "Email already taken", false);
                 return;
             }
         } catch (SQLException e) {
-             System.out.println("Error connecting with db");
+            System.out.println("Error connecting with db");
         }
     }
 }
