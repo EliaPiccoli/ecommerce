@@ -39,13 +39,11 @@ public class DBProduct {
     public List<Product> getProducts(){
         try(PreparedStatement st = con.prepareStatement("SELECT * FROM Prodotto;")){
             ResultSet rs = st.executeQuery();
-            List<Product> prodList = new ArrayList<Product>();
-            if(rs.next() == false) return null;
-
-            do{
-                prodList.add(new Product(rs.getInt("id"), rs.getString("tipo"), rs.getString("nome"), rs.getString("marca"), rs.getString("descrizioni"), rs.getInt("quantita"), rs.getInt("quantita_conf"), rs.getBigDecimal("prezzo")));
-            }while(rs.next());
-
+            List<Product> prodList = new ArrayList<>();
+            while(rs.next()) {
+                prodList.add(new Product(rs.getInt("id"), rs.getString("tipo"), rs.getString("nome"), rs.getString("marca"), rs.getString("descrizione"), rs.getInt("quantita"), rs.getInt("quantita_conf"), rs.getBigDecimal("prezzo")));
+            }
+            System.out.println(prodList);
             return prodList;
         }
         catch(SQLException e){
@@ -97,6 +95,20 @@ public class DBProduct {
         }
         catch(SQLException e){
             System.out.println(e);
+        }
+    }
+
+    public List<Product> searchProduct(String column, String value) {
+        try (PreparedStatement st = con.prepareStatement(String.format("SELECT * FROM prodotto WHERE LOWER(%s) = LOWER(?)", column))) {
+            st.setString(1, value);
+            ResultSet rs = st.executeQuery();
+            List<Product> l = new ArrayList<>();
+            while(rs.next())
+                l.add(new Product(rs.getInt("id"), rs.getString("tipo"), rs.getString("nome"), rs.getString("marca"), rs.getString("descrizione"), rs.getInt("quantita"), rs.getInt("quantita_conf"), rs.getBigDecimal("prezzo")));
+            return l;
+        } catch (SQLException e) {
+            System.out.println("Error fetching info from db");
+            return null;
         }
     }
 }

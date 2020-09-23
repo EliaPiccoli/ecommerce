@@ -10,7 +10,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="1054.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="1054.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomeController">
    <children>
       <Separator layoutX="-2.0" layoutY="109.0" prefHeight="3.0" prefWidth="1059.0" style="-fx-background-color: #02048a;" />
       <Label layoutX="40.0" layoutY="26.0" prefHeight="59.0" prefWidth="332.0" text="Super" textFill="#02048a">
@@ -23,15 +24,43 @@
             <Font name="Constantia" size="14.0" />
          </font>
       </TextField>
-      <TableView fx:id="ordersTable" layoutX="39.0" layoutY="217.0" prefHeight="476.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
+      <TableView fx:id="productTable" layoutX="39.0" layoutY="217.0" prefHeight="476.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
         <columns>
-            <TableColumn fx:id="colID1" prefWidth="154.0" text="Unit" />
-          <TableColumn fx:id="colID" prefWidth="159.0" text="Name" />
-            <TableColumn fx:id="colDescr" prefWidth="188.0" text="Brand" />
-            <TableColumn fx:id="colPonts1" prefWidth="127.0" text="Description" />
-            <TableColumn fx:id="colPonts" prefWidth="132.0" text="Quantity" />
-            <TableColumn fx:id="colDate" prefWidth="115.0" text="Price" />
-            <TableColumn fx:id="colStat" prefWidth="113.0" text="Status" />
+            <TableColumn fx:id="id" prefWidth="154.0" text="ID">
+               <cellValueFactory>
+                  <PropertyValueFactory property="id" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="tipo" prefWidth="113.0" text="Class">
+               <cellValueFactory>
+                  <PropertyValueFactory property="tipo" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="nome" prefWidth="159.0" text="Name">
+              <cellValueFactory>
+                 <PropertyValueFactory property="nome" />
+              </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="marca" prefWidth="188.0" text="Brand">
+               <cellValueFactory>
+                  <PropertyValueFactory property="marca" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="descrizione" prefWidth="127.0" text="Description">
+               <cellValueFactory>
+                  <PropertyValueFactory property="descrizione" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="quantita" prefWidth="132.0" text="Quantity">
+               <cellValueFactory>
+                  <PropertyValueFactory property="quantita" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="prezzo" prefWidth="115.0" text="Price">
+               <cellValueFactory>
+                  <PropertyValueFactory property="prezzo" />
+               </cellValueFactory>
+            </TableColumn>
         </columns>
       </TableView>
       <Button layoutX="47.0" layoutY="140.0" mnemonicParsing="false"  prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #02048a;" text="Search" textFill="WHITE">
@@ -42,7 +71,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TextField fx:id="IDtoSearch" alignment="CENTER" layoutX="195.0" layoutY="138.0" prefHeight="44.0" prefWidth="817.0" promptText="Type, Name, Brand" style="-fx-background-color: white;">
+      <TextField fx:id="searchParameter" alignment="CENTER" layoutX="195.0" layoutY="138.0" prefHeight="44.0" prefWidth="817.0" promptText="Type, Name, Brand" style="-fx-background-color: white;">
          <font>
             <Font name="Ubuntu" size="20.0" />
          </font>
@@ -52,7 +81,7 @@
             <Image url="@carrello.png" />
          </image>
       </ImageView>
-      <Button layoutX="766.0" layoutY="67.0" mnemonicParsing="false"  prefHeight="19.0" prefWidth="120.0" style="-fx-background-color: #bdc3c7;" text="BASKET" textFill="#1616dd">
+      <Button onAction="#seeBasket" layoutX="766.0" layoutY="67.0" mnemonicParsing="false"  prefHeight="19.0" prefWidth="120.0" style="-fx-background-color: #bdc3c7;" text="BASKET" textFill="#1616dd">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -60,7 +89,7 @@
             <Font name="Constantia" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="876.0" layoutY="53.0" mnemonicParsing="false"  prefHeight="28.0" prefWidth="147.0" style="-fx-background-color: #02048a;" text="POINTS BALANCE" textFill="WHITE">
+      <Button onAction="#seePoints" layoutX="876.0" layoutY="53.0" mnemonicParsing="false"  prefHeight="28.0" prefWidth="147.0" style="-fx-background-color: #02048a;" text="POINTS BALANCE" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -68,7 +97,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="646.0" layoutY="53.0" mnemonicParsing="false"  prefHeight="28.0" prefWidth="120.0" style="-fx-background-color: #0a960a;" text="ORDERS" textFill="WHITE">
+      <Button onAction="#seeOrders" layoutX="646.0" layoutY="53.0" mnemonicParsing="false"  prefHeight="28.0" prefWidth="120.0" style="-fx-background-color: #0a960a;" text="ORDERS" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -76,7 +105,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="406.0" layoutY="53.0" mnemonicParsing="false"  prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #02448a;" text="Logged as:" textFill="WHITE">
+      <Button fx:id="userLogged" onAction="#editProfile" layoutX="406.0" layoutY="53.0" mnemonicParsing="false"  prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #02448a;" text="Logged as:" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

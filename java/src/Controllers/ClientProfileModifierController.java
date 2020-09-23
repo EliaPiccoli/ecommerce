@@ -13,8 +13,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ClientProfileModifierController {
-    @FXML
-    private Button CancelButton;
+    @FXML private Button CancelButton;
     @FXML private Button SaveButton;
 
     @FXML private TextField Name;
