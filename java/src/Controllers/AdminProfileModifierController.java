@@ -62,43 +62,43 @@ public class AdminProfileModifierController {
 
     private boolean checkRightFormat() {
         if(Cap.getText().trim().length() != 5) {//il cap deve essere esattamente di 5 cifre
-            AlertBox.display("Error", "CAP must be numeric and composed by five numbers");
+            AlertBox.display("Error", "CAP must be numeric and composed by five numbers", false);
             return false;
         }
         else if(TelNum.getText().trim().length() > 11 || TelNum.getText().length() < 10) { //il numero telefonico deve essere di 10-11 caratteri
-            AlertBox.display("Error", "Insert a valid telephone number");
+            AlertBox.display("Error", "Insert a valid telephone number", false);
             return false;
         }
         else if(Email.getText().trim().length() < 6) {//non è possibile inserire una email con meno di 6 caratteri
-            AlertBox.display("Error", "Email must be at least 6 characters long");
+            AlertBox.display("Error", "Email must be at least 6 characters long", false);
             return false;
         }
         else if(Password.getText().trim().length() < 6) {//non è possibile inserire una password con meno di 6 caratteri
-            AlertBox.display("Error", "Password must be at least 6 characters long");
+            AlertBox.display("Error", "Password must be at least 6 characters long", false);
             return false;
         }
         else {
             try {//testo se la stringa presa dal cap è effettivamente un numero o meno
                 if( Integer.parseInt(Cap.getText().trim())<0) {
-                    AlertBox.display("Error", "Cap must be positive");
+                    AlertBox.display("Error", "Cap must be positive", false);
                     return false;
                 }
 
             }
             catch(NumberFormatException e){
-                AlertBox.display("Error", "Insert a valid numeric CAP");
+                AlertBox.display("Error", "Insert a valid numeric CAP", false);
                 return false;
             }
 
             try {//testo se la stringa presa dal numero di telefono è effettivamente un numero o meno
                 if(Double.valueOf(Phone.getText().trim())<0) {
-                    AlertBox.display("Error", "Telephone number must be positive");
+                    AlertBox.display("Error", "Telephone number must be positive", false);
                     return false;
                 }
 
             }
             catch(NumberFormatException e){
-                AlertBox.display("Error", "Insert a valid numeric telephone number");
+                AlertBox.display("Error", "Insert a valid numeric telephone number", false);
                 return false;
             }
         }
@@ -108,7 +108,7 @@ public class AdminProfileModifierController {
     public void  SaveButtonPushed(ActionEvent event) throws IOException {
 
         if(!vefifyTextField()) {
-            AlertBox.display("Error","All field must be filled");
+            AlertBox.display("Error","All field must be filled", false);
             return;
         }
         if(!checkRightFormat()) return;
