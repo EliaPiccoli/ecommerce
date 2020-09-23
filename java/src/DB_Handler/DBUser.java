@@ -138,6 +138,7 @@ public class DBUser {
         Integer fidelityCard_id = null;
         //insert fidelity card
         try(PreparedStatement st = con.prepareStatement("INSERT INTO cartaFed (dataEmissione, saldo) VALUES (?, ?) RETURNING id;")){ //se non va mettiamo anche id e DEFAULT           st.setDate(1, new Date(System.currentTimeMillis()));
+            st.setDate(1, new Date(System.currentTimeMillis()));
             st.setInt(2, 0);
             ResultSet rs = st.executeQuery();
             if(rs.next() == false) throw new SQLException("Something went TERRIBLY wrong");
