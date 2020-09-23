@@ -14,14 +14,14 @@ public class DBOrder {
     }
 
     public Order getOrder(Integer id){
-        try(PreparedStatement st = con.prepareStatement("SELECT * FROM ordine o JOIN prodotto_in_ordine po ON o.id=po.id_ordine JOIN prodotto p ON p.id=po.id_prodotto WHERE id = ?;")){
+        try(PreparedStatement st = con.prepareStatement("SELECT p. FROM ordine o JOIN prodotto_in_ordine po ON o.id=po.id_ordine JOIN prodotto p ON p.id=po.id_prodotto WHERE id = ?;")){
             st.setInt(1, id);
 
             ResultSet rs = st.executeQuery();
             if(rs.next() != false){
                 FidelityCard fidelityCard = new FidelityCard(rs.getInt("id"), rs.getDate("dataemissione"), rs.getInt("saldo"));
                 User user = new User(rs.getString("email"), rs.getString("matricola"), rs.getString("nome"), rs.getString("cognome"), rs.getString("indirizzo"), rs.getString("citta"), rs.getString("cap"), rs.getString("telefono"), rs.getString("password"), fidelityCard,rs.getString("ruolo"));
-                return user;
+                return null;
             }
             else{
                 return null;
