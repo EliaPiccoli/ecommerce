@@ -21,7 +21,7 @@
    <children>
       <Button fx:id="saveButton" layoutX="354.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleAddButton" prefHeight="37.0" prefWidth="139.0" style="    -fx-background-color:         #090a0c,         linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),         linear-gradient(#20262b, #191d22),         radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));     -fx-background-radius: 5,4,3,5;     -fx-background-insets: 0,1,2,0;     -fx-text-fill: white;     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="SAVE" textFill="WHITE" />
       <TextField fx:id="name" layoutX="93.0" layoutY="33.0" promptText="Luca" />
-      <TextField fx:id="userName" layoutX="351.0" layoutY="135.0" prefHeight="27.0" prefWidth="258.0" promptText="luca.rossi@gmail.com" />
+      <TextField fx:id="email" layoutX="351.0" layoutY="135.0" prefHeight="27.0" prefWidth="258.0" promptText="luca.rossi@gmail.com" />
       <Label layoutX="22.0" layoutY="38.0" prefHeight="17.0" prefWidth="53.0" text="Name" textFill="#270cc3">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
@@ -45,14 +45,14 @@
       <Label fx:id="invalidAddress" layoutX="154.0" layoutY="107.0" text="This field is required*" textFill="#ee0000" visible="false" />
       <Label fx:id="invalidPassword" layoutX="154.0" layoutY="184.0" text="This field is required*" textFill="#ee0000" visible="false" />
       <Label fx:id="invalidMatch" layoutX="157.0" layoutY="227.0" text="Password do not match" textFill="#ee0000" visible="false" />
-      <TextField fx:id="name1" layoutX="349.0" layoutY="33.0" prefHeight="27.0" prefWidth="258.0" promptText="Via Martino gualtieri, 10" />
-      <Label fx:id="surname" layoutX="22.0" layoutY="86.0" prefHeight="17.0" prefWidth="53.0" text="Surname" textFill="#4727ea">
+      <TextField fx:id="address" layoutX="349.0" layoutY="33.0" prefHeight="27.0" prefWidth="258.0" promptText="Via Martino gualtieri, 10" />
+      <Label layoutX="22.0" layoutY="86.0" prefHeight="17.0" prefWidth="53.0" text="Surname" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="name2" layoutX="93.0" layoutY="81.0" promptText="Rossi" />
-      <TextField fx:id="name21" layoutX="346.0" layoutY="81.0" prefHeight="27.0" prefWidth="77.0" promptText="37130" />
+      <TextField fx:id="surname" layoutX="93.0" layoutY="81.0" promptText="Rossi" />
+      <TextField fx:id="cap" layoutX="346.0" layoutY="81.0" prefHeight="27.0" prefWidth="77.0" promptText="37130" />
       <Label layoutX="276.0" layoutY="86.0" prefHeight="17.0" prefWidth="77.0" text="Postal Code" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
@@ -63,15 +63,15 @@
             <Font name="Open Sans Semibold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="name211" layoutX="470.0" layoutY="81.0" prefHeight="27.0" prefWidth="139.0" promptText="Verona, Italy" />
-      <TextField fx:id="name2111" layoutX="93.0" layoutY="135.0" prefHeight="27.0" prefWidth="167.0" promptText="320 1634532" />
+      <TextField fx:id="city" layoutX="470.0" layoutY="81.0" prefHeight="27.0" prefWidth="139.0" promptText="Verona, Italy" />
+      <TextField fx:id="phone" layoutX="93.0" layoutY="135.0" prefHeight="27.0" prefWidth="167.0" promptText="320 1634532" />
       <Label layoutX="22.0" layoutY="140.0" prefHeight="17.0" prefWidth="53.0" text="Phone" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font>
       </Label>
       <Separator layoutX="21.0" layoutY="243.0" prefHeight="3.0" prefWidth="588.0" style="-fx-background-color: #000000;" />
-      <TextField fx:id="name3" layoutX="218.0" layoutY="271.0" promptText="0001" />
+      <TextField fx:id="matricola" layoutX="218.0" layoutY="271.0" promptText="0001" />
       <Label layoutX="126.0" layoutY="271.0" text="Matricola" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />

@@ -22,7 +22,6 @@ public class ClientProfileModifierController {
     @FXML private TextField city;
     @FXML private TextField cap;
     @FXML private TextField phone;
-    @FXML private TextField telNum;
     @FXML private TextField email;
     @FXML private TextField password;
     @FXML private TextField cardCode;
@@ -52,7 +51,7 @@ public class ClientProfileModifierController {
             AlertBox.display("Error", "CAP must be numeric and composed by five numbers", false);
             return false;
         }
-        else if(telNum.getText().trim().length() > 11 || telNum.getText().length() < 10) { //il numero telefonico deve essere di 10-11 caratteri
+        else if(phone.getText().trim().length() > 11 || phone.getText().length() < 10) { //il numero telefonico deve essere di 10-11 caratteri
             AlertBox.display("Error", "Insert a valid telephone number", false);
             return false;
         }

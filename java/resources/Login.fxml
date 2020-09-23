@@ -21,7 +21,7 @@
             <Font name="Constantia" size="16.0" />
          </font>
       </TextField>
-      <Button layoutX="236.0" layoutY="285.0" mnemonicParsing="false" onAction="#LoginButtonPushed" prefHeight="58.0" prefWidth="136.0" style="-fx-background-color: #02048a;" text="Enter" textFill="WHITE">
+      <Button fx:id="loginButton" layoutX="236.0" layoutY="285.0" mnemonicParsing="false" onAction="#LoginButtonPushed" prefHeight="58.0" prefWidth="136.0" style="-fx-background-color: #02048a;" text="Enter" textFill="WHITE">
          <font>
             <Font name="Constantia" size="16.0" />
          </font>
@@ -32,7 +32,7 @@
          <font>
             <Font name="Ubuntu" size="17.0" />
          </font></Label>
-      <Button layoutX="486.0" layoutY="357.0" mnemonicParsing="false" onAction="#SignUpButtonPushed" prefHeight="58.0" prefWidth="100.0" style="-fx-background-color: red;" text="Register" textFill="WHITE">
+      <Button fx:id="signUpButton" layoutX="486.0" layoutY="357.0" mnemonicParsing="false" onAction="#SignUpButtonPushed" prefHeight="58.0" prefWidth="100.0" style="-fx-background-color: red;" text="Register" textFill="WHITE">
          <font>
             <Font name="Constantia" size="16.0" />
          </font>
