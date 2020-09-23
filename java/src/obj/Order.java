@@ -3,6 +3,8 @@ package obj;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.Dictionary;
+import java.util.List;
 
 public class Order {
 
@@ -12,14 +14,16 @@ public class Order {
     BigDecimal totale;
     Integer puntiGenerati;
     String emailCliente;
+    Dictionary<Product, Integer> prodottiOrdine;
 
-    public Order(Integer id, Date dataConsegna, Time oraConsegna, BigDecimal totale, Integer puntiGenerati, String emailCliente){
+    public Order(Integer id, Date dataConsegna, Time oraConsegna, BigDecimal totale, Integer puntiGenerati, String emailCliente, Dictionary<Product, Integer> prodottiOrdine){
         this.id=id;
         this.dataConsegna=dataConsegna;
         this.oraConsegna=oraConsegna;
         this.totale=totale;
         this.puntiGenerati=puntiGenerati;
         this.emailCliente=emailCliente;
+        this.prodottiOrdine=prodottiOrdine;
     }
 
     public Integer getId() {
@@ -44,5 +48,9 @@ public class Order {
 
     public String getEmailCliente() {
         return emailCliente;
+    }
+
+    public Dictionary<Product, Integer> getProdottiOrdine() {
+        return prodottiOrdine;
     }
 }
