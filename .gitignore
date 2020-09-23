@@ -1,4 +1,5 @@
 out/*
 java/lib/*
+java/out/*
 .idea/*
 progetto_ing.iml

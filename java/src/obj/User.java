@@ -23,6 +23,7 @@ public class User {
         this.cap = cap;
         this.telefono = telefono;
         this.password = password;
+        this.cartaFedelta = null;
         this.ruolo = ruolo;
     }
 

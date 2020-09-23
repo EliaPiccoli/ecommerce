@@ -86,22 +86,59 @@ public class DBUser {
         }
     }
 
+    /*    public boolean insertUser(User user){
+            Integer fidelityCard_id = null;
+            //insert fidelity card
+            try(PreparedStatement st = con.prepareStatement("INSERT INTO cartaFed (dataEmissione, saldo) VALUES (?, ?);")){
+                st.setDate(1, new Date(System.currentTimeMillis()));
+                st.setInt(2, 0);
+                int update = st.executeUpdate();
+                if(update == 0) throw new SQLException("update was unsuccesful");
+            }
+            catch(SQLException e){
+                System.out.println(e);
+                return false;
+            }
+            //TODO se poffà mejo: referenziata al contrario (chiedi a mario)
+            //get fidelity card id to insert user
+            try(PreparedStatement st = con.prepareStatement("SELECT id FROM cartaFed ORDER BY id DESC LIMIT 1;")){
+                ResultSet rs = st.executeQuery();
+                if(rs.next() == false) throw new SQLException("Something went TERRIBLY wrong");
+                else fidelityCard_id = rs.getInt("id");
+            }
+            catch(SQLException e){
+                System.out.println(e);
+                return false;
+            }
+
+            //insert user
+            try(PreparedStatement st = con.prepareStatement("INSERT INTO utente(nome, cognome, indirizzo, citta, cap, email, telefono, password, cartafed, ruolo) VALUES(?,?,?,?,?,?,?,?,?,?)")){
+                st.setString(1, user.getNome());
+                st.setString(2, user.getCognome());
+                st.setString(3, user.getIndirizzo());
+                st.setString(4, user.getCitta());
+                st.setString(5, user.getCap());
+                st.setString(6, user.getEmail());
+                st.setString(7, user.getTelefono());
+                st.setString(8, user.getPassword());
+                st.setInt(9, fidelityCard_id);
+                st.setString(10, user.getRuolo());
+
+                int update = st.executeUpdate();
+                if(update == 0) throw new SQLException("update was unsuccesful");
+                else return true;
+            }
+            catch(SQLException e){
+                System.out.println(e);
+                return false;
+            }
+        }
+    */
     public boolean insertUser(User user){
         Integer fidelityCard_id = null;
         //insert fidelity card
-        try(PreparedStatement st = con.prepareStatement("INSERT INTO cartaFed (dataEmissione, saldo) VALUES (?, ?);")){
-            st.setDate(1, new Date(System.currentTimeMillis()));
+        try(PreparedStatement st = con.prepareStatement("INSERT INTO cartaFed (dataEmissione, saldo) VALUES (?, ?) RETURNING id;")){ //se non va mettiamo anche id e DEFAULT           st.setDate(1, new Date(System.currentTimeMillis()));
             st.setInt(2, 0);
-            int update = st.executeUpdate();
-            if(update == 0) throw new SQLException("update was unsuccesful");
-        }
-        catch(SQLException e){
-            System.out.println(e);
-            return false;
-        }
-        //TODO se poffà mejo: referenziata al contrario (chiedi a mario)
-        //get fidelity card id to insert user
-        try(PreparedStatement st = con.prepareStatement("SELECT id FROM cartaFed ORDER BY id DESC LIMIT 1;")){
             ResultSet rs = st.executeQuery();
             if(rs.next() == false) throw new SQLException("Something went TERRIBLY wrong");
             else fidelityCard_id = rs.getInt("id");
