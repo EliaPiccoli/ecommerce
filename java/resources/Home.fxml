@@ -24,7 +24,7 @@
             <Font name="Constantia" size="14.0" />
          </font>
       </TextField>
-      <TableView fx:id="productTable" layoutX="39.0" layoutY="217.0" prefHeight="476.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
+      <TableView fx:id="productTable" onMouseClicked="#click" layoutX="39.0" layoutY="217.0" prefHeight="476.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
         <columns>
             <TableColumn fx:id="id" prefWidth="154.0" text="ID">
                <cellValueFactory>

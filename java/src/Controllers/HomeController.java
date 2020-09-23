@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import obj.Product;
 
@@ -18,12 +19,15 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeController {
     @FXML TableView<Product> productTable = new TableView<>();
     @FXML Button userLogged;
     @FXML TextField searchParameter;
+
+    List<Product> cart = new ArrayList<>();
 
     public void initialize() {
         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
@@ -70,9 +74,11 @@ public class HomeController {
 
     }
 
-    /*
-    search -> f()
-    doubleclick -> event -> popup -> cart
-    */
-
+    public void click(MouseEvent event) {
+        if(event.getClickCount() >= 2) {
+            cart.add(productTable.getSelectionModel().getSelectedItem());
+            System.out.println(cart);
+            AlertBox.display("Cart", "Product added to cart!", true);
+        }
+    }
 }

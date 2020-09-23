@@ -43,7 +43,6 @@ public class DBProduct {
             while(rs.next()) {
                 prodList.add(new Product(rs.getInt("id"), rs.getString("tipo"), rs.getString("nome"), rs.getString("marca"), rs.getString("descrizione"), rs.getInt("quantita"), rs.getInt("quantita_conf"), rs.getBigDecimal("prezzo")));
             }
-            System.out.println(prodList);
             return prodList;
         }
         catch(SQLException e){
