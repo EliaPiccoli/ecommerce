@@ -4,6 +4,7 @@ import obj.*;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Dictionary;
 import java.util.List;
 
 public class DBOrder {
@@ -14,11 +15,12 @@ public class DBOrder {
     }
 
     public Order getOrder(Integer id){
-        try(PreparedStatement st = con.prepareStatement("SELECT p. FROM ordine o JOIN prodotto_in_ordine po ON o.id=po.id_ordine JOIN prodotto p ON p.id=po.id_prodotto WHERE id = ?;")){
+        try(PreparedStatement st = con.prepareStatement("SELECT dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, po.quantita, id_ordine, id_prodotto, tipo, nome, marca, descrizione, quantita_conf, prezzo FROM ordine o JOIN prodotto_in_ordine po ON o.id=po.id_ordine JOIN prodotto p ON p.id=po.id_prodotto WHERE o.id = ?;")){
             st.setInt(1, id);
-
+            Dictionary<Product, Integer> prodottiOrdine=null;
             ResultSet rs = st.executeQuery();
             if(rs.next() != false){
+                prodottiOrdine.put(new Product(rs.getInt("id_prodotto"), rs.getString("tipo"), rs.getString("nome"), rs.getString("marca"), rs.getString("descrizione"), null, rs.getInt("quantita_conf"), rs.getBigDecimal("prezzo")), rs.getInt("quantita"));
                 FidelityCard fidelityCard = new FidelityCard(rs.getInt("id"), rs.getDate("dataemissione"), rs.getInt("saldo"));
                 User user = new User(rs.getString("email"), rs.getString("matricola"), rs.getString("nome"), rs.getString("cognome"), rs.getString("indirizzo"), rs.getString("citta"), rs.getString("cap"), rs.getString("telefono"), rs.getString("password"), fidelityCard,rs.getString("ruolo"));
                 return null;
