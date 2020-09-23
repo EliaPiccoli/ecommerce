@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="531.0" prefWidth="895.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.Points_Controller">
+   <children>
+      <Separator layoutY="85.0" prefHeight="3.0" prefWidth="965.0" style="-fx-background-color: #02048a;" />
+      <Label layoutX="19.0" layoutY="102.0" text="Points Card" textFill="#02048a">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="mail" alignment="CENTER" editable="false" layoutX="560.0" layoutY="31.0" opacity="0.51" prefHeight="37.0" prefWidth="292.0" style="-fx-background-color: ffde7d;">
+         <font>
+            <Font name="Ubuntu" size="17.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="points_tot" alignment="CENTER" editable="false" layoutX="437.0" layoutY="182.0" prefHeight="51.0" prefWidth="224.0" style="-fx-background-color: #000000;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="IDcardtxt" alignment="CENTER" editable="false" layoutX="278.0" layoutY="289.0" prefHeight="51.0" prefWidth="383.0" style="-fx-background-color: #000000;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="DateCardtxt" alignment="CENTER" editable="false" layoutX="278.0" layoutY="358.0" prefHeight="51.0" prefWidth="383.0" style="-fx-background-color: #000000;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Label layoutX="155.0" layoutY="300.0" text="Card ID :" textFill="#02048a">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="45.0" layoutY="368.0" text="Registration Date :" textFill="#02048a">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="343.0" layoutY="193.0" text="Score:" textFill="#02048a">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="740.0" layoutY="358.0" mnemonicParsing="false" onAction="#close" prefHeight="51.0" prefWidth="121.0" style="-fx-background-color: #9d0901;" text="Close" textFill="WHITE">
+         <font>
+            <Font name="Ubuntu" size="23.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="439.0" layoutY="31.0" mnemonicParsing="false" onAction="#close" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: #003399;" text="Logged as:" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="19.0" layoutY="27.0" text="SUPER" textFill="#02048a">
+         <font>
+            <Font name="Constantia" size="36.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

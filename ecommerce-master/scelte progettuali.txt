@@ -1,0 +1,21 @@
+Scelte progettuali:
+
+-metodo di pagamento scelto di volta in volta al momento del pagamento. Si sarebbe potuto scegliere in alternativa un metodo di
+pagamento preferito (magari al momento della registrazione), che poi per ogni spesa sarebbe già scelto, e modificabile nella
+sezione di modifica dei dati personali.
+
+-si sceglie di associare in automatico una carta fedeltà al momento della registrazione. La cosa più completa sarebbe stata di
+gestire eventualmente la presenza di tessere già fatte, magari in negozio, prima della registrazione, oppure di tessere
+sottoscrivibili in un momento successivo alla registrazione sulla piattaforma, ma abbiamo voluto semplificare.
+
+-abbiamo scelto di preinserire le credenziali del responsabile, quindi non se ne possono registrare altri, ma quello presente può
+essere modificabile. Altri responsabili si possono inserire.
+
+-nella scelta della data di consegna abbiamo deciso che si può scegliere una data strettamente successiva al giorno corrente,
+e un orario del tipo ore 8:00/9:00/10:00/11:00/12:00. In aggiunta, abbiamo eliminato l'intervallo di tempo di consegna della
+spesa, visto che l'utente può scegliere esattamente quando farsela consegnare.
+
+-La mail non è modificabile dopo la registrazione.
+
+-Abbiamo deciso di gestire gli stati dell'ordine nel seguente modo: lo stato di ordine CONFERMATO è fino a 3 ore prima della
+consegna, poi in quelle 3 ore diventa ordine IN PREPARAZIONE, e dopo il momento della consegna l'ordine diventa CONSEGNATO.
