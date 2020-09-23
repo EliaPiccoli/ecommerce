@@ -7,8 +7,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import System.State;
+import obj.User;
 
 import java.io.IOException;
 
@@ -23,8 +27,25 @@ public class ClientProfileModifierController {
     @FXML private TextField cap;
     @FXML private TextField phone;
     @FXML private TextField email;
-    @FXML private TextField password;
+    @FXML private PasswordField password;
     @FXML private TextField cardCode;
+
+    State state = State.getInstance();
+
+    public void initialize() {
+        User user = state.getCurrentUser();
+        name.setText(user.getNome());
+        surname.setText(user.getCognome());
+        address.setText(user.getEmail());
+        city.setText(user.getCitta());
+        cap.setText(user.getCap());
+        phone.setText(user.getTelefono());
+        email.setText(user.getEmail());
+        email.setDisable(true);
+        password.setText(user.getPassword());
+        cardCode.setText(String.valueOf(user.getCartaFed().getId()));
+        cardCode.setDisable(true);
+    }
 
     private boolean vefifyTextField() {
         if(name.getText() == null || name.getText().trim().isEmpty())
@@ -91,7 +112,7 @@ public class ClientProfileModifierController {
         return true;
     }
 
-    public void  SaveButtonPushed(ActionEvent event) throws IOException {
+    public void SaveButtonPushed(ActionEvent event) throws IOException {
 
         if(!vefifyTextField()) {
             AlertBox.display("Error","All field must be filled", false);
@@ -99,11 +120,11 @@ public class ClientProfileModifierController {
         }
         if(!checkRightFormat()) return;
 
-        //update user tuple
+
     }
 
     public void CancelButtonPushed(ActionEvent event) throws IOException{
-        Parent tableViewParent =  FXMLLoader.load(getClass().getResource("Home.fxml"));
+        Parent tableViewParent =  FXMLLoader.load(getClass().getResource("/Home.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);

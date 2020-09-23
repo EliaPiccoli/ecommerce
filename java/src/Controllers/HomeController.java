@@ -1,6 +1,5 @@
 package Controllers;
 
-import DB_Handler.DBOrder;
 import DB_Handler.DBProduct;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,17 +18,20 @@ import obj.Product;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import System.State;
 
 public class HomeController {
     @FXML TableView<Product> productTable = new TableView<>();
     @FXML Button userLogged;
     @FXML TextField searchParameter;
     @FXML ComboBox<String> typeSearch;
+    @FXML TextField user;
+    State state = State.getInstance();
 
     List<Product> cart = new ArrayList<>();
 
@@ -45,6 +47,8 @@ public class HomeController {
             data2.removeAll(data2);
             data2.addAll("Show All", "Tipo", "Nome", "Marca");
             typeSearch.getSelectionModel().selectFirst();
+
+            user.setText(state.getCurrentUser().getEmail());
         } catch (SQLException e) {
             System.out.println("Error connecting with db");
         }
