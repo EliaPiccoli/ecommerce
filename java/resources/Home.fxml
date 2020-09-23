@@ -22,7 +22,7 @@
             <Font name="Ubuntu" size="47.0" />
          </font>
       </Label>
-      <TextField fx:id="infoLbl" editable="false" layoutX="486.0" layoutY="53.0" opacity="0.51" prefHeight="28.0" prefWidth="133.0" style="-fx-background-color: ffde7d;">
+      <TextField fx:id="user" editable="false" layoutX="486.0" layoutY="53.0" opacity="0.51" prefHeight="28.0" prefWidth="133.0" style="-fx-background-color: ffde7d;">
          <font>
             <Font name="Constantia" size="14.0" />
          </font>

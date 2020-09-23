@@ -13,6 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import obj.User;
+import System.State;
 
 import java.io.IOException;
 import java.sql.*;
@@ -40,11 +41,16 @@ public class LoginController {
             DBUser dbUserConnector = new DBUser(con);
             if (dbUserConnector.checkUser(email, pw)) {
                 User usr = dbUserConnector.getUser(email);
-                Parent tableViewParent = FXMLLoader.load(getClass().getResource((usr.getRuolo().equals("Cliente")) ? "/Home.fxml" : "/HomeAdminOrders.fxml"));
-                Scene tableViewScene = new Scene(tableViewParent);
-                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                window.setScene(tableViewScene);
-                window.show();
+                if(usr != null) {
+                    State.getInstance().setCurrentUser(usr);
+                    Parent tableViewParent = FXMLLoader.load(getClass().getResource((usr.getRuolo().equals("Cliente")) ? "/Home.fxml" : "/HomeAdminOrders.fxml"));
+                    Scene tableViewScene = new Scene(tableViewParent);
+                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    window.setScene(tableViewScene);
+                    window.show();
+                } else {
+                    AlertBox.display("Error", "Login Failed", false);
+                }
             }
         } catch (SQLException e) {
             System.out.println("Error connecting with db");
