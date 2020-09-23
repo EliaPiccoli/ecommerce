@@ -11,18 +11,18 @@ public class Order {
     Integer id;
     Date dataConsegna;
     Time oraConsegna;
+    String emailCliente;
     BigDecimal totale;
     Integer saldoPunti;
-    String emailCliente;
     Dictionary<Product, Integer> prodottiOrdine;
 
-    public Order(Integer id, Date dataConsegna, Time oraConsegna, BigDecimal totale, Integer saldoPunti, String emailCliente, Dictionary<Product, Integer> prodottiOrdine){
+    public Order(Integer id, Date dataConsegna, Time oraConsegna, String emailCliente, BigDecimal totale, Integer saldoPunti, Dictionary<Product, Integer> prodottiOrdine){
         this.id=id;
         this.dataConsegna=dataConsegna;
         this.oraConsegna=oraConsegna;
+        this.emailCliente=emailCliente;
         this.totale=totale;
         this.saldoPunti=saldoPunti;
-        this.emailCliente=emailCliente;
         this.prodottiOrdine=prodottiOrdine;
     }
 
@@ -52,5 +52,33 @@ public class Order {
 
     public Dictionary<Product, Integer> getProdottiOrdine() {
         return prodottiOrdine;
+    }
+
+    public void setDataConsegna(Date dataConsegna) {
+        this.dataConsegna = dataConsegna;
+    }
+
+    public void setOraConsegna(Time oraConsegna) {
+        this.oraConsegna = oraConsegna;
+    }
+
+    public void addProduct(Product prodotto) {
+        totale=totale.add(prodotto.getPrezzo());
+
+
+    }
+
+    public void removeProduct(Product prodotto) {
+        if(prodottiOrdine.get(prodotto)!=null){
+            totale=totale.subtract(prodotto.getPrezzo());
+        }
+
+
+    }
+
+    public void removeAllProducts(Product prodotto) {
+        totale=totale.add(prodotto.getPrezzo());
+
+
     }
 }
