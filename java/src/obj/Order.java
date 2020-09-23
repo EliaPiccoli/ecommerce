@@ -12,16 +12,16 @@ public class Order {
     Date dataConsegna;
     Time oraConsegna;
     BigDecimal totale;
-    Integer puntiGenerati;
+    Integer saldoPunti;
     String emailCliente;
     Dictionary<Product, Integer> prodottiOrdine;
 
-    public Order(Integer id, Date dataConsegna, Time oraConsegna, BigDecimal totale, Integer puntiGenerati, String emailCliente, Dictionary<Product, Integer> prodottiOrdine){
+    public Order(Integer id, Date dataConsegna, Time oraConsegna, BigDecimal totale, Integer saldoPunti, String emailCliente, Dictionary<Product, Integer> prodottiOrdine){
         this.id=id;
         this.dataConsegna=dataConsegna;
         this.oraConsegna=oraConsegna;
         this.totale=totale;
-        this.puntiGenerati=puntiGenerati;
+        this.saldoPunti=saldoPunti;
         this.emailCliente=emailCliente;
         this.prodottiOrdine=prodottiOrdine;
     }
@@ -43,7 +43,7 @@ public class Order {
     }
 
     public Integer getPuntiGenerati() {
-        return puntiGenerati;
+        return saldoPunti;
     }
 
     public String getEmailCliente() {
