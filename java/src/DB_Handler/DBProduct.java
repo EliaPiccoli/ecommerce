@@ -97,7 +97,7 @@ public class DBProduct {
         }
     }
 
-    public List<Product> searchProduct(String column, String value) {
+    public List<Product> searchProducts(String column, String value) {
         try (PreparedStatement st = con.prepareStatement(String.format("SELECT * FROM prodotto WHERE LOWER(%s) = LOWER(?)", column))) {
             st.setString(1, value);
             ResultSet rs = st.executeQuery();
