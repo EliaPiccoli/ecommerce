@@ -1,5 +1,6 @@
 package Controllers;
 
+import DB_Handler.DBUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import obj.User;
+
 import java.awt.*;
 import java.io.IOException;
 import java.sql.*;
@@ -102,42 +105,23 @@ public class SignUpController {
         if(!checkRightFormat()) return;
 
         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
-            try (PreparedStatement st = con.prepareStatement("SELECT * FROM utente WHERE email=? AND password=?")) {
-                st.setString(1, Email.getText());
-                st.setString(2, Password.getText());
-
-                System.out.println(Email.getText());
-                System.out.println(Password.getText());
-                ResultSet res = st.executeQuery();
-                if(!res.next()) {
-                    try(PreparedStatement statement = con.prepareStatement("INSERT INTO utente(nome, cognome, indirizzo, citta, cap, email, telefono, password, cartafed, ruolo) VALUES(?,?,?,?,?,?,?,?,?,?)")) {
-                        statement.setString(1, Name.getText());
-                        statement.setString(2, Surname.getText());
-                        statement.setString(3, Address.getText());
-                        statement.setString(4, City.getText());
-                        statement.setString(5, Cap.getText());
-                        statement.setString(6, Email.getText());
-                        statement.setString(7, TelNum.getText());
-                        statement.setString(8, Password.getText());
-                        statement.setInt(9, Integer.parseInt(CardCode.getText()));
-                        statement.setString(10, "Cliente");
-                        System.out.println(statement);
-
-                        if(statement.executeUpdate() == 1)
-                            System.out.println("User added to db");
-
-                        Parent tableViewParent =  FXMLLoader.load(getClass().getResource("/Home.fxml"));
-                        Scene tableViewScene = new Scene(tableViewParent);
-                        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-                        window.setScene(tableViewScene);
-                        window.show();
-                    } catch (SQLException e) {
-                        System.out.println("Error while adding user to db");
-                    }
-                } else{
-                    AlertBox.display("Error","Email already taken");
+            DBUser dbUserConnector = new DBUser(con);
+            if(!dbUserConnector.checkUser(Email.getText(), Password.getText())) {
+                boolean insert = dbUserConnector.insertUser(new User(Email.getText(), Name.getText(), Surname.getText(), Address.getText(), City.getText(), Cap.getText(), TelNum.getText(), Password.getText(), "Cliente"));
+                if(insert) {
+                    System.out.println("User added to db");
+                    Parent tableViewParent =  FXMLLoader.load(getClass().getResource("/Home.fxml"));
+                    Scene tableViewScene = new Scene(tableViewParent);
+                    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+                    window.setScene(tableViewScene);
+                    window.show();
+                } else {
+                    AlertBox.display("Error","Couldn't add user to db");
                     return;
                 }
+            } else {
+                AlertBox.display("Error","Email already taken");
+                return;
             }
         } catch (SQLException e) {
              System.out.println("Error connecting with db");

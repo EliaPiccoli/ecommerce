@@ -14,6 +14,18 @@ public class User {
     FidelityCard cartaFedelta;
     String ruolo;
 
+    public User(String email, String nome, String cognome, String indirizzo, String citta, String cap, String telefono, String password, String ruolo) {
+        this.email = email;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.indirizzo = indirizzo;
+        this.citta = citta;
+        this.cap = cap;
+        this.telefono = telefono;
+        this.password = password;
+        this.ruolo = ruolo;
+    }
+
     public User(String email, String matricola, String nome, String cognome, String indirizzo, String citta, String cap, String telefono, String password, FidelityCard cartaFed, String ruolo){
         this.email=email;
         this.matricola=matricola;

@@ -1,5 +1,6 @@
 package Controllers;
 
+import DB_Handler.DBUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import obj.User;
+
 import java.io.IOException;
 import java.sql.*;
 
@@ -29,37 +32,21 @@ public class LoginController {
     }
 
     public void LoginButtonPushed(ActionEvent event) throws IOException, ClassNotFoundException {
-        System.out.println("Login");
-
         String email=emailField.getText();
         String pw=pwField.getText();
 
         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
-            try (PreparedStatement st = con.prepareStatement("SELECT * FROM utente WHERE email = ? AND password = ?")) {
-                st.setString(1, email);
-                st.setString(2, pw);
-
-                ResultSet userResult = st.executeQuery();
-                if(userResult!=null){
-                    userResult.next();
-
-                    Parent tableViewParent = FXMLLoader.load(getClass().getResource((userResult.getString("ruolo").equals("Cliente")) ? "/Home.fxml" : "/HomeAdminOrders.fxml"));
-                    Scene tableViewScene = new Scene(tableViewParent);
-                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-                    window.setScene(tableViewScene);
-                    window.show();
-                }
-                else {
-                    AlertBox.display("Error", "Email and/or password are not correct");
-                }
-            } catch (SQLException e) {
-                System.out.println("Error in fetching users from db");
+            DBUser dbUserConnector = new DBUser(con);
+            if(dbUserConnector.checkUser(email, pw)) {
+                User usr = dbUserConnector.getUser(email);
+                Parent tableViewParent = FXMLLoader.load(getClass().getResource((usr.getRuolo().equals("Cliente")) ? "/Home.fxml" : "/HomeAdminOrders.fxml"));
+                Scene tableViewScene = new Scene(tableViewParent);
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                window.setScene(tableViewScene);
+                window.show();
             }
         } catch (SQLException e) {
             System.out.println("Error connecting with db");
         }
     }
-
-
 }
