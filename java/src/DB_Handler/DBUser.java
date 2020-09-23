@@ -67,7 +67,7 @@ public class DBUser {
         }
     }
 
-    public boolean updateUser(User user){
+    public User updateUser(User user){
         try(PreparedStatement st = con.prepareStatement("UPDATE utente SET nome = ?, cognome = ?, indirizzo = ?, citta = ?, cap = ?, telefono = ?, password = ? WHERE email = ?;")){
             st.setString(1, user.getNome());
             st.setString(2, user.getCognome());
@@ -80,11 +80,11 @@ public class DBUser {
 
             int update = st.executeUpdate();
             if(update == 0) throw new SQLException("update was unsuccesful");
-            else return true;
+            else return getUser(user.getEmail());
         }
         catch(SQLException e){
             System.out.println(e);
-            return false;
+            return null;
         }
     }
 

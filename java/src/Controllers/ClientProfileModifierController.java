@@ -127,8 +127,9 @@ public class ClientProfileModifierController {
 
         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
             DBUser dbUserController = new DBUser(con);
-            User updatedUser = new User(email.getText(), name.getText(), surname.getText(), address.getText(), city.getText(), cap.getText(), phone.getText(), password.getText(), "Cliente");
-            if(dbUserController.updateUser(updatedUser)) {
+            User newUserData = new User(email.getText(), name.getText(), surname.getText(), address.getText(), city.getText(), cap.getText(), phone.getText(), password.getText(), "Cliente");
+            User updatedUser = dbUserController.updateUser(newUserData);
+            if(updatedUser != null) {
                 state.setCurrentUser(updatedUser);
                 Parent tableViewParent =  FXMLLoader.load(getClass().getResource("/Home.fxml"));
                 Scene tableViewScene = new Scene(tableViewParent);
@@ -136,7 +137,6 @@ public class ClientProfileModifierController {
                 window.setScene(tableViewScene);
                 window.show();
             }
-
         } catch (SQLException e) {
             System.out.println("Error connecting to db");
         }
