@@ -17,7 +17,6 @@ public class Main extends Application {
 
         try{
             FXMLLoader login = new FXMLLoader(getClass().getResource("/Login.fxml"));
-            login.setController(new LoginController());
             Pane root = login.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
