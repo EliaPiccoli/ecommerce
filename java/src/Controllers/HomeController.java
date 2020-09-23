@@ -56,18 +56,28 @@ public class HomeController {
 
     private void newScene(ActionEvent event, String path) {
         try {
+            System.out.println(path);
+
             Parent tableViewParent = FXMLLoader.load(getClass().getResource(path));
             Scene tableViewScene = new Scene(tableViewParent);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(tableViewScene);
             window.show();
         } catch (IOException e) {
-            System.out.println("/ff");
+            System.out.println(e);
         }
     }
 
     public void editProfile(ActionEvent event) {
-        newScene(event, "/ClientProfileModifier.fxml");
+        try {
+            Parent tableViewParent = FXMLLoader.load(getClass().getResource("/ClientProfileModifier.fxml"));
+            Scene tableViewScene = new Scene(tableViewParent);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(tableViewScene);
+            window.show();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
     public void seeOrders(ActionEvent event) {

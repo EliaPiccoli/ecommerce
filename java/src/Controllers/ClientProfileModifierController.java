@@ -1,5 +1,6 @@
 package Controllers;
 
+import DB_Handler.DBUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,10 @@ import System.State;
 import obj.User;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class ClientProfileModifierController {
     @FXML private Button cancelButton;
@@ -36,7 +41,7 @@ public class ClientProfileModifierController {
         User user = state.getCurrentUser();
         name.setText(user.getNome());
         surname.setText(user.getCognome());
-        address.setText(user.getEmail());
+        address.setText(user.getIndirizzo());
         city.setText(user.getCitta());
         cap.setText(user.getCap());
         phone.setText(user.getTelefono());
@@ -120,7 +125,21 @@ public class ClientProfileModifierController {
         }
         if(!checkRightFormat()) return;
 
+        try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
+            DBUser dbUserController = new DBUser(con);
+            User updatedUser = new User(email.getText(), name.getText(), surname.getText(), address.getText(), city.getText(), cap.getText(), phone.getText(), password.getText(), "Cliente");
+            if(dbUserController.updateUser(updatedUser)) {
+                state.setCurrentUser(updatedUser);
+                Parent tableViewParent =  FXMLLoader.load(getClass().getResource("/Home.fxml"));
+                Scene tableViewScene = new Scene(tableViewParent);
+                Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+                window.setScene(tableViewScene);
+                window.show();
+            }
 
+        } catch (SQLException e) {
+            System.out.println("Error connecting to db");
+        }
     }
 
     public void CancelButtonPushed(ActionEvent event) throws IOException{
