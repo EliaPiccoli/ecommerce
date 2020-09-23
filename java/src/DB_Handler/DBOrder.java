@@ -2,6 +2,7 @@ package DB_Handler;
 
 import obj.*;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -15,19 +16,29 @@ public class DBOrder {
     }
 
     public Order getOrder(Integer id){
-        try(PreparedStatement st = con.prepareStatement("SELECT dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, po.quantita, id_ordine, id_prodotto, tipo, nome, marca, descrizione, quantita_conf, prezzo FROM ordine o JOIN prodotto_in_ordine po ON o.id=po.id_ordine JOIN prodotto p ON p.id=po.id_prodotto WHERE o.id = ?;")){
+        try(PreparedStatement st = con.prepareStatement("SELECT dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, po.quantita, id_prodotto, tipo, nome, marca, descrizione, quantita_conf, prezzo FROM ordine o JOIN prodotto_in_ordine po ON o.id=po.id_ordine JOIN prodotto p ON p.id=po.id_prodotto WHERE o.id = ?;")){
             st.setInt(1, id);
             Dictionary<Product, Integer> prodottiOrdine=null;
+            Date dataConsegna;
+            Time oraConsegna;
+            String emailCliente;
+            BigDecimal totale;
+            Integer saldoPunti;
             ResultSet rs = st.executeQuery();
-            if(rs.next() != false){
+            if(rs.next() == false) return null;
+
+            dataConsegna=rs.getDate("dataConsegna");
+            oraConsegna=rs.getTime("oraConsegna");
+            emailCliente=rs.getString("emailCliente");
+            totale=rs.getBigDecimal("totale");
+            saldoPunti=rs.getInt("saldoPunti");
+
+            do{
                 prodottiOrdine.put(new Product(rs.getInt("id_prodotto"), rs.getString("tipo"), rs.getString("nome"), rs.getString("marca"), rs.getString("descrizione"), null, rs.getInt("quantita_conf"), rs.getBigDecimal("prezzo")), rs.getInt("quantita"));
-                FidelityCard fidelityCard = new FidelityCard(rs.getInt("id"), rs.getDate("dataemissione"), rs.getInt("saldo"));
-                User user = new User(rs.getString("email"), rs.getString("matricola"), rs.getString("nome"), rs.getString("cognome"), rs.getString("indirizzo"), rs.getString("citta"), rs.getString("cap"), rs.getString("telefono"), rs.getString("password"), fidelityCard,rs.getString("ruolo"));
-                return null;
-            }
-            else{
-                return null;
-            }
+            }while(rs.next());
+
+            return new Order(id, dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, prodottiOrdine);
+
         }
         catch(SQLException e){
             System.out.println(e);
@@ -35,18 +46,35 @@ public class DBOrder {
         }
     }
 
-    public List<User> getUsers(){
-        try(PreparedStatement st = con.prepareStatement("SELECT * FROM utente u LEFT JOIN cartaFed cf;")){
+    public List<Order> getOrders(){
+        try(PreparedStatement st = con.prepareStatement("SELECT dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, po.quantita, id_ordine, id_prodotto, tipo, nome, marca, descrizione, quantita_conf, prezzo FROM ordine o JOIN prodotto_in_ordine po ON o.id=po.id_ordine JOIN prodotto p ON p.id=po.id_prodotto WHERE o.id = ? ORDER BY id_ordine;")){
+
+            Dictionary<Product, Integer> prodottiOrdine=null;
+            Integer id_prodotto;
+            Date dataConsegna;
+            Time oraConsegna;
+            String emailCliente;
+            BigDecimal totale;
+            Integer saldoPunti;
             ResultSet rs = st.executeQuery();
-            List<User> userList = new ArrayList<User>();
+            List<Order> orderList = new ArrayList<Order>();
             if(rs.next() == false) return null;
 
             do{
-                FidelityCard fidelityCard = new FidelityCard(rs.getInt("id"),rs.getDate("dataEmissione"),rs.getInt("saldo"));
-                userList.add(new User(rs.getString("email"), rs.getString("matricola"), rs.getString("nome"), rs.getString("cognome"), rs.getString("indirizzo"), rs.getString("citta"), rs.getString("cap"), rs.getString("telefono"), rs.getString("password"), fidelityCard,rs.getString("ruolo")));
+                id_prodotto=rs.getInt("id_prodotto");
+                dataConsegna=rs.getDate("dataConsegna");
+                oraConsegna=rs.getTime("oraConsegna");
+                emailCliente=rs.getString("emailCliente");
+                totale=rs.getBigDecimal("totale");
+                saldoPunti=rs.getInt("saldoPunti");
+
+                do{
+                    prodottiOrdine.put(new Product(rs.getInt("id_prodotto"), rs.getString("tipo"), rs.getString("nome"), rs.getString("marca"), rs.getString("descrizione"), null, rs.getInt("quantita_conf"), rs.getBigDecimal("prezzo")), rs.getInt("quantita"));
+                }while(rs.next()&&rs.getInt("id_prodotto")==id_prodotto);
+                orderList.add(new Order(id_prodotto, dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, prodottiOrdine));
             }while(rs.next());
 
-            return userList;
+            return orderList;
         }
         catch(SQLException e){
             System.out.println(e);
@@ -54,26 +82,8 @@ public class DBOrder {
         }
     }
 
-    public void updateUser(User user){
-        try(PreparedStatement st = con.prepareStatement("UPDATE utente SET nome = ?, cognome = ?, indirizzo = ?, citta = ?, cap = ?, telefono = ?, password = ? WHERE email = ?;")){
-            st.setString(1, user.getNome());
-            st.setString(2, user.getCognome());
-            st.setString(3, user.getIndirizzo());
-            st.setString(4, user.getCitta());
-            st.setString(5, user.getCap());
-            st.setString(6, user.getTelefono());
-            st.setString(7, user.getPassword());
-            st.setString(8, user.getEmail());
 
-            int update = st.executeUpdate();
-            if(update == 0) throw new SQLException("update was unsuccesful");
-        }
-        catch(SQLException e){
-            System.out.println(e);
-        }
-    }
-
-    public boolean insertUser(User user){
+    public boolean insertOrder(User user){
         Integer fidelityCard_id = null;
         //insert fidelity card
         try(PreparedStatement st = con.prepareStatement("INSERT INTO cartaFed (dataEmissione, saldo) VALUES (?, ?) RETURNING id;")){ //se non va mettiamo anche id e DEFAULT           st.setDate(1, new Date(System.currentTimeMillis()));
