@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.List;
 
 public class Order {
@@ -13,15 +14,17 @@ public class Order {
     Time oraConsegna;
     String emailCliente;
     BigDecimal totale;
+    Integer saldoPuntiBase;
     Integer saldoPunti;
-    Dictionary<Product, Integer> prodottiOrdine;
+    HashMap<Product, Integer> prodottiOrdine;
 
-    public Order(Integer id, Date dataConsegna, Time oraConsegna, String emailCliente, BigDecimal totale, Integer saldoPunti, Dictionary<Product, Integer> prodottiOrdine){
+    public Order(Integer id, Date dataConsegna, Time oraConsegna, String emailCliente, BigDecimal totale, Integer saldoPunti, HashMap<Product, Integer> prodottiOrdine){
         this.id=id;
         this.dataConsegna=dataConsegna;
         this.oraConsegna=oraConsegna;
         this.emailCliente=emailCliente;
         this.totale=totale;
+        this.saldoPuntiBase=saldoPunti;
         this.saldoPunti=saldoPunti;
         this.prodottiOrdine=prodottiOrdine;
     }
@@ -50,7 +53,7 @@ public class Order {
         return emailCliente;
     }
 
-    public Dictionary<Product, Integer> getProdottiOrdine() {
+    public HashMap<Product, Integer> getProdottiOrdine() {
         return prodottiOrdine;
     }
 
@@ -64,21 +67,33 @@ public class Order {
 
     public void addProduct(Product prodotto) {
         totale=totale.add(prodotto.getPrezzo());
-
-
+        saldoPunti=saldoPuntiBase+totale.intValue();
+        if(prodottiOrdine.get(prodotto)==null)
+            prodottiOrdine.put(prodotto, 1);
+        else
+            prodottiOrdine.put(prodotto, prodottiOrdine.get(prodotto)+1);
     }
 
     public void removeProduct(Product prodotto) {
         if(prodottiOrdine.get(prodotto)!=null){
             totale=totale.subtract(prodotto.getPrezzo());
+            saldoPunti=saldoPuntiBase+totale.intValue();
+            if(prodottiOrdine.get(prodotto)>1)
+                prodottiOrdine.put(prodotto, prodottiOrdine.get(prodotto)-1);
+            else
+                prodottiOrdine.remove(prodotto);
         }
-
-
+        else
+            System.out.println("\n!!!ERROR!!! You are trying to remove a product that is not in your cart!\n");
     }
 
     public void removeAllProducts(Product prodotto) {
-        totale=totale.add(prodotto.getPrezzo());
-
-
+        if(prodottiOrdine.get(prodotto)!=null){
+            totale=totale.subtract(prodotto.getPrezzo().multiply(BigDecimal.valueOf(prodotto.getQuantita())));
+            saldoPunti=saldoPuntiBase+totale.intValue();
+            prodottiOrdine.remove(prodotto);
+        }
+        else
+            System.out.println("\n!!!ERROR!!! You are trying to remove a product that is not in your cart!\n");
     }
 }
