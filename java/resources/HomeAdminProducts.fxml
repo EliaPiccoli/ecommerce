@@ -30,20 +30,12 @@
             <Font name="Constantia" size="14.0" />
          </font>
       </TextField>
-      <Button layoutX="604.0" layoutY="35.0" mnemonicParsing="false" onAction="#refresh" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #0a960a;" text="ADD" textFill="WHITE">
+      <Button layoutX="748.0" layoutY="36.0" mnemonicParsing="false" onAction="#refresh" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #0a960a;" text="ADD" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <font>
             <Font size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="751.0" layoutY="35.0" mnemonicParsing="false" onAction="#close" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #9d0901;" text="Products" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font name="Constantia" size="14.0" />
          </font>
       </Button>
       <Button layoutX="895.0" layoutY="35.0" mnemonicParsing="false" onAction="#close" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #9d0901;" text="ID Orders" textFill="WHITE">
