@@ -124,6 +124,6 @@
             </TableColumn>
         </columns>
       </TableView>
-      <Button mnemonicParsing="false" text="Log Out" />
+      <Button fx:id="logOutButton" onAction="#logOutButtonPushed" mnemonicParsing="false" text="Log Out" />
    </children>
 </Pane>

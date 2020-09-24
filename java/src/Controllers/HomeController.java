@@ -119,4 +119,13 @@ public class HomeController {
             AlertBox.display("Cart", "Product added to cart!", true);
         }
     }
+
+    public void logOutButtonPushed(ActionEvent event) throws IOException, ClassNotFoundException {
+        state.setCurrentUser(null);
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("/Login.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(tableViewScene);
+        window.show();
+    }
 }
