@@ -95,7 +95,7 @@ public class DBOrder {
             System.out.println("\nNon ci sono prodotti nel carrello, quindi non si aggiunge nessun ordine!\n");
             return false;
         }
-        else {
+        /*else {
             try (PreparedStatement st = con.prepareStatement("INSERT INTO ordine (DataConsegna, OraConsegna, EmailCliente, Totale, SaldoPunti) VALUES (?, ?, ?, ?, ?) RETURNING id;")) { //se non va mettiamo anche id e DEFAULT
                 st.setDate(1, new Date(System.currentTimeMillis()));
                 st.setInt(2, 0);
@@ -127,6 +127,7 @@ public class DBOrder {
                 System.out.println(e);
                 return false;
             }
-        }
+        }*/
+        return false; //da canc
     }
 }
