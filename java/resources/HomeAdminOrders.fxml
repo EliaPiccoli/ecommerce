@@ -57,17 +57,17 @@
             <cellValueFactory>
                 <PropertyValueFactory property="id" />
             </cellValueFactory>
-          </TableColumn>>
+          </TableColumn>
           <TableColumn fx:id="dataConsegna" prefWidth="143.0" text="Date">
               <cellValueFactory>
                   <PropertyValueFactory property="dataConsegna" />
               </cellValueFactory>
-          </TableColumn>>
+          </TableColumn>
           <TableColumn fx:id="totale" minWidth="0.0" prefWidth="193.0" text="Total">
               <cellValueFactory>
                   <PropertyValueFactory property="totale" />
               </cellValueFactory>
-          </TableColumn>>
+          </TableColumn>
           <TableColumn fx:id="stato" prefWidth="105.0" text="Status">
               <cellValueFactory>
                   <PropertyValueFactory property="stato" />
@@ -77,7 +77,7 @@
               <cellValueFactory>
                   <PropertyValueFactory property="emailCliente" />
               </cellValueFactory>
-          </TableColumn>>
+          </TableColumn>
         </columns>
       </TableView>
       <Label layoutX="41.0" layoutY="335.0" prefHeight="23.0" prefWidth="165.0" text="Description order:" textFill="#02048a">
@@ -87,10 +87,26 @@
       </Label>
       <TableView fx:id="ordersTable1" layoutX="214.0" layoutY="325.0" prefHeight="127.0" prefWidth="817.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
          <columns>
-            <TableColumn fx:id="colDate11" minWidth="0.0" prefWidth="172.0" text="Unit" />
-            <TableColumn fx:id="colID1" prefWidth="245.0" text="Name" />
-            <TableColumn fx:id="colDate1" prefWidth="252.0" text="Price" />
-            <TableColumn fx:id="colDate21" prefWidth="173.0" text="Total" />
+            <TableColumn fx:id="1" minWidth="0.0" prefWidth="172.0" text="Unit">
+               <cellValueFactory>
+                  <PropertyValueFactory property="1" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="2" prefWidth="245.0" text="Name">
+               <cellValueFactory>
+                  <PropertyValueFactory property="2" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="3" prefWidth="252.0" text="Price">
+               <cellValueFactory>
+                  <PropertyValueFactory property="3" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="4" prefWidth="173.0" text="Total">
+               <cellValueFactory>
+                  <PropertyValueFactory property="4" />
+               </cellValueFactory>
+            </TableColumn>
          </columns>
       </TableView>
       <Label layoutX="36.0" layoutY="481.0" prefHeight="23.0" prefWidth="136.0" text="Points balance:" textFill="#02048a">
