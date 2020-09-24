@@ -3,9 +3,7 @@ package obj;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
-import java.util.Dictionary;
 import java.util.HashMap;
-import java.util.List;
 
 public class Order {
 
@@ -45,7 +43,7 @@ public class Order {
         return totale;
     }
 
-    public Integer getPuntiGenerati() {
+    public Integer getSaldoPunti() {
         return saldoPunti;
     }
 

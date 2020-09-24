@@ -62,7 +62,7 @@ public class DBProduct {
             st.setBigDecimal(7, prod.getPrezzo());
             st.setInt(8, prod.getId());
             int update = st.executeUpdate();
-            if(update == 0) throw new SQLException("update was unsuccesful");//TODO impara l'inglese
+            if(update == 0) throw new SQLException("\nProduct update failed!\n");
         }
         catch(SQLException e){
             System.out.println(e);
@@ -79,7 +79,7 @@ public class DBProduct {
             st.setInt(6, quantita_conf);
             st.setBigDecimal(7, prezzo);
             int insert = st.executeUpdate();
-            if(insert == 0) throw new SQLException("insert was unsuccesful");//TODO impara l'esperanto
+            if(insert == 0) throw new SQLException("\nProduct insertion failed!\n");
         }
         catch(SQLException e){
             System.out.println(e);
@@ -90,7 +90,7 @@ public class DBProduct {
         try(PreparedStatement st = con.prepareStatement("DELETE FROM prodotto WHERE id = ?;")){
             st.setInt(1, id);
             int delete = st.executeUpdate();
-            if(delete == 0) throw new SQLException("delete was unsuccesful");//TODO impara l'esperanto
+            if(delete == 0) throw new SQLException("\nProduct removal failed!\n");
         }
         catch(SQLException e){
             System.out.println(e);
