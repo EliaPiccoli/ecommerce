@@ -3,7 +3,7 @@ package obj;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
-import java.util.HashMap;
+import java.util.List;
 
 public class Order {
 
@@ -14,10 +14,12 @@ public class Order {
     BigDecimal totale;
     Integer saldoPuntiBase;
     Integer saldoPunti;
-    HashMap<Product, Integer> prodottiOrdine;
-    //TODO add pagamento - stato fields
+    List<ProductInOrder> prodottiOrdine;
+    String pagamento;
+    String stato;
 
-    public Order(Integer id, Date dataConsegna, Time oraConsegna, String emailCliente, BigDecimal totale, Integer saldoPunti, HashMap<Product, Integer> prodottiOrdine){
+
+    public Order(Integer id, Date dataConsegna, Time oraConsegna, String emailCliente, BigDecimal totale, Integer saldoPunti, List<ProductInOrder> prodottiOrdine, String pagamento, String stato){
         this.id=id;
         this.dataConsegna=dataConsegna;
         this.oraConsegna=oraConsegna;
@@ -26,6 +28,8 @@ public class Order {
         this.saldoPuntiBase=saldoPunti;
         this.saldoPunti=saldoPunti;
         this.prodottiOrdine=prodottiOrdine;
+        this.pagamento=pagamento;
+        this.stato=stato;
     }
 
     public Integer getId() {
@@ -52,8 +56,16 @@ public class Order {
         return emailCliente;
     }
 
-    public HashMap<Product, Integer> getProdottiOrdine() {
+    public List<ProductInOrder> getProdottiOrdine() {
         return prodottiOrdine;
+    }
+
+    public String getPagamento() {
+        return pagamento;
+    }
+
+    public String getStato() {
+        return stato;
     }
 
     public void setDataConsegna(Date dataConsegna) {
@@ -62,6 +74,10 @@ public class Order {
 
     public void setOraConsegna(Time oraConsegna) {
         this.oraConsegna = oraConsegna;
+    }
+
+    public void setPagamento(String pagamento) {
+        this.pagamento = pagamento;
     }
 
     public void addProduct(Product prodotto) {

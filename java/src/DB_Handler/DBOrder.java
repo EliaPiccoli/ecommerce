@@ -15,16 +15,52 @@ public class DBOrder {
         this.con = con;
     }
 
+    private void ordersStatusUpdate(){
+        List<Order> ordini=null;
+        try(PreparedStatement st = con.prepareStatement("SELECT * FROM ordine;")){
+
+            ResultSet rs = st.executeQuery();
+
+            while(rs.next()){
+                ordini.add(new Order(rs.getInt("id"), rs.getDate("dataConsegna"), rs.getTime("oraConsegna"), null, null, null, null, null, null));
+            }
+        }
+        catch(SQLException e){
+            System.out.println(e);
+        }
+
+        for(Order ordine: ordini) {
+            try(PreparedStatement st = con.prepareStatement("UPDATE ordine SET stato=? WHERE id=?")){
+                String status=null;
+                Date data = ordine.getDataConsegna();
+                Time ora = ordine.getOraConsegna();
+                long millis = data.getTime();
+
+                //TODO impostare lo status corretto
+                st.setString(1, status);
+                st.setInt(1, ordine.getId());
+
+                int update = st.executeUpdate();
+            }
+            catch(SQLException e){
+                System.out.println(e);
+            }
+        }
+    }
+
     public Order getOrder(Integer id){
-        try(PreparedStatement st = con.prepareStatement("SELECT dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, po.quantita, id_prodotto, tipo, nome, marca, descrizione, quantita_conf, prezzo FROM ordine o JOIN prodotto_in_ordine po ON o.id=po.id_ordine JOIN prodotto p ON p.id=po.id_prodotto WHERE o.id = ?;")){
+        ordersStatusUpdate(); //aggiorno gli status
+        try(PreparedStatement st = con.prepareStatement("SELECT dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, pagamento, stato, po.quantita, id_prodotto, tipo, nome, marca, descrizione, quantita_conf, prezzo FROM ordine o JOIN prodotto_in_ordine po ON o.id=po.id_ordine JOIN prodotto p ON p.id=po.id_prodotto WHERE o.id = ?;")){
             st.setInt(1, id);
             //utility variables
-            HashMap<Product, Integer> prodottiOrdine=null;
             Date dataConsegna;
             Time oraConsegna;
             String emailCliente;
             BigDecimal totale;
             Integer saldoPunti;
+            HashMap<Product, Integer> prodottiOrdine=null;
+            String pagamento;
+            String stato;
 
             ResultSet rs = st.executeQuery();
 
@@ -35,12 +71,14 @@ public class DBOrder {
             emailCliente=rs.getString("emailCliente");
             totale=rs.getBigDecimal("totale");
             saldoPunti=rs.getInt("saldoPunti");
+            pagamento=rs.getString("pagamento");
+            stato=rs.getString("stato");
             //avendo fatto rs.next() nell'if precedente vado di do-while.
             do{
                 prodottiOrdine.put(new Product(rs.getInt("id_prodotto"), rs.getString("tipo"), rs.getString("nome"), rs.getString("marca"), rs.getString("descrizione"), null, rs.getInt("quantita_conf"), rs.getBigDecimal("prezzo")), rs.getInt("quantita"));
             }while(rs.next());
 
-            return new Order(id, dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, prodottiOrdine);
+            return new Order(id, dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, prodottiOrdine, pagamento, stato);
 
         }
         catch(SQLException e){
@@ -50,9 +88,8 @@ public class DBOrder {
     }
 
     public List<Order> getOrders(){
-        try(PreparedStatement st = con.prepareStatement("SELECT dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, po.quantita, id_ordine, id_prodotto, tipo, nome, marca, descrizione, quantita_conf, prezzo FROM ordine o JOIN prodotto_in_ordine po ON o.id=po.id_ordine JOIN prodotto p ON p.id=po.id_prodotto ORDER BY id_ordine;")){
-
-            HashMap<Product, Integer> prodottiOrdine=null;
+        ordersStatusUpdate(); //aggiorno gli status
+        try(PreparedStatement st = con.prepareStatement("SELECT dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, pagamento, stato, po.quantita, id_ordine, id_prodotto, tipo, nome, marca, descrizione, quantita_conf, prezzo FROM ordine o JOIN prodotto_in_ordine po ON o.id=po.id_ordine JOIN prodotto p ON p.id=po.id_prodotto ORDER BY id_ordine;")){
 
             Integer id_ordine;
             Date dataConsegna;
@@ -60,6 +97,9 @@ public class DBOrder {
             String emailCliente;
             BigDecimal totale;
             Integer saldoPunti;
+            HashMap<Product, Integer> prodottiOrdine=null;
+            String pagamento;
+            String stato;
 
             ResultSet rs = st.executeQuery();
 
@@ -73,11 +113,13 @@ public class DBOrder {
                 emailCliente=rs.getString("emailCliente");
                 totale=rs.getBigDecimal("totale");
                 saldoPunti=rs.getInt("saldoPunti");
+                pagamento=rs.getString("pagamento");
+                stato=rs.getString("stato");
                 //la query ordina per id_ordine, quindi vado avanti finché ho prodotti per lo stesso ordine
                 do{
                     prodottiOrdine.put(new Product(rs.getInt("id_prodotto"), rs.getString("tipo"), rs.getString("nome"), rs.getString("marca"), rs.getString("descrizione"), null, rs.getInt("quantita_conf"), rs.getBigDecimal("prezzo")), rs.getInt("quantita"));
                 }while(rs.next()&&rs.getInt("id_ordine")==id_ordine);
-                orderList.add(new Order(id_ordine, dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, prodottiOrdine));
+                orderList.add(new Order(id_ordine, dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, prodottiOrdine, pagamento, stato));
             }while(rs.next());
 
             return orderList;
@@ -89,10 +131,9 @@ public class DBOrder {
     }
 
     public List<Order> getOrdersOfUser(String loggedUser){
-        try(PreparedStatement st = con.prepareStatement("SELECT dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, po.quantita, id_ordine, id_prodotto, tipo, nome, marca, descrizione, quantita_conf, prezzo FROM ordine o JOIN prodotto_in_ordine po ON o.id=po.id_ordine JOIN prodotto p ON p.id=po.id_prodotto WHERE LOWER(emailCliente) = LOWER(?) ORDER BY id_ordine;")){
+        ordersStatusUpdate(); //aggiorno gli status
+        try(PreparedStatement st = con.prepareStatement("SELECT dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, pagamento, stato, po.quantita, id_ordine, id_prodotto, tipo, nome, marca, descrizione, quantita_conf, prezzo FROM ordine o JOIN prodotto_in_ordine po ON o.id=po.id_ordine JOIN prodotto p ON p.id=po.id_prodotto WHERE LOWER(emailCliente) = LOWER(?) ORDER BY id_ordine;")){
             st.setString(1, loggedUser);
-
-            HashMap<Product, Integer> prodottiOrdine=null;
 
             Integer id_ordine;
             Date dataConsegna;
@@ -100,6 +141,9 @@ public class DBOrder {
             String emailCliente;
             BigDecimal totale;
             Integer saldoPunti;
+            HashMap<Product, Integer> prodottiOrdine=null;
+            String pagamento;
+            String stato;
 
             ResultSet rs = st.executeQuery();
 
@@ -113,11 +157,13 @@ public class DBOrder {
                 emailCliente=rs.getString("emailCliente");
                 totale=rs.getBigDecimal("totale");
                 saldoPunti=rs.getInt("saldoPunti");
+                pagamento=rs.getString("pagamento");
+                stato=rs.getString("stato");
                 //la query ordina per id_ordine, quindi vado avanti finché ho prodotti per lo stesso ordine
                 do{
                     prodottiOrdine.put(new Product(rs.getInt("id_prodotto"), rs.getString("tipo"), rs.getString("nome"), rs.getString("marca"), rs.getString("descrizione"), null, rs.getInt("quantita_conf"), rs.getBigDecimal("prezzo")), rs.getInt("quantita"));
                 }while(rs.next()&&rs.getInt("id_ordine")==id_ordine);
-                orderList.add(new Order(id_ordine, dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, prodottiOrdine));
+                orderList.add(new Order(id_ordine, dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, prodottiOrdine, pagamento, stato));
             }while(rs.next());
 
             return orderList;
@@ -138,12 +184,14 @@ public class DBOrder {
         }
         else {
             //insert user
-            try (PreparedStatement st = con.prepareStatement("INSERT INTO ordine (DataConsegna, OraConsegna, EmailCliente, Totale, SaldoPunti) VALUES (?, ?, ?, ?, ?) RETURNING id;")) { //se non va mettiamo anche id e DEFAULT
+            try (PreparedStatement st = con.prepareStatement("INSERT INTO ordine (DataConsegna, OraConsegna, EmailCliente, Totale, SaldoPunti, Pagamento, Stato) VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING id;")) { //se non va mettiamo anche id e DEFAULT
                 st.setDate(1, order.getDataConsegna());
                 st.setTime(2, order.getOraConsegna());
                 st.setString(3, order.getEmailCliente());
                 st.setBigDecimal(4, order.getTotale());
                 st.setInt(5, order.getSaldoPunti());
+                st.setString(6, order.getPagamento());
+                st.setString(7, "Confermato");
                 ResultSet rs = st.executeQuery();
                 if (rs.next() == false) throw new SQLException("\nOrder insertion failed!\n");
                 id_ordine=rs.getInt("id");

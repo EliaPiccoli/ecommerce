@@ -79,7 +79,7 @@ public class DBUser {
             st.setString(8, user.getEmail());
 
             int update = st.executeUpdate();
-            if(update == 0) throw new SQLException("update was unsuccesful");
+            if(update == 0) throw new SQLException("User update failed!");
             else return getUser(user.getEmail());
         }
         catch(SQLException e){
