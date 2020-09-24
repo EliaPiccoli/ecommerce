@@ -15,6 +15,7 @@ public class Order {
     Integer saldoPuntiBase;
     Integer saldoPunti;
     HashMap<Product, Integer> prodottiOrdine;
+    //TODO add pagamento - stato fields
 
     public Order(Integer id, Date dataConsegna, Time oraConsegna, String emailCliente, BigDecimal totale, Integer saldoPunti, HashMap<Product, Integer> prodottiOrdine){
         this.id=id;

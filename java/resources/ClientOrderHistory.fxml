@@ -8,7 +8,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="1054.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.OrderHistory_Controller">
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="1054.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ClientOrderHistoryController">
    <children>
       <Label layoutX="39.0" layoutY="22.0" text="Super" textFill="#02048a">
          <font>
@@ -20,7 +21,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button layoutX="290.0" layoutY="34.0" mnemonicParsing="false" onAction="#search" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #02048a;" text="Logged as:" textFill="WHITE">
+      <Button fx:id="log" layoutX="290.0" layoutY="34.0" mnemonicParsing="false" onAction="#search" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #02048a;" text="Logged as:" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -28,12 +29,12 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <TextField fx:id="infoLbl" editable="false" layoutX="410.0" layoutY="34.0" opacity="0.51" prefHeight="32.0" prefWidth="190.0" style="-fx-background-color: ffde7d;">
+      <TextField fx:id="user" editable="false" layoutX="410.0" layoutY="34.0" opacity="0.51" prefHeight="32.0" prefWidth="190.0" style="-fx-background-color: ffde7d;">
          <font>
             <Font name="Constantia" size="14.0" />
          </font>
       </TextField>
-      <Button layoutX="882.0" layoutY="30.0" mnemonicParsing="false" onAction="#close" prefHeight="40.0" prefWidth="128.0" style="-fx-background-color: #9d0901;" text="Home" textFill="WHITE">
+      <Button layoutX="882.0" layoutY="30.0" mnemonicParsing="false" onAction="#home" prefHeight="40.0" prefWidth="128.0" style="-fx-background-color: #9d0901;" text="Home" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
@@ -58,13 +59,36 @@
       </TextField>
       <TableView fx:id="ordersTable" layoutX="39.0" layoutY="160.0" prefHeight="208.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
         <columns>
-          <TableColumn fx:id="colID" prefWidth="167.0" text="Order ID" />
-            <TableColumn fx:id="colDate" prefWidth="195.0" text="Date" />
-            <TableColumn fx:id="colDate1" minWidth="0.0" prefWidth="174.0" text="Total" />
-            <TableColumn fx:id="colDate2" prefWidth="165.0" text="Delivery date" />
-            <TableColumn fx:id="colStat" prefWidth="153.0" text="Pay mode" />
-            <TableColumn fx:id="colDate3" prefWidth="122.0" text="Status" />
-            <TableColumn fx:id="colDate31" prefWidth="233.0" text="Pay mode" />
+          <TableColumn fx:id="colID" prefWidth="167.0" text="Order ID">
+           <cellValueFactory>
+              <PropertyValueFactory property="id" />
+           </cellValueFactory>
+          </TableColumn>
+            <TableColumn fx:id="colDate" prefWidth="195.0" text="Total">
+               <cellValueFactory>
+                  <PropertyValueFactory property="totale" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="colDate1" minWidth="0.0" prefWidth="174.0" text="Delivery Date">
+               <cellValueFactory>
+                  <PropertyValueFactory property="dataConsegna" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="colDate2" prefWidth="165.0" text="Delivery hour">
+               <cellValueFactory>
+                  <PropertyValueFactory property="oraConsegna" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="colStat" prefWidth="153.0" text="Pay mode">
+               <cellValueFactory>
+                  <PropertyValueFactory property="pagamento" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="colDate3" prefWidth="122.0" text="Status">
+               <cellValueFactory>
+                  <PropertyValueFactory property="stato" />
+               </cellValueFactory>
+            </TableColumn>
         </columns>
       </TableView>
       <Label layoutX="39.0" layoutY="384.0" prefHeight="23.0" prefWidth="165.0" text="Description order:" textFill="#02048a">
@@ -80,6 +104,6 @@
             <TableColumn fx:id="colDate21" prefWidth="173.0" text="Total" />
          </columns>
       </TableView>
-      <Button fx:id="logOutButton" layoutY="1.0" mnemonicParsing="false" onAction="#logOutButtonPushed" text="Log Out" />
+      <Button fx:id="logOutButton" layoutY="1.0" mnemonicParsing="false" onAction="#logout" text="Log Out" />
    </children>
 </Pane>
