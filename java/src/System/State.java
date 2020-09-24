@@ -1,13 +1,20 @@
 package System;
 
+import obj.Order;
+import obj.Product;
 import obj.User;
+
+import java.math.BigDecimal;
+import java.util.HashMap;
 
 public class State {
     private static State s;
     private User currentUser;
+    private Order currentOrder;
 
     private State () {
-
+        this.currentUser = null;
+        this.currentOrder = null;
     }
 
     public static State getInstance() {
@@ -22,5 +29,15 @@ public class State {
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
+        this.currentOrder = new Order(null, null, null, currentUser.getEmail(), BigDecimal.ZERO, currentUser.getCartaFed().getSaldo(), new HashMap<>());
+    }
+
+    public void addProduct(Product prod) {
+        this.currentOrder.addProduct(prod);
+    }
+
+    public void reset() {
+        this.currentUser = null;
+        this.currentOrder = null;
     }
 }

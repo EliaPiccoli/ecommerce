@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import obj.Product;
@@ -32,8 +33,6 @@ public class HomeController {
     @FXML ComboBox<String> typeSearch;
     @FXML TextField user;
     State state = State.getInstance();
-
-    List<Product> cart = new ArrayList<>();
 
     public void initialize() {
         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
@@ -85,12 +84,22 @@ public class HomeController {
     }
 
     public void seeBasket(ActionEvent event) {
-        // TODO: pass info of the elements in the cart
+        // cart in State
         newScene(event, "/Basket.fxml");
     }
 
     public void seePoints(ActionEvent event) {
-        newScene(event, "/FidelityPoints.fxml");
+        try {
+            Parent tableViewParent = FXMLLoader.load(getClass().getResource("/FidelityPoints.fxml"));
+            Scene tableViewScene = new Scene(tableViewParent);
+            Stage pointsStage = new Stage();
+            pointsStage.setScene(tableViewScene);
+            pointsStage.setTitle("Verdo's Shop");
+            pointsStage.getIcons().add(new Image("/logo.jpg"));
+            pointsStage.show();
+        } catch (IOException e) {
+            System.out.println("Error loading fidelity card");
+        }
     }
 
     public void search() {
@@ -114,14 +123,13 @@ public class HomeController {
 
     public void click(MouseEvent event) {
         if(event.getClickCount() >= 2) {
-            cart.add(productTable.getSelectionModel().getSelectedItem());
-            System.out.println(cart);
+            state.addProduct(productTable.getSelectionModel().getSelectedItem());
             AlertBox.display("Cart", "Product added to cart!", true);
         }
     }
 
     public void logOutButtonPushed(ActionEvent event) throws IOException, ClassNotFoundException {
-        state.setCurrentUser(null);
+        state.reset();
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("/Login.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
