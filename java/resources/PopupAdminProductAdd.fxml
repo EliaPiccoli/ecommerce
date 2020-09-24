@@ -21,7 +21,7 @@
 
 <AnchorPane prefHeight="422.0" prefWidth="622.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Store.RegisterController">
    <children>
-      <Label layoutX="169.0" layoutY="23.0" prefHeight="29.0" prefWidth="307.0" text="New product insertion" textFill="#4727ea">
+      <Label layoutX="169.0" layoutY="21.0" prefHeight="29.0" prefWidth="259.0" text="New product insertion" textFill="#4727ea">
          <font>
             <Font size="24.0" />
          </font>
@@ -43,18 +43,18 @@
             <Font name="Open Sans Semibold" size="12.0" />
          </font></Label>
       <TextField fx:id="name21" layoutX="121.0" layoutY="152.0" promptText="Melinda" />
-      <Label layoutX="21.0" layoutY="204.0" prefHeight="15.0" prefWidth="90.0" text="Price per pack:" textFill="#4727ea">
+      <Label layoutX="22.0" layoutY="204.0" prefHeight="15.0" prefWidth="90.0" text="Price per pack:" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font></Label>
       <TextField fx:id="name22" layoutX="121.0" layoutY="198.0" promptText="-" />
-      <Label layoutX="25.0" layoutY="244.0" prefHeight="17.0" prefWidth="47.0" text="Price:" textFill="#4727ea">
+      <Label layoutX="24.0" layoutY="244.0" prefHeight="17.0" prefWidth="47.0" text="Price:" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font>
       </Label>
       <TextField fx:id="name221" layoutX="121.0" layoutY="239.0" promptText="0,1" />
-      <Label layoutX="23.0" layoutY="281.0" prefHeight="17.0" prefWidth="74.0" text="Desciption:" textFill="#4727ea">
+      <Label layoutX="24.0" layoutY="281.0" prefHeight="17.0" prefWidth="74.0" text="Desciption:" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font></Label>
@@ -66,7 +66,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </ChoiceBox>
-      <Label layoutX="21.0" layoutY="350.0" prefHeight="17.0" prefWidth="90.0" text="Units in stock:" textFill="#4727ea">
+      <Label layoutX="24.0" layoutY="350.0" prefHeight="17.0" prefWidth="90.0" text="Units in stock:" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font>

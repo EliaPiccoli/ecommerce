@@ -19,62 +19,62 @@
 
 <AnchorPane prefHeight="422.0" prefWidth="622.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ClientProfileModifierController">
    <children>
-      <Button fx:id="saveButton" onAction="#SaveButtonPushed" layoutX="317.0" layoutY="360.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="139.0" style="    -fx-background-color:         #090a0c,         linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),         linear-gradient(#20262b, #191d22),         radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));     -fx-background-radius: 5,4,3,5;     -fx-background-insets: 0,1,2,0;     -fx-text-fill: white;     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="SAVE" textFill="WHITE" />
-      <TextField fx:id="name" layoutX="93.0" layoutY="33.0" promptText="Luca" />
-      <TextField fx:id="email" layoutX="351.0" layoutY="135.0" prefHeight="27.0" prefWidth="258.0" promptText="luca.rossi@gmail.com" />
       <Label layoutX="22.0" layoutY="38.0" prefHeight="17.0" prefWidth="53.0" text="Name" textFill="#270cc3">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font></Label>
-      <Label layoutX="283.0" layoutY="140.0" prefHeight="17.0" prefWidth="53.0" text="Email" textFill="#4727ea">
-         <font>
-            <Font name="Open Sans Semibold" size="12.0" />
-         </font></Label>
-      <Label layoutX="279.0" layoutY="39.0" text="Address" textFill="#4727ea">
-         <font>
-            <Font name="Open Sans Semibold" size="12.0" />
-         </font></Label>
-      <PasswordField fx:id="password" layoutX="219.0" layoutY="200.0" promptText="Password" />
-      <Label layoutX="121.0" layoutY="206.0" text="Password" textFill="#4727ea">
-         <font>
-            <Font name="Open Sans Semibold" size="12.0" />
-         </font></Label>
-      <Label layoutX="121.0" layoutY="250.0" prefHeight="15.0" prefWidth="67.0" text="Card Code" textFill="#4727ea">
-         <font>
-            <Font name="Open Sans Semibold" size="12.0" />
-         </font></Label>
-      <TextField fx:id="cardCode" layoutX="219.0" layoutY="244.0" promptText="A97H2" />
-      <Separator layoutX="16.0" layoutY="183.0" prefHeight="3.0" prefWidth="588.0" style="-fx-background-color: #000000;" />
-      <Label fx:id="invalidName" layoutX="157.0" layoutY="14.0" text="This field is required*" textFill="#ee0000" visible="false" />
-      <Label fx:id="invalidEmail" layoutX="157.0" layoutY="58.0" text="This field is required*" textFill="#ee0000" visible="false" />
-      <Label fx:id="invalidAddress" layoutX="154.0" layoutY="107.0" text="This field is required*" textFill="#ee0000" visible="false" />
-      <Label fx:id="invalidPassword" layoutX="154.0" layoutY="184.0" text="This field is required*" textFill="#ee0000" visible="false" />
-      <Label fx:id="invalidMatch" layoutX="157.0" layoutY="227.0" text="Password do not match" textFill="#ee0000" visible="false" />
-      <TextField fx:id="address" layoutX="349.0" layoutY="33.0" prefHeight="27.0" prefWidth="258.0" promptText="Via Martino gualtieri, 10" />
+      <TextField fx:id="name" layoutX="93.0" layoutY="33.0" promptText="Luca" />
       <Label layoutX="22.0" layoutY="86.0" prefHeight="17.0" prefWidth="53.0" text="Surname" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font>
       </Label>
       <TextField fx:id="surname" layoutX="93.0" layoutY="81.0" promptText="Rossi" />
-      <TextField fx:id="cap" layoutX="346.0" layoutY="81.0" prefHeight="27.0" prefWidth="77.0" promptText="37130" />
+      <Label layoutX="23.0" layoutY="140.0" prefHeight="17.0" prefWidth="53.0" text="Phone" textFill="#4727ea">
+         <font>
+            <Font name="Open Sans Semibold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="phone" layoutX="93.0" layoutY="135.0" prefHeight="27.0" prefWidth="167.0" promptText="320 1634532" />
+      <Label layoutX="277.0" layoutY="39.0" text="Address" textFill="#4727ea">
+         <font>
+            <Font name="Open Sans Semibold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="address" layoutX="349.0" layoutY="33.0" prefHeight="27.0" prefWidth="258.0" promptText="Via Martino gualtieri, 10" />
       <Label layoutX="276.0" layoutY="86.0" prefHeight="17.0" prefWidth="77.0" text="Postal Code" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="429.0" layoutY="86.0" prefHeight="17.0" prefWidth="32.0" text="City" textFill="#4727ea">
+      <TextField fx:id="cap" layoutX="349.0" layoutY="81.0" prefHeight="27.0" prefWidth="77.0" promptText="37130" />
+      <Label layoutX="434.0" layoutY="86.0" prefHeight="17.0" prefWidth="32.0" text="City" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font>
       </Label>
       <TextField fx:id="city" layoutX="470.0" layoutY="81.0" prefHeight="27.0" prefWidth="139.0" promptText="Verona, Italy" />
-      <TextField fx:id="phone" layoutX="93.0" layoutY="135.0" prefHeight="27.0" prefWidth="167.0" promptText="320 1634532" />
-      <Label layoutX="22.0" layoutY="140.0" prefHeight="17.0" prefWidth="53.0" text="Phone" textFill="#4727ea">
+      <Label layoutX="278.0" layoutY="140.0" prefHeight="17.0" prefWidth="53.0" text="Email" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
-         </font>
-      </Label>
-      <Button fx:id="cancelButton" onAction="#CancelButtonPushed" layoutX="153.0" layoutY="360.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="139.0" style="-fx-background-color: #033323; -fx-background-radius: 5,4,3,5; -fx-background-insets: 0,1,2,0; -fx-text-fill: white; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="CANCEL" textFill="WHITE" />
+         </font></Label>
+      <TextField fx:id="email" layoutX="351.0" layoutY="135.0" prefHeight="27.0" prefWidth="258.0" promptText="luca.rossi@gmail.com" />
+      <Separator layoutX="16.0" layoutY="183.0" prefHeight="3.0" prefWidth="588.0" style="-fx-background-color: #000000;" />
+      <Label layoutX="121.0" layoutY="206.0" text="Password" textFill="#4727ea">
+         <font>
+            <Font name="Open Sans Semibold" size="12.0" />
+         </font></Label>
+      <PasswordField fx:id="password" layoutX="219.0" layoutY="200.0" promptText="Password" />
+      <Label layoutX="121.0" layoutY="250.0" prefHeight="15.0" prefWidth="67.0" text="Card Code" textFill="#4727ea">
+         <font>
+            <Font name="Open Sans Semibold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="cardCode" layoutX="219.0" layoutY="244.0" promptText="A97H2" />
+      <Button fx:id="cancelButton" layoutX="153.0" layoutY="360.0" mnemonicParsing="false" onAction="#CancelButtonPushed" prefHeight="37.0" prefWidth="139.0" style="-fx-background-color: #033323; -fx-background-radius: 5,4,3,5; -fx-background-insets: 0,1,2,0; -fx-text-fill: white; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="CANCEL" textFill="WHITE" />
+      <Button fx:id="saveButton" layoutX="317.0" layoutY="360.0" mnemonicParsing="false" onAction="#SaveButtonPushed" prefHeight="37.0" prefWidth="139.0" style="    -fx-background-color:         #090a0c,         linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),         linear-gradient(#20262b, #191d22),         radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));     -fx-background-radius: 5,4,3,5;     -fx-background-insets: 0,1,2,0;     -fx-text-fill: white;     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="SAVE" textFill="WHITE" />
+      <Label fx:id="invalidName" layoutX="157.0" layoutY="14.0" text="This field is required*" textFill="#ee0000" visible="false" />
+      <Label fx:id="invalidEmail" layoutX="157.0" layoutY="58.0" text="This field is required*" textFill="#ee0000" visible="false" />
+      <Label fx:id="invalidAddress" layoutX="154.0" layoutY="107.0" text="This field is required*" textFill="#ee0000" visible="false" />
+      <Label fx:id="invalidPassword" layoutX="154.0" layoutY="184.0" text="This field is required*" textFill="#ee0000" visible="false" />
+      <Label fx:id="invalidMatch" layoutX="157.0" layoutY="227.0" text="Password do not match" textFill="#ee0000" visible="false" />
    </children>
 </AnchorPane>

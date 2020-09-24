@@ -12,18 +12,63 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="1054.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.OrderHistory_Controller">
    <children>
-      <Separator layoutX="-2.0" layoutY="109.0" prefHeight="3.0" prefWidth="1059.0" style="-fx-background-color: #02048a;" />
-      <Label layoutX="40.0" layoutY="26.0" prefHeight="59.0" prefWidth="332.0" text="Super" textFill="#02048a">
+      <Label layoutX="32.0" layoutY="21.0" prefHeight="59.0" prefWidth="184.0" text="Super" textFill="#02048a">
          <font>
             <Font name="Ubuntu" size="47.0" />
          </font>
       </Label>
-      <TextField fx:id="infoLbl" editable="false" layoutX="420.0" layoutY="53.0" opacity="0.51" prefHeight="28.0" prefWidth="133.0" style="-fx-background-color: ffde7d;">
+      <Button layoutX="270.0" layoutY="35.0" mnemonicParsing="false" onAction="#search" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #02448a;" text="Logged as:" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <TextField fx:id="infoLbl" editable="false" layoutX="390.0" layoutY="35.0" opacity="0.51" prefHeight="32.0" prefWidth="192.0" style="-fx-background-color: ffde7d;">
          <font>
             <Font name="Constantia" size="14.0" />
          </font>
       </TextField>
-      <TableView fx:id="ordersTable" layoutX="39.0" layoutY="217.0" prefHeight="476.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
+      <Button layoutX="604.0" layoutY="35.0" mnemonicParsing="false" onAction="#refresh" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #0a960a;" text="ADD" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="751.0" layoutY="35.0" mnemonicParsing="false" onAction="#close" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #9d0901;" text="Products" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Constantia" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="895.0" layoutY="35.0" mnemonicParsing="false" onAction="#close" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #9d0901;" text="ID Orders" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Constantia" size="14.0" />
+         </font>
+      </Button>
+      <Separator layoutX="2.0" layoutY="92.0" prefHeight="3.0" prefWidth="1048.0" style="-fx-background-color: #02048a;" />
+      <Button layoutX="41.0" layoutY="104.0" mnemonicParsing="false" onAction="#search" prefHeight="40.0" prefWidth="136.0" style="-fx-background-color: #02048a;" text="Search" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <TextField fx:id="IDtoSearch" alignment="CENTER" layoutX="378.0" layoutY="104.0" prefHeight="40.0" prefWidth="651.0" promptText="Type, Name, Brand" style="-fx-background-color: white;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TableView fx:id="ordersTable" layoutX="39.0" layoutY="160.0" prefHeight="529.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
         <columns>
             <TableColumn fx:id="colID1" prefWidth="154.0" text="Unit" />
           <TableColumn fx:id="colID" prefWidth="159.0" text="Name" />
@@ -34,50 +79,7 @@
             <TableColumn fx:id="colStat" prefWidth="113.0" text="Status" />
         </columns>
       </TableView>
-      <Button layoutX="47.0" layoutY="140.0" mnemonicParsing="false" onAction="#search" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #02048a;" text="Search" textFill="WHITE">
-         <font>
-            <Font name="Ubuntu" size="20.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <TextField fx:id="IDtoSearch" alignment="CENTER" layoutX="195.0" layoutY="138.0" prefHeight="44.0" prefWidth="817.0" promptText="Type, Name, Brand" style="-fx-background-color: white;">
-         <font>
-            <Font name="Ubuntu" size="20.0" />
-         </font>
-      </TextField>
-      <Button layoutX="325.0" layoutY="53.0" mnemonicParsing="false" onAction="#search" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #02448a;" text="Logged as:" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="749.0" layoutY="51.0" mnemonicParsing="false" onAction="#close" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #9d0901;" text="Products" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font name="Constantia" size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="892.0" layoutY="51.0" mnemonicParsing="false" onAction="#close" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #9d0901;" text="ID Orders" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font name="Constantia" size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="604.0" layoutY="51.0" mnemonicParsing="false" onAction="#refresh" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #0a960a;" text="ADD" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
+      <ComboBox layoutX="203.0" layoutY="104.0" prefHeight="40.0" prefWidth="150.0" />
+      <Button mnemonicParsing="false" text="Log Out" />
    </children>
 </Pane>

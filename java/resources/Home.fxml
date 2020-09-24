@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -14,20 +21,71 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="1054.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomeController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="1054.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomeController">
    <children>
-      <Separator layoutX="-2.0" layoutY="109.0" prefHeight="3.0" prefWidth="1059.0" style="-fx-background-color: #02048a;" />
-      <Label layoutX="40.0" layoutY="26.0" prefHeight="59.0" prefWidth="332.0" text="Super" textFill="#02048a">
+      <Label layoutX="40.0" layoutY="26.0" prefHeight="59.0" prefWidth="184.0" text="Super" textFill="#02048a">
          <font>
             <Font name="Ubuntu" size="47.0" />
          </font>
       </Label>
-      <TextField fx:id="user" editable="false" layoutX="486.0" layoutY="53.0" opacity="0.51" prefHeight="28.0" prefWidth="133.0" style="-fx-background-color: ffde7d;">
+      <Button fx:id="userLogged" layoutX="270.0" layoutY="53.0" mnemonicParsing="false" onAction="#editProfile" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #02448a;" text="Logged as:" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <TextField fx:id="user" editable="false" layoutX="365.0" layoutY="53.0" opacity="0.51" prefHeight="28.0" prefWidth="192.0" style="-fx-background-color: ffde7d;">
          <font>
             <Font name="Constantia" size="14.0" />
          </font>
       </TextField>
-      <TableView fx:id="productTable" layoutX="39.0" layoutY="217.0" onMouseClicked="#click" prefHeight="476.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
+      <Button layoutX="646.0" layoutY="53.0" mnemonicParsing="false" onAction="#seeOrders" prefHeight="28.0" prefWidth="120.0" style="-fx-background-color: #0a960a;" text="ORDERS" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="44.0" fitWidth="95.0" layoutX="798.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@carrello.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="766.0" layoutY="60.0" mnemonicParsing="false" onAction="#seeBasket" prefHeight="19.0" prefWidth="120.0" style="-fx-background-color: #bdc3c7;" text="BASKET" textFill="#1616dd">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Constantia" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="876.0" layoutY="53.0" mnemonicParsing="false" onAction="#seePoints" prefHeight="28.0" prefWidth="147.0" style="-fx-background-color: #02048a;" text="POINTS BALANCE" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Separator layoutX="2.0" layoutY="92.0" prefHeight="3.0" prefWidth="1048.0" style="-fx-background-color: #02048a;" />
+      <Button layoutX="41.0" layoutY="104.0" mnemonicParsing="false" onAction="#search" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #02048a;" text="Search" textFill="WHITE">
+         <font>
+            <Font name="Ubuntu" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ComboBox fx:id="typeSearch" layoutX="203.0" layoutY="104.0" prefHeight="40.0" prefWidth="150.0" />
+      <TextField fx:id="searchParameter" alignment="CENTER" layoutX="378.0" layoutY="104.0" prefHeight="40.0" prefWidth="651.0" promptText="Type, Name, Brand" style="-fx-background-color: white;">
+         <font>
+            <Font name="Ubuntu" size="20.0" />
+         </font>
+      </TextField>
+      <TableView fx:id="productTable" layoutX="39.0" layoutY="160.0" onMouseClicked="#click" prefHeight="529.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
         <columns>
             <TableColumn fx:id="id" prefWidth="154.0" text="ID">
                <cellValueFactory>
@@ -66,56 +124,6 @@
             </TableColumn>
         </columns>
       </TableView>
-      <Button onAction="#search" layoutX="47.0" layoutY="140.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #02048a;" text="Search" textFill="WHITE">
-         <font>
-            <Font name="Ubuntu" size="20.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <TextField fx:id="searchParameter" alignment="CENTER" layoutX="496.0" layoutY="140.0" prefHeight="40.0" prefWidth="533.0" promptText="Type, Name, Brand" style="-fx-background-color: white;">
-         <font>
-            <Font name="Ubuntu" size="20.0" />
-         </font>
-      </TextField>
-      <ImageView fitHeight="44.0" fitWidth="95.0" layoutX="798.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@carrello.png" />
-         </image>
-      </ImageView>
-      <Button layoutX="766.0" layoutY="67.0" mnemonicParsing="false" onAction="#seeBasket" prefHeight="19.0" prefWidth="120.0" style="-fx-background-color: #bdc3c7;" text="BASKET" textFill="#1616dd">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font name="Constantia" size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="876.0" layoutY="53.0" mnemonicParsing="false" onAction="#seePoints" prefHeight="28.0" prefWidth="147.0" style="-fx-background-color: #02048a;" text="POINTS BALANCE" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="646.0" layoutY="53.0" mnemonicParsing="false" onAction="#seeOrders" prefHeight="28.0" prefWidth="120.0" style="-fx-background-color: #0a960a;" text="ORDERS" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="userLogged" layoutX="406.0" layoutY="53.0" mnemonicParsing="false" onAction="#editProfile" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #02448a;" text="Logged as:" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <ComboBox fx:id="typeSearch" layoutX="206.0" layoutY="140.0" prefHeight="40.0" prefWidth="243.0" />
+      <Button mnemonicParsing="false" text="Log Out" />
    </children>
 </Pane>

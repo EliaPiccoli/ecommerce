@@ -18,14 +18,14 @@
             <Font name="Ubuntu" size="32.0" />
          </font>
       </Label>
-      <Button layoutX="272.0" layoutY="98.0" mnemonicParsing="false" onAction="#viewCart" prefHeight="53.0" prefWidth="149.0" style="-fx-background-color: #02048a;" text="View Cart" textFill="WHITE">
+      <Button layoutX="81.0" layoutY="98.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="53.0" prefWidth="149.0" style="-fx-background-color: #9d0901;" text="Close " textFill="WHITE">
          <font>
             <Font name="Ubuntu" size="22.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button layoutX="88.0" layoutY="98.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="53.0" prefWidth="149.0" style="-fx-background-color: #9d0901;" text="Close " textFill="WHITE">
+      <Button layoutX="272.0" layoutY="98.0" mnemonicParsing="false" onAction="#viewCart" prefHeight="53.0" prefWidth="149.0" style="-fx-background-color: #02048a;" text="View Cart" textFill="WHITE">
          <font>
             <Font name="Ubuntu" size="22.0" />
          </font>

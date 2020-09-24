@@ -19,10 +19,11 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="678.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Store.PaymentController">
    <children>
-      <Button layoutX="149.0" layoutY="344.0" mnemonicParsing="false" onAction="#handleConfirmButton" prefHeight="35.0" prefWidth="101.0" style="-fx-background-color: #008f39;" text="Confirm" textFill="#1b0101">
+      <Label layoutX="25.0" layoutY="27.0" text="Super" textFill="#100aa7">
          <font>
-            <Font size="18.0" />
-         </font></Button>
+            <Font name="ATROX normal" size="36.0" />
+         </font>
+      </Label>
       <Label layoutX="25.0" layoutY="79.0" text="Checkout" textFill="#100aa7">
          <font>
             <Font size="18.0" />
@@ -41,20 +42,17 @@
       <Separator layoutX="3.0" layoutY="172.0" prefHeight="5.0" prefWidth="697.0" />
       <TextField fx:id="cardName" layoutX="32.0" layoutY="197.0" prefHeight="39.0" prefWidth="204.0" promptText="Name on card" />
       <TextField fx:id="cardNumber" layoutX="32.0" layoutY="252.0" prefHeight="27.0" prefWidth="204.0" promptText="XXXX-XXXX-XXXX-XXXX" />
-      <TextField fx:id="exp" layoutX="34.0" layoutY="294.0" prefHeight="26.0" prefWidth="101.0" promptText="MM/YY" />
+      <TextField fx:id="exp" layoutX="32.0" layoutY="294.0" prefHeight="27.0" prefWidth="103.0" promptText="MM/YY" />
       <TextField fx:id="cvc" layoutX="163.0" layoutY="294.0" prefHeight="27.0" prefWidth="73.0" promptText="CVC" />
-      <Label layoutX="359.0" layoutY="275.0" prefHeight="39.0" prefWidth="108.0" text="TOTAL" textFill="#100aa7">
+      <Button layoutX="34.0" layoutY="344.0" mnemonicParsing="false" onAction="#handleConfirmButton" prefHeight="35.0" prefWidth="97.0" style="-fx-background-color: #ff0000;" text="Annul" textFill="#1b0101">
          <font>
-            <Font size="24.0" />
+            <Font size="18.0" />
          </font>
-      </Label>
-      <Label fx:id="totalLabel" layoutX="533.0" layoutY="281.0" prefHeight="39.0" prefWidth="108.0" text="000.00 €" textFill="#100aa7">
+      </Button>
+      <Button layoutX="143.0" layoutY="344.0" mnemonicParsing="false" onAction="#handleConfirmButton" prefHeight="35.0" prefWidth="93.0" style="-fx-background-color: #008f39;" text="Confirm" textFill="#1b0101">
          <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label fx:id="invalid" layoutX="36.0" layoutY="335.0" text="Invalid Card. Please enter valid details" textFill="#ee0000" visible="false" />
-      <Separator layoutX="344.0" layoutY="265.0" prefHeight="5.0" prefWidth="358.0" />
+            <Font size="18.0" />
+         </font></Button>
       <Label layoutX="359.0" layoutY="216.0" prefHeight="39.0" prefWidth="175.0" text="Loyalty card" textFill="#100aa7">
          <font>
             <Font size="24.0" />
@@ -65,14 +63,15 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button layoutX="34.0" layoutY="344.0" mnemonicParsing="false" onAction="#handleConfirmButton" prefHeight="35.0" prefWidth="101.0" style="-fx-background-color: #ff0000;" text="Annul" textFill="#1b0101">
+      <Separator layoutX="344.0" layoutY="265.0" prefHeight="5.0" prefWidth="358.0" />
+      <Label layoutX="359.0" layoutY="275.0" prefHeight="39.0" prefWidth="108.0" text="TOTAL" textFill="#100aa7">
          <font>
-            <Font size="18.0" />
+            <Font size="24.0" />
          </font>
-      </Button>
-      <Label layoutX="25.0" layoutY="27.0" text="Super" textFill="#100aa7">
+      </Label>
+      <Label fx:id="totalLabel" layoutX="533.0" layoutY="281.0" prefHeight="39.0" prefWidth="108.0" text="000.00 €" textFill="#100aa7">
          <font>
-            <Font name="ATROX normal" size="36.0" />
+            <Font size="24.0" />
          </font>
       </Label>
    </children>

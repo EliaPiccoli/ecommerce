@@ -16,11 +16,16 @@
             <Font name="Ubuntu" size="48.0" />
          </font>
       </Label>
-      <TextField fx:id="emailField" layoutX="152.0" layoutY="121.0" prefHeight="58.0" prefWidth="296.0" promptText="email" style="-fx-background-color: #e9e9e9; -fx-border-style: none;">
+      <TextField fx:id="emailField" layoutX="154.0" layoutY="121.0" prefHeight="58.0" prefWidth="296.0" promptText="email" style="-fx-background-color: #e9e9e9; -fx-border-style: none;">
          <font>
             <Font name="Constantia" size="16.0" />
          </font>
       </TextField>
+      <PasswordField fx:id="pwField" layoutX="155.0" layoutY="197.0" prefHeight="58.0" prefWidth="296.0" promptText="password" style="-fx-background-color: #e9e9e9;">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </PasswordField>
       <Button fx:id="loginButton" layoutX="236.0" layoutY="285.0" mnemonicParsing="false" onAction="#LoginButtonPushed" prefHeight="58.0" prefWidth="136.0" style="-fx-background-color: #02048a;" text="Enter" textFill="WHITE">
          <font>
             <Font name="Constantia" size="16.0" />
@@ -40,10 +45,5 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <PasswordField fx:id="pwField" layoutX="155.0" layoutY="197.0" prefHeight="58.0" prefWidth="296.0" promptText="password" style="-fx-background-color: #e9e9e9;">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </PasswordField>
    </children>
 </Pane>
