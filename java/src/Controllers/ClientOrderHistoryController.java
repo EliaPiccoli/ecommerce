@@ -1,6 +1,7 @@
 package Controllers;
 
 import DB_Handler.DBOrder;
+import DB_Handler.DBProduct;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,6 +30,7 @@ public class ClientOrderHistoryController {
     @FXML TextField user;
     @FXML ComboBox<String> typeSearch;
     @FXML TableView<Order> ordersTable;
+    @FXML TextField searchParameter;
 
     State state = State.getInstance();
 
@@ -65,7 +67,21 @@ public class ClientOrderHistoryController {
     }
 
     public void search() {
-        System.out.println("Search");
+        try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
+            DBOrder dbOrderController = new DBOrder(con);
+            String col = typeSearch.getSelectionModel().getSelectedItem();
+            List<Order> filteredOrders = new ArrayList<>();
+            if(col.equals("Show All"))
+                filteredOrders = dbOrderController.getOrdersOfUser(state.getCurrentUser().getEmail());
+            else
+                filteredOrders.add(dbOrderController.getOrder(Integer.parseInt(searchParameter.getText())));
+            ObservableList<Order> data = ordersTable.getItems();
+            data.removeAll(data);
+            data.addAll(filteredOrders);
+            searchParameter.clear();
+        } catch (SQLException e) {
+            System.out.println("Error connecting with db");
+        }
     }
 
     public void logout(ActionEvent event) throws IOException {
