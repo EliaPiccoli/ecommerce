@@ -95,7 +95,7 @@ public class DBUser {
             st.setDate(1, new Date(System.currentTimeMillis()));
             st.setInt(2, 0);
             ResultSet rs = st.executeQuery();
-            if(rs.next() == false) throw new SQLException("Something went TERRIBLY wrong");
+            if(rs.next() == false) throw new SQLException("\nCartaFed insertion failed!\n");
             else fidelityCard_id = rs.getInt("id");
         }
         catch(SQLException e){
@@ -117,7 +117,7 @@ public class DBUser {
             st.setString(10, user.getRuolo());
 
             int update = st.executeUpdate();
-            if(update == 0) throw new SQLException("update was unsuccesful");
+            if(update == 0) throw new SQLException("\nUser insertion failed!\n");
             else return true;
         }
         catch(SQLException e){

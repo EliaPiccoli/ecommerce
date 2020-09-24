@@ -71,7 +71,6 @@ CREATE TABLE PRODOTTO_IN_ORDINE(
 	Id_ordine SERIAL NOT NULL REFERENCES ORDINE(Id),
 	Id_prodotto SERIAL NOT NULL REFERENCES PRODOTTO(Id),
 	Quantita INTEGER NOT NULL CHECK(Quantita > 0),
-	PrezzoUnitario DECIMAL(5, 2) NOT NULL CHECK(PrezzoUnitario >='0.00'),
 	PRIMARY KEY(Id_ordine, Id_prodotto)
 );
 
