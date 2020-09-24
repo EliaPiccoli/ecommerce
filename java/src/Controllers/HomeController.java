@@ -38,6 +38,7 @@ public class HomeController {
         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
             DBProduct dbProductController = new DBProduct(con);
             List<Product> products = dbProductController.getProducts();
+            System.out.println(products);
             ObservableList<Product> data = productTable.getItems();
             data.removeAll(data);
             data.addAll(products);
