@@ -80,16 +80,13 @@
       </Button>
       <TableView fx:id="ordersTable" layoutX="39.0" layoutY="159.0" prefHeight="332.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
         <columns>
-            <TableColumn fx:id="colID1" prefWidth="83.0" text="Type" />
-          <TableColumn fx:id="colID" prefWidth="79.0" text="Name" />
-            <TableColumn fx:id="colDescr" prefWidth="73.0" text="Brand" />
-            <TableColumn fx:id="colPonts1" prefWidth="103.0" text="Description" />
-            <TableColumn fx:id="colPonts" prefWidth="92.0" text="Quantity" />
-            <TableColumn fx:id="colDate" prefWidth="104.0" text="Price" />
-            <TableColumn fx:id="colStat" prefWidth="116.0" text="Status" />
-            <TableColumn fx:id="colStat1" prefWidth="100.0" text="Add +" />
-            <TableColumn fx:id="colStat11" prefWidth="120.0" text="Remove -" />
-            <TableColumn fx:id="colStat12" prefWidth="114.0" text=" Delete X" />
+            <TableColumn fx:id="colID1" prefWidth="154.0" text="Type" />
+          <TableColumn fx:id="colID" prefWidth="98.0" text="Name" />
+            <TableColumn fx:id="colDescr" prefWidth="143.0" text="Brand" />
+            <TableColumn fx:id="colPonts1" prefWidth="107.0" text="Description" />
+            <TableColumn fx:id="colPonts" prefWidth="103.0" text="Quantity" />
+            <TableColumn fx:id="colDate" prefWidth="174.0" text="Price" />
+            <TableColumn fx:id="colStat" prefWidth="168.0" text="Status" />
         </columns>
       </TableView>
       <Text layoutX="39.0" layoutY="552.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shopping delivery date:" wrappingWidth="173.72885131835938">
