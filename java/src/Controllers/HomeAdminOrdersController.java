@@ -1,6 +1,8 @@
 package Controllers;
 
+import DB_Handler.DBOrder;
 import DB_Handler.DBProduct;
+import DB_Handler.DBUser;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,10 +14,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import obj.Order;
+
+import System.State;
 import obj.Product;
+import obj.User;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -24,28 +29,37 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import System.State;
-
-public class HomeController {
-    @FXML TableView<Product> productTable = new TableView<>();
+public class HomeAdminOrdersController {
+    @FXML TableView<Order> ordersTable = new TableView<>();
+ //   @FXML TableView<OrderProducts> ordersTable1 = new TableView<>();
     @FXML Button userLogged;
-    @FXML TextField searchParameter;
-    @FXML ComboBox<String> typeSearch;
     @FXML TextField user;
+    @FXML ComboBox<String> typeSearch;
+    @FXML TextField searchParameter;
+    @FXML Button logOutButton;
+    @FXML TextField pointsBalanceText;
+    @FXML TextField nameText;
+    @FXML TextField phoneText;
+    @FXML TextField addressText;
+    @FXML TextField paymentText;
+    @FXML TextField surnameText;
+    @FXML TextField emailText;
+
     State state = State.getInstance();
+
+    List<Order> orders = new ArrayList<>();
 
     public void initialize() {
         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
-            DBProduct dbProductController = new DBProduct(con);
-            List<Product> products = dbProductController.getProducts();
-            System.out.println(products);
-            ObservableList<Product> data = productTable.getItems();
+            DBOrder dbOrderController = new DBOrder(con);
+            List<Order> products = dbOrderController.getOrders();
+            ObservableList<Order> data = ordersTable.getItems();
             data.removeAll(data);
-            data.addAll(products);
+            data.addAll(orders);
 
             ObservableList<String> data2 = typeSearch.getItems();
             data2.removeAll(data2);
-            data2.addAll("Show All", "Tipo", "Nome", "Marca");
+            data2.addAll("Show All", "ID", "Email");
             typeSearch.getSelectionModel().selectFirst();
 
             user.setText(state.getCurrentUser().getEmail());
@@ -70,7 +84,7 @@ public class HomeController {
 
     public void editProfile(ActionEvent event) {
         try {
-            Parent tableViewParent = FXMLLoader.load(getClass().getResource("/ClientProfileModifier.fxml"));
+            Parent tableViewParent = FXMLLoader.load(getClass().getResource("/AdminProfileModifier.fxml"));
             Scene tableViewScene = new Scene(tableViewParent);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(tableViewScene);
@@ -80,52 +94,52 @@ public class HomeController {
         }
     }
 
-    public void seeOrders(ActionEvent event) {
-        newScene(event, "/ClientOrderHistory.fxml");
-    }
-
-    public void seeBasket(ActionEvent event) {
-        // cart in State
-        newScene(event, "/Basket.fxml");
-    }
-
-    public void seePoints(ActionEvent event) {
-        try {
-            Parent tableViewParent = FXMLLoader.load(getClass().getResource("/FidelityPoints.fxml"));
-            Scene tableViewScene = new Scene(tableViewParent);
-            Stage pointsStage = new Stage();
-            pointsStage.setScene(tableViewScene);
-            pointsStage.setTitle("Verdo's Shop");
-            pointsStage.getIcons().add(new Image("/logo.jpg"));
-            pointsStage.show();
-        } catch (IOException e) {
-            System.out.println("Error loading fidelity card");
-        }
+    public void seeProducts(ActionEvent event) {
+        newScene(event, "/HomeAdminProducts.fxml");
     }
 
     public void search() {
         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
-            DBProduct dbProductController = new DBProduct(con);
+            DBOrder dbOrderController = new DBOrder(con);
             String col = typeSearch.getSelectionModel().getSelectedItem();
-            List<Product> filteredProducts = new ArrayList<>();
+            List<Order> filteredOrders = new ArrayList<>();
             if(col.equals("Show All"))
-                filteredProducts = dbProductController.getProducts();
+                filteredOrders = dbOrderController.getOrders();
+            else if (col.equals("Email"))
+                filteredOrders = dbOrderController.getOrdersOfUser(searchParameter.getText());
             else
-                filteredProducts = dbProductController.searchProducts(col, searchParameter.getText());
+                filteredOrders.add(dbOrderController.getOrder(Integer.parseInt(searchParameter.getText())));
 
-            ObservableList<Product> data = productTable.getItems();
+            ObservableList<Order> data = ordersTable.getItems();
             data.removeAll(data);
-            data.addAll(filteredProducts);
+            data.addAll(filteredOrders);
             searchParameter.clear();
         } catch (SQLException e) {
             System.out.println("Error connecting with db");
         }
     }
 
+    // TODO
     public void click(MouseEvent event) {
         if(event.getClickCount() >= 2) {
-            state.addProduct(productTable.getSelectionModel().getSelectedItem());
-            AlertBox.display("Cart", "Product added to cart!", true);
+            try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
+                Order orderSelected = ordersTable.getSelectionModel().getSelectedItem();
+                DBUser DBUserController = new DBUser(con);
+                User userSelected = DBUserController.getUser(orderSelected.getEmailCliente());
+
+                // TODO
+
+                pointsBalanceText.setText(userSelected.getCartaFed().getSaldo().toString());
+                nameText.setText(userSelected.getNome());
+                phoneText.setText(userSelected.getTelefono());
+                addressText.setText(userSelected.getIndirizzo());
+                //paymentText.setText(orderSelected.getPagamento());
+                surnameText.setText(userSelected.getCognome());
+                emailText.setText(userSelected.getEmail());
+
+            }  catch (SQLException e) {
+                System.out.println("Error connecting with db");
+            }
         }
     }
 

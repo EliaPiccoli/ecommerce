@@ -1,4 +1,3 @@
-
 DROP DOMAIN IF EXISTS cap_domain CASCADE;
 CREATE DOMAIN cap_domain AS VARCHAR(5)
 	CHECK(VALUE SIMILAR TO '[0-9]{5}')
@@ -12,6 +11,11 @@ CREATE DOMAIN phone_domain AS VARCHAR(10)
 DROP DOMAIN IF EXISTS pay_domain CASCADE;
 CREATE DOMAIN pay_domain AS VARCHAR
 	CHECK(VALUE IN('Carta di Credito', 'PayPal', 'Consegna'))
+	NOT NULL;
+
+DROP DOMAIN IF EXISTS status_domain CASCADE;
+CREATE DOMAIN status_domain AS VARCHAR
+	CHECK(VALUE IN('Confermato', 'In preparazione', 'Consegnato'))
 	NOT NULL;
 
 DROP DOMAIN IF EXISTS ruolo_domain CASCADE;
@@ -62,16 +66,17 @@ CREATE TABLE ORDINE(
 	Id SERIAL PRIMARY KEY,
 	DataConsegna DATE NOT NULL,
 	OraConsegna ora_domain,
-	Id_cliente VARCHAR NOT NULL REFERENCES UTENTE(email),
+	EmailCliente VARCHAR NOT NULL REFERENCES UTENTE(email),
 	Totale DECIMAL(6, 2) NOT NULL,
-	SaldoPunti INTEGER NOT NULL
+	SaldoPunti INTEGER NOT NULL,
+	Pagamento pay_domain NOT NULL,
+	Stato status_domain NOT NULL
 );
 DROP TABLE IF EXISTS PRODOTTO_IN_ORDINE;
 CREATE TABLE PRODOTTO_IN_ORDINE(
 	Id_ordine SERIAL NOT NULL REFERENCES ORDINE(Id),
 	Id_prodotto SERIAL NOT NULL REFERENCES PRODOTTO(Id),
 	Quantita INTEGER NOT NULL CHECK(Quantita > 0),
-	PrezzoUnitario DECIMAL(5, 2) NOT NULL CHECK(PrezzoUnitario >='0.00'),
 	PRIMARY KEY(Id_ordine, Id_prodotto)
 );
 
@@ -234,14 +239,14 @@ INSERT INTO PRODOTTO(Tipo, Nome, Marca, Descrizione, Quantita, Quantita_Conf, Pr
 ------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------
 INSERT INTO CARTAFED(DataEmissione, Saldo)
-	VALUES('2020-09-19','000000'),
-	('2020-09-19','000000'),
-	('2020-09-19','000000'),
+	VALUES('2001-09-11','000000'),
+	('2012-12-12','000000'),
+	('2018-01-20','000000'),
 	('2020-09-19','000000');
 
 INSERT INTO UTENTE(Matricola, Nome, Cognome, Indirizzo, Citta, Cap, Email, Telefono, Password, CartaFed, Ruolo)
 	VALUES('', 'Matteo','Rosa','Celino 22','Verona','37134','matteo.rosa@gmail.it','3432178920','0000', 1, 'Cliente'),
-    ('', 'Massimo','lugo','Santa marta 4','Bari','17455','massimo.lugo@libero.it','3452343538','1111', 2, 'Cliente'),
+	('', 'Massimo','lugo','Santa marta 4','Bari','17455','massimo.lugo@libero.it','3452343538','1111', 2, 'Cliente'),
 	('', 'Nicola','sarti','Mantova 43','Roma','20154','nicola.sarti@hotmail.it','3404323678','2222', 3, 'Cliente'),
-    ('', 'Michele','Turrina','Santa marta 4','Verona','37069','michele.turrina@libero.it','3452343538','123456', 4, 'Cliente'),
-    ('', 'Michele2','Turrina2','Santa marta 4','Verona','37069','admin','3452343538','admin', null, 'Responsabile');
+	('', 'Massimo','lugo','Santa marta 4','Bari','17455','user','3452343538','user', 4, 'Cliente'),
+	('', 'Massimo','lugo','Santa marta 4','Bari','17455','admin','3452343538','admin', NULL, 'Responsabile');

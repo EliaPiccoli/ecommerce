@@ -104,6 +104,6 @@
             <TableColumn fx:id="colDate21" prefWidth="173.0" text="Total" />
          </columns>
       </TableView>
-      <Button fx:id="logOutButton" layoutY="1.0" mnemonicParsing="false" onAction="#logout" text="Log Out" />
+      <Button fx:id="logout" layoutY="1.0" mnemonicParsing="false" onAction="#logout" text="Log Out" />
    </children>
 </Pane>
