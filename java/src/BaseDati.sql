@@ -236,9 +236,11 @@ INSERT INTO PRODOTTO(Tipo, Nome, Marca, Descrizione, Quantita, Quantita_Conf, Pr
 INSERT INTO CARTAFED(DataEmissione, Saldo)
 	VALUES('2020-09-19','000000'),
 	('2020-09-19','000000'),
+	('2020-09-19','000000'),
 	('2020-09-19','000000');
 
 INSERT INTO UTENTE(Matricola, Nome, Cognome, Indirizzo, Citta, Cap, Email, Telefono, Password, CartaFed, Ruolo)
 	VALUES('', 'Matteo','Rosa','Celino 22','Verona','37134','matteo.rosa@gmail.it','3432178920','0000', 1, 'Cliente'),
-	('', 'Massimo','lugo','Santa marta 4','Bari','17455','massimo.lugo@libero.it','3452343538','1111', 2, 'Cliente'),
-	('', 'Nicola','sarti','Mantova 43','Roma','20154','nicola.sarti@hotmail.it','3404323678','2222', 3, 'Cliente');
+    ('', 'Massimo','lugo','Santa marta 4','Bari','17455','massimo.lugo@libero.it','3452343538','1111', 2, 'Cliente'),
+	('', 'Nicola','sarti','Mantova 43','Roma','20154','nicola.sarti@hotmail.it','3404323678','2222', 3, 'Cliente'),
+    ('', 'Michele','Turrina','Santa marta 4','Verona','37069','michele.turrina@libero.it','3452343538','123456', 4, 'Cliente');
