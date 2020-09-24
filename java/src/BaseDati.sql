@@ -250,3 +250,10 @@ INSERT INTO UTENTE(Matricola, Nome, Cognome, Indirizzo, Citta, Cap, Email, Telef
 	('', 'Nicola','sarti','Mantova 43','Roma','20154','nicola.sarti@hotmail.it','3404323678','2222', 3, 'Cliente'),
 	('', 'Massimo','lugo','Santa marta 4','Bari','17455','user','3452343538','user', 4, 'Cliente'),
 	('', 'Massimo','lugo','Santa marta 4','Bari','17455','admin','3452343538','admin', NULL, 'Responsabile');
+
+INSERT INTO ORDINE(dataconsegna, oraconsegna, emailcliente, totale, saldopunti, pagamento, stato) VALUES
+    (CURRENT_DATE+4, '11:00:00', 'user', '23', 23, 'PayPal', 'Confermato');
+
+INSERT INTO PRODOTTO_IN_ORDINE(id_ordine, id_prodotto, quantita) VALUES
+    (1, 141, 1),
+    (1, 142, 1);

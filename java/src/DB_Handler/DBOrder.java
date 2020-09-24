@@ -16,7 +16,7 @@ public class DBOrder {
     }
 
     private void ordersStatusUpdate(){
-        List<Order> ordini=null;
+        List<Order> ordini= new ArrayList<>();
         try(PreparedStatement st = con.prepareStatement("SELECT * FROM ordine;")){
 
             ResultSet rs = st.executeQuery();
@@ -33,12 +33,18 @@ public class DBOrder {
             try(PreparedStatement st = con.prepareStatement("UPDATE ordine SET stato=? WHERE id=?")){
                 String status=null;
                 Date data = ordine.getDataConsegna();
-                Time ora = ordine.getOraConsegna();
                 long millis = data.getTime();
+                long now = System.currentTimeMillis();
+                long timeDiff = millis - now;
 
-                //TODO impostare lo status corretto
+                if(timeDiff < 0)
+                    status = "Consegnato";
+                else if(timeDiff < 24*60*60*1000L)
+                    status = "Confermato";
+                else status = "In preparazione";
+
                 st.setString(1, status);
-                st.setInt(1, ordine.getId());
+                st.setInt(2, ordine.getId());
 
                 int update = st.executeUpdate();
             }
@@ -58,7 +64,7 @@ public class DBOrder {
             String emailCliente;
             BigDecimal totale;
             Integer saldoPunti;
-            HashMap<Product, Integer> prodottiOrdine=null;
+            List<ProductInOrder> prodottiOrdine = new ArrayList<>();
             String pagamento;
             String stato;
 
@@ -75,7 +81,7 @@ public class DBOrder {
             stato=rs.getString("stato");
             //avendo fatto rs.next() nell'if precedente vado di do-while.
             do{
-                prodottiOrdine.put(new Product(rs.getInt("id_prodotto"), rs.getString("tipo"), rs.getString("nome"), rs.getString("marca"), rs.getString("descrizione"), null, rs.getInt("quantita_conf"), rs.getBigDecimal("prezzo")), rs.getInt("quantita"));
+                prodottiOrdine.add(new ProductInOrder(rs.getInt("id_prodotto"), rs.getString("nome"), rs.getString("marca"), rs.getString("descrizione"), rs.getInt("quantita"), rs.getInt("quantita_conf"), rs.getBigDecimal("prezzo")));
             }while(rs.next());
 
             return new Order(id, dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, prodottiOrdine, pagamento, stato);
@@ -97,7 +103,7 @@ public class DBOrder {
             String emailCliente;
             BigDecimal totale;
             Integer saldoPunti;
-            HashMap<Product, Integer> prodottiOrdine=null;
+            List<ProductInOrder> prodottiOrdine = new ArrayList<>();
             String pagamento;
             String stato;
 
@@ -117,7 +123,7 @@ public class DBOrder {
                 stato=rs.getString("stato");
                 //la query ordina per id_ordine, quindi vado avanti finché ho prodotti per lo stesso ordine
                 do{
-                    prodottiOrdine.put(new Product(rs.getInt("id_prodotto"), rs.getString("tipo"), rs.getString("nome"), rs.getString("marca"), rs.getString("descrizione"), null, rs.getInt("quantita_conf"), rs.getBigDecimal("prezzo")), rs.getInt("quantita"));
+                    prodottiOrdine.add(new ProductInOrder(rs.getInt("id_prodotto"), rs.getString("nome"), rs.getString("marca"), rs.getString("descrizione"), rs.getInt("quantita"), rs.getInt("quantita_conf"), rs.getBigDecimal("prezzo")));
                 }while(rs.next()&&rs.getInt("id_ordine")==id_ordine);
                 orderList.add(new Order(id_ordine, dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, prodottiOrdine, pagamento, stato));
             }while(rs.next());
@@ -141,7 +147,7 @@ public class DBOrder {
             String emailCliente;
             BigDecimal totale;
             Integer saldoPunti;
-            HashMap<Product, Integer> prodottiOrdine=null;
+            List<ProductInOrder> prodottiOrdine = new ArrayList<>();
             String pagamento;
             String stato;
 
@@ -161,7 +167,7 @@ public class DBOrder {
                 stato=rs.getString("stato");
                 //la query ordina per id_ordine, quindi vado avanti finché ho prodotti per lo stesso ordine
                 do{
-                    prodottiOrdine.put(new Product(rs.getInt("id_prodotto"), rs.getString("tipo"), rs.getString("nome"), rs.getString("marca"), rs.getString("descrizione"), null, rs.getInt("quantita_conf"), rs.getBigDecimal("prezzo")), rs.getInt("quantita"));
+                    prodottiOrdine.add(new ProductInOrder(rs.getInt("id_prodotto"), rs.getString("nome"), rs.getString("marca"), rs.getString("descrizione"), rs.getInt("quantita"), rs.getInt("quantita_conf"), rs.getBigDecimal("prezzo")));
                 }while(rs.next()&&rs.getInt("id_ordine")==id_ordine);
                 orderList.add(new Order(id_ordine, dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, prodottiOrdine, pagamento, stato));
             }while(rs.next());
@@ -201,13 +207,13 @@ public class DBOrder {
             }
 
             //insert products in order
-            for (HashMap.Entry<Product, Integer> entry : order.getProdottiOrdine().entrySet()) {
-                Product product = entry.getKey();
-                Integer quantita = entry.getValue();
+            for (ProductInOrder entry : order.getProdottiOrdine()) {
+                Integer productId = entry.getId();
+                Integer quantita = entry.getQuantita();
 
                 try (PreparedStatement st = con.prepareStatement("INSERT INTO prodotto_in_ordine(id_ordine, id_prodotto, quantita) VALUES(?,?,?)")) {
                     st.setInt(1, id_ordine);
-                    st.setInt(2, product.getId());
+                    st.setInt(2, productId);
                     st.setInt(3, quantita);
                     int update = st.executeUpdate();
                     if (update == 0) throw new SQLException("\nProduct_in_order insertion failed!\n");

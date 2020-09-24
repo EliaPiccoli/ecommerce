@@ -38,7 +38,6 @@ public class HomeController {
         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
             DBProduct dbProductController = new DBProduct(con);
             List<Product> products = dbProductController.getProducts();
-            System.out.println(products);
             ObservableList<Product> data = productTable.getItems();
             data.removeAll(data);
             data.addAll(products);
@@ -56,8 +55,6 @@ public class HomeController {
 
     private void newScene(ActionEvent event, String path) {
         try {
-            System.out.println(path);
-
             Parent tableViewParent = FXMLLoader.load(getClass().getResource(path));
             Scene tableViewScene = new Scene(tableViewParent);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -81,7 +78,16 @@ public class HomeController {
     }
 
     public void seeOrders(ActionEvent event) {
-        newScene(event, "/ClientOrderHistory.fxml");
+        try {
+            Parent tableViewParent = FXMLLoader.load(getClass().getResource("/ClientOrderHistory.fxml"));
+            Scene tableViewScene = new Scene(tableViewParent);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(tableViewScene);
+            window.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(e);
+        }
     }
 
     public void seeBasket(ActionEvent event) {

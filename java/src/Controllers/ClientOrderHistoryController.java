@@ -15,8 +15,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 import System.State;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import obj.Order;
+import obj.ProductInOrder;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -30,6 +32,7 @@ public class ClientOrderHistoryController {
     @FXML TextField user;
     @FXML ComboBox<String> typeSearch;
     @FXML TableView<Order> ordersTable;
+    @FXML TableView<ProductInOrder> productsInOrder;
     @FXML TextField searchParameter;
 
     State state = State.getInstance();
@@ -91,5 +94,14 @@ public class ClientOrderHistoryController {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();
+    }
+
+    public void click(MouseEvent event) {
+        if(event.getClickCount() >= 2) {
+            Order o = ordersTable.getSelectionModel().getSelectedItem();
+            ObservableList<ProductInOrder> data = productsInOrder.getItems();
+            data.removeAll(data);
+            data.addAll(o.getProdottiOrdine());
+        }
     }
 }

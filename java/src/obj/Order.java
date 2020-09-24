@@ -83,32 +83,44 @@ public class Order {
     public void addProduct(Product prodotto) {
         totale=totale.add(prodotto.getPrezzo());
         saldoPunti=saldoPuntiBase+totale.intValue();
-        if(prodottiOrdine.get(prodotto)==null)
-            prodottiOrdine.put(prodotto, 1);
-        else
-            prodottiOrdine.put(prodotto, prodottiOrdine.get(prodotto)+1);
+        for(ProductInOrder p : prodottiOrdine) {
+            if(p.getId().equals(prodotto.getId())) {
+                p.setQuantita(p.getQuantita()+1);
+                return;
+            }
+        }
+        prodottiOrdine.add(new ProductInOrder(prodotto.getId(), prodotto.getNome(), prodotto.getMarca(), prodotto.getDescrizione(), 1, prodotto.getQuantita_conf(), prodotto.getPrezzo()));
     }
 
     public void removeProduct(Product prodotto) {
-        if(prodottiOrdine.get(prodotto)!=null){
-            totale=totale.subtract(prodotto.getPrezzo());
-            saldoPunti=saldoPuntiBase+totale.intValue();
-            if(prodottiOrdine.get(prodotto)>1)
-                prodottiOrdine.put(prodotto, prodottiOrdine.get(prodotto)-1);
-            else
-                prodottiOrdine.remove(prodotto);
+        for(ProductInOrder p : prodottiOrdine) {
+            if(p.getId().equals(prodotto.getId())) {
+                totale=totale.subtract(prodotto.getPrezzo());
+                saldoPunti=saldoPuntiBase+totale.intValue();
+                int q = p.getQuantita();
+                if(q>1)
+                    p.setQuantita(q-1);
+                else
+                    prodottiOrdine.remove(p);
+                return;
+            }
         }
-        else
-            System.out.println("\n!!!ERROR!!! You are trying to remove a product that is not in your cart!\n");
+        System.out.println("\n!!!ERROR!!! You are trying to remove a product that is not in your cart!\n");
     }
 
+    // ?????? should get a list or products ??????
     public void removeAllProducts(Product prodotto) {
-        if(prodottiOrdine.get(prodotto)!=null){
+        for(ProductInOrder p : prodottiOrdine) {
             totale=totale.subtract(prodotto.getPrezzo().multiply(BigDecimal.valueOf(prodotto.getQuantita())));
             saldoPunti=saldoPuntiBase+totale.intValue();
-            prodottiOrdine.remove(prodotto);
+            prodottiOrdine.remove(p);
         }
-        else
-            System.out.println("\n!!!ERROR!!! You are trying to remove a product that is not in your cart!\n");
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                '}';
     }
 }

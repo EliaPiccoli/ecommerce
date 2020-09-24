@@ -5,6 +5,7 @@ import obj.Product;
 import obj.User;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class State {
@@ -29,7 +30,7 @@ public class State {
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
-        this.currentOrder = new Order(null, null, null, currentUser.getEmail(), BigDecimal.ZERO, currentUser.getCartaFed().getSaldo(), new HashMap<>());
+        this.currentOrder = new Order(null, null, null, currentUser.getEmail(), BigDecimal.ZERO, currentUser.getCartaFed().getSaldo(), new ArrayList<>(), null, null);
     }
 
     public void addProduct(Product prod) {
