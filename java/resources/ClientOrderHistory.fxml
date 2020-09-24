@@ -43,7 +43,7 @@
          </cursor>
       </Button>
       <ComboBox fx:id="typeSearch" layoutX="200.0" layoutY="106.0" prefHeight="40.0" prefWidth="150.0" />
-      <TextField fx:id="IDtoSearch" alignment="CENTER" layoutX="402.0" layoutY="106.0" prefHeight="40.0" prefWidth="624.0" promptText="ID, Date" style="-fx-background-color: white;">
+      <TextField fx:id="IDtoSearch" alignment="CENTER" layoutX="402.0" layoutY="106.0" prefHeight="40.0" prefWidth="624.0" promptText="ID" style="-fx-background-color: white;">
          <font>
             <Font name="Ubuntu" size="20.0" />
          </font>
