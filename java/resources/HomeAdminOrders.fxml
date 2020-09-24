@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="1054.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.OrderHistory_Controller">
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="1054.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomeAdminOrdersController">
    <children>
       <Label layoutX="32.0" layoutY="21.0" text="Super" textFill="#02048a">
          <font>
             <Font name="Ubuntu" size="47.0" />
          </font>
       </Label>
-      <Button layoutX="270.0" layoutY="34.0" mnemonicParsing="false" onAction="#search" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #02048a;" text="Logged as:" textFill="WHITE">
+      <Button layoutX="270.0" layoutY="34.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #02048a;" text="Logged as:" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -23,26 +23,18 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <TextField fx:id="infoLbl" editable="false" layoutX="392.0" layoutY="34.0" opacity="0.51" prefHeight="32.0" prefWidth="297.0" style="-fx-background-color: ffde7d;">
+      <TextField fx:id="user" editable="false" layoutX="392.0" layoutY="34.0" opacity="0.51" prefHeight="32.0" prefWidth="297.0" style="-fx-background-color: ffde7d;">
          <font>
             <Font name="Constantia" size="14.0" />
          </font>
       </TextField>
-      <Button layoutX="751.0" layoutY="35.0" mnemonicParsing="false" onAction="#close" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #9d0901;" text="Products" textFill="WHITE">
+      <Button layoutX="909.0" layoutY="35.0" mnemonicParsing="false" onAction="#seeProducts" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #9d0901;" text="Products" textFill="WHITE">
          <font>
             <Font name="Constantia" size="14.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
-      </Button>
-      <Button layoutX="895.0" layoutY="35.0" mnemonicParsing="false" onAction="#close" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #9d0901;" text="ID Orders" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font name="Constantia" size="14.0" />
-         </font>
       </Button>
       <Separator layoutX="2.0" layoutY="92.0" prefHeight="3.0" prefWidth="1048.0" style="-fx-background-color: #02048a;" />
       <Button layoutX="41.0" layoutY="102.0" mnemonicParsing="false" onAction="#search" prefHeight="40.0" prefWidth="136.0" style="-fx-background-color: #02048a;" text="Search" textFill="WHITE">
@@ -54,19 +46,38 @@
          </cursor>
       </Button>
       <ComboBox layoutX="203.0" layoutY="104.0" prefHeight="40.0" prefWidth="150.0" />
-      <TextField fx:id="IDtoSearch" alignment="CENTER" layoutX="378.0" layoutY="106.0" prefHeight="40.0" prefWidth="651.0" promptText="ID" style="-fx-background-color: white;">
+      <TextField fx:id="searchParameter" alignment="CENTER" layoutX="378.0" layoutY="106.0" prefHeight="40.0" prefWidth="651.0" promptText="ID" style="-fx-background-color: white;">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TableView fx:id="ordersTable" layoutX="39.0" layoutY="160.0" prefHeight="152.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
+      <TableView fx:id="ordersTable" onMouseClicked="#click" layoutX="39.0" layoutY="160.0" prefHeight="152.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
         <columns>
-          <TableColumn fx:id="colID" prefWidth="253.0" text="Order ID" />
-            <TableColumn fx:id="colDate" prefWidth="143.0" text="Date" />
-            <TableColumn fx:id="colDate1" minWidth="0.0" prefWidth="193.0" text="Total" />
-            <TableColumn fx:id="colStat" prefWidth="105.0" text="Status" />
-            <TableColumn fx:id="colDate3" prefWidth="143.0" text="Email" />
-            <TableColumn fx:id="colDate31" prefWidth="148.0" text="Surname Clients" />
+          <TableColumn fx:id="id" prefWidth="253.0" text="Order ID">
+            <cellValueFactory>
+                <PropertyValueFactory property="id" />
+            </cellValueFactory>
+          </TableColumn>>
+          <TableColumn fx:id="dataConsegna" prefWidth="143.0" text="Date">
+              <cellValueFactory>
+                  <PropertyValueFactory property="dataConsegna" />
+              </cellValueFactory>
+          </TableColumn>>
+          <TableColumn fx:id="totale" minWidth="0.0" prefWidth="193.0" text="Total">
+              <cellValueFactory>
+                  <PropertyValueFactory property="totale" />
+              </cellValueFactory>
+          </TableColumn>>
+          <TableColumn fx:id="stato" prefWidth="105.0" text="Status">
+              <cellValueFactory>
+                  <PropertyValueFactory property="stato" />
+              </cellValueFactory>
+          </TableColumn>>
+          <TableColumn fx:id="emailCliente" prefWidth="143.0" text="Email">
+              <cellValueFactory>
+                  <PropertyValueFactory property="emailCliente" />
+              </cellValueFactory>
+          </TableColumn>>
         </columns>
       </TableView>
       <Label layoutX="41.0" layoutY="335.0" prefHeight="23.0" prefWidth="165.0" text="Description order:" textFill="#02048a">
@@ -87,7 +98,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="IDtoSearch1" alignment="CENTER" layoutX="203.0" layoutY="475.0" prefHeight="35.0" prefWidth="238.0" style="-fx-background-color: white;">
+      <TextField fx:id="pointsBalanceText" editable="false" alignment="CENTER" layoutX="203.0" layoutY="475.0" prefHeight="35.0" prefWidth="238.0" style="-fx-background-color: white;">
          <font>
             <Font size="18.0" />
          </font>
@@ -97,7 +108,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="IDtoSearch111" alignment="CENTER" layoutX="203.0" layoutY="538.0" prefHeight="35.0" prefWidth="238.0" style="-fx-background-color: white;">
+      <TextField fx:id="nameText" editable="false" alignment="CENTER" layoutX="203.0" layoutY="538.0" prefHeight="35.0" prefWidth="238.0" style="-fx-background-color: white;">
          <font>
             <Font size="18.0" />
          </font>
@@ -107,7 +118,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="IDtoSearch12" alignment="CENTER" layoutX="203.0" layoutY="602.0" prefHeight="35.0" prefWidth="238.0" style="-fx-background-color: white;">
+      <TextField fx:id="phoneText" editable="false" alignment="CENTER" layoutX="203.0" layoutY="602.0" prefHeight="35.0" prefWidth="238.0" style="-fx-background-color: white;">
          <font>
             <Font size="18.0" />
          </font>
@@ -117,7 +128,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="IDtoSearch13" alignment="CENTER" layoutX="203.0" layoutY="658.0" prefHeight="35.0" prefWidth="238.0" style="-fx-background-color: white;">
+      <TextField fx:id="addressText" editable="false" alignment="CENTER" layoutX="203.0" layoutY="658.0" prefHeight="35.0" prefWidth="238.0" style="-fx-background-color: white;">
          <font>
             <Font size="18.0" />
          </font>
@@ -127,7 +138,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="IDtoSearch11" alignment="CENTER" layoutX="680.0" layoutY="475.0" prefHeight="35.0" prefWidth="238.0" style="-fx-background-color: white;">
+      <TextField fx:id="paymentText" editable="false" alignment="CENTER" layoutX="680.0" layoutY="475.0" prefHeight="35.0" prefWidth="238.0" style="-fx-background-color: white;">
          <font>
             <Font size="18.0" />
          </font>
@@ -137,7 +148,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="IDtoSearch1111" alignment="CENTER" layoutX="680.0" layoutY="538.0" prefHeight="35.0" prefWidth="238.0" style="-fx-background-color: white;">
+      <TextField fx:id="surnameText" editable="false" alignment="CENTER" layoutX="680.0" layoutY="538.0" prefHeight="35.0" prefWidth="238.0" style="-fx-background-color: white;">
          <font>
             <Font size="18.0" />
          </font>
@@ -147,11 +158,11 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="IDtoSearch1112" alignment="CENTER" layoutX="680.0" layoutY="602.0" prefHeight="35.0" prefWidth="238.0" style="-fx-background-color: white;">
+      <TextField fx:id="emailText" editable="false" alignment="CENTER" layoutX="680.0" layoutY="602.0" prefHeight="35.0" prefWidth="238.0" style="-fx-background-color: white;">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <Button mnemonicParsing="false" text="Log Out" />
+      <Button mnemonicParsing="false" text="Log Out" onAction="#logOutButtonPushed"/>
    </children>
 </Pane>

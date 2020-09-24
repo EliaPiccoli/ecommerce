@@ -85,7 +85,7 @@
             <Font name="Ubuntu" size="20.0" />
          </font>
       </TextField>
-      <TableView fx:id="productTable" layoutX="39.0" layoutY="160.0" onMouseClicked="#click" prefHeight="529.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
+      <TableView fx:id="ordersTable" layoutX="39.0" layoutY="160.0" onMouseClicked="#click" prefHeight="529.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
         <columns>
             <TableColumn fx:id="id" prefWidth="154.0" text="ID">
                <cellValueFactory>
