@@ -1,6 +1,5 @@
 package Controllers;
 
-import DB_Handler.DBOrder;
 import DB_Handler.DBProduct;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,7 +12,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import obj.Order;
 import obj.Product;
 
 import java.io.IOException;
@@ -30,7 +28,7 @@ public class HomeAdminProductsController {
     @FXML TextField user;
     @FXML ComboBox<String> typeSearch;
     @FXML TextField searchParameter;
-    @FXML TableView<Product> productsTable = new TableView<>();
+    @FXML TableView<Product> productTable = new TableView<>();
 
     State state = State.getInstance();
 
@@ -39,7 +37,7 @@ public class HomeAdminProductsController {
             DBProduct dbProductController = new DBProduct(con);
             List<Product> products = dbProductController.getProducts();
             if (products != null) {
-                ObservableList<Product> data = productsTable.getItems();
+                ObservableList<Product> data = productTable.getItems();
                 data.removeAll(data);
                 data.addAll(products);
             } else {
@@ -99,7 +97,7 @@ public class HomeAdminProductsController {
             else
                 filteredProducts = dbProductController.searchProducts(col, searchParameter.getText());
 
-            ObservableList<Product> data = productsTable.getItems();
+            ObservableList<Product> data = productTable.getItems();
             data.removeAll(data);
             data.addAll(filteredProducts);
 
