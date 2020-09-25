@@ -15,7 +15,7 @@
             <Font name="Ubuntu" size="47.0" />
          </font>
       </Label>
-      <Button layoutX="270.0" layoutY="34.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #02048a;" text="Logged as:" textFill="WHITE">
+      <Button onAction="#editProfile" layoutX="270.0" layoutY="34.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #02048a;" text="Logged as:" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -45,7 +45,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ComboBox layoutX="203.0" layoutY="104.0" prefHeight="40.0" prefWidth="150.0" />
+      <ComboBox fx:id="typeSearch" layoutX="203.0" layoutY="104.0" prefHeight="40.0" prefWidth="150.0" />
       <TextField fx:id="searchParameter" alignment="CENTER" layoutX="378.0" layoutY="106.0" prefHeight="40.0" prefWidth="651.0" promptText="ID" style="-fx-background-color: white;">
          <font>
             <Font size="18.0" />
@@ -72,7 +72,7 @@
               <cellValueFactory>
                   <PropertyValueFactory property="stato" />
               </cellValueFactory>
-          </TableColumn>>
+          </TableColumn>
           <TableColumn fx:id="emailCliente" prefWidth="143.0" text="Email">
               <cellValueFactory>
                   <PropertyValueFactory property="emailCliente" />
@@ -87,24 +87,24 @@
       </Label>
       <TableView fx:id="ordersTable1" layoutX="214.0" layoutY="325.0" prefHeight="127.0" prefWidth="817.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
          <columns>
-            <TableColumn fx:id="1" minWidth="0.0" prefWidth="172.0" text="Unit">
+            <TableColumn fx:id="idProd" minWidth="0.0" prefWidth="172.0" text="Unit">
                <cellValueFactory>
-                  <PropertyValueFactory property="1" />
+                  <PropertyValueFactory property="id" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="2" prefWidth="245.0" text="Name">
+            <TableColumn fx:id="nome" prefWidth="245.0" text="Name">
                <cellValueFactory>
-                  <PropertyValueFactory property="2" />
+                  <PropertyValueFactory property="nome" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="3" prefWidth="252.0" text="Price">
+            <TableColumn fx:id="marca" prefWidth="252.0" text="Brand">
                <cellValueFactory>
-                  <PropertyValueFactory property="3" />
+                  <PropertyValueFactory property="marca" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="4" prefWidth="173.0" text="Total">
+            <TableColumn fx:id="totaleProd" prefWidth="173.0" text="Total">
                <cellValueFactory>
-                  <PropertyValueFactory property="4" />
+                  <PropertyValueFactory property="totale" />
                </cellValueFactory>
             </TableColumn>
          </columns>

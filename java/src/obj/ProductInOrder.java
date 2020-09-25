@@ -14,7 +14,7 @@ public class ProductInOrder {
         this.nome = nome;
         this.marca = marca;
         this.quantita = quantita;
-        this.totale = totale;
+        this.totale = prezzo.multiply(BigDecimal.valueOf(quantita));
     }
 
     public Integer getId() {

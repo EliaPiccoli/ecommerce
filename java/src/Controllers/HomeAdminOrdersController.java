@@ -20,6 +20,7 @@ import obj.Order;
 
 import System.State;
 import obj.Product;
+import obj.ProductInOrder;
 import obj.User;
 
 import java.io.IOException;
@@ -31,7 +32,7 @@ import java.util.List;
 
 public class HomeAdminOrdersController {
     @FXML TableView<Order> ordersTable = new TableView<>();
- //   @FXML TableView<OrderProducts> ordersTable1 = new TableView<>();
+    @FXML TableView<ProductInOrder> ordersTable1 = new TableView<>();
     @FXML Button userLogged;
     @FXML TextField user;
     @FXML ComboBox<String> typeSearch;
@@ -47,15 +48,19 @@ public class HomeAdminOrdersController {
 
     State state = State.getInstance();
 
-    List<Order> orders = new ArrayList<>();
+    //List<Order> orders = new ArrayList<>();
 
     public void initialize() {
         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
             DBOrder dbOrderController = new DBOrder(con);
-            List<Order> products = dbOrderController.getOrders();
-            ObservableList<Order> data = ordersTable.getItems();
-            data.removeAll(data);
-            data.addAll(orders);
+            List<Order> orders = dbOrderController.getOrders();
+            if (orders != null) {
+                ObservableList<Order> data = ordersTable.getItems();
+                data.removeAll(data);
+                data.addAll(orders);
+            } else {
+                System.out.println("Lista ordini vuota");
+            }
 
             ObservableList<String> data2 = typeSearch.getItems();
             data2.removeAll(data2);
@@ -110,16 +115,19 @@ public class HomeAdminOrdersController {
             else
                 filteredOrders.add(dbOrderController.getOrder(Integer.parseInt(searchParameter.getText())));
 
-            ObservableList<Order> data = ordersTable.getItems();
-            data.removeAll(data);
-            data.addAll(filteredOrders);
+            if (filteredOrders != null) {
+                ObservableList<Order> data = ordersTable.getItems();
+                data.removeAll(data);
+                data.addAll(filteredOrders);
+            } else {
+                System.out.println("Lista ordini vuota nella ricerca");
+            }
             searchParameter.clear();
         } catch (SQLException e) {
             System.out.println("Error connecting with db");
         }
     }
 
-    // TODO
     public void click(MouseEvent event) {
         if(event.getClickCount() >= 2) {
             try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
@@ -127,13 +135,16 @@ public class HomeAdminOrdersController {
                 DBUser DBUserController = new DBUser(con);
                 User userSelected = DBUserController.getUser(orderSelected.getEmailCliente());
 
-                // TODO
+                List<ProductInOrder> productInOrders = orderSelected.getProdottiOrdine();
+                ObservableList<ProductInOrder> data = ordersTable1.getItems();
+                data.removeAll(data);
+                data.addAll(productInOrders);
 
                 pointsBalanceText.setText(userSelected.getCartaFed().getSaldo().toString());
                 nameText.setText(userSelected.getNome());
                 phoneText.setText(userSelected.getTelefono());
                 addressText.setText(userSelected.getIndirizzo());
-                //paymentText.setText(orderSelected.getPagamento());
+                paymentText.setText(orderSelected.getPagamento());
                 surnameText.setText(userSelected.getCognome());
                 emailText.setText(userSelected.getEmail());
 
