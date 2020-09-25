@@ -1,5 +1,6 @@
 package Controllers;
 
+import DB_Handler.DBOrder;
 import DB_Handler.DBProduct;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,13 +9,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import obj.Order;
 import obj.Product;
 
 import java.io.IOException;
@@ -26,12 +25,13 @@ import java.util.List;
 
 import System.State;
 
-public class HomeController {
-    @FXML TableView<Product> productTable = new TableView<>();
-    @FXML Button userLogged;
-    @FXML TextField searchParameter;
-    @FXML ComboBox<String> typeSearch;
+public class HomeAdminProductsController {
+
     @FXML TextField user;
+    @FXML ComboBox<String> typeSearch;
+    @FXML TextField searchParameter;
+    @FXML TableView<Product> productsTable = new TableView<>();
+
     State state = State.getInstance();
 
     public void initialize() {
@@ -39,7 +39,7 @@ public class HomeController {
             DBProduct dbProductController = new DBProduct(con);
             List<Product> products = dbProductController.getProducts();
             if (products != null) {
-                ObservableList<Product> data = productTable.getItems();
+                ObservableList<Product> data = productsTable.getItems();
                 data.removeAll(data);
                 data.addAll(products);
             } else {
@@ -57,6 +57,18 @@ public class HomeController {
         }
     }
 
+    public void editProfile(ActionEvent event) {
+        try {
+            Parent tableViewParent = FXMLLoader.load(getClass().getResource("/AdminProfileModifier.fxml"));
+            Scene tableViewScene = new Scene(tableViewParent);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(tableViewScene);
+            window.show();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
     private void newScene(ActionEvent event, String path) {
         try {
             Parent tableViewParent = FXMLLoader.load(getClass().getResource(path));
@@ -69,51 +81,15 @@ public class HomeController {
         }
     }
 
-    public void editProfile(ActionEvent event) {
-        try {
-            Parent tableViewParent = FXMLLoader.load(getClass().getResource("/ClientProfileModifier.fxml"));
-            Scene tableViewScene = new Scene(tableViewParent);
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(tableViewScene);
-            window.show();
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-    }
-
     public void seeOrders(ActionEvent event) {
-        try {
-            Parent tableViewParent = FXMLLoader.load(getClass().getResource("/ClientOrderHistory.fxml"));
-            Scene tableViewScene = new Scene(tableViewParent);
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(tableViewScene);
-            window.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println(e);
-        }
+        newScene(event, "/HomeAdminProducts.fxml");
     }
 
-    public void seeBasket(ActionEvent event) {
-        // cart in State
-        newScene(event, "/Basket.fxml");
+    public void addProduct(ActionEvent event) {
+        // TODO
     }
 
-    public void seePoints(ActionEvent event) {
-        try {
-            Parent tableViewParent = FXMLLoader.load(getClass().getResource("/FidelityPoints.fxml"));
-            Scene tableViewScene = new Scene(tableViewParent);
-            Stage pointsStage = new Stage();
-            pointsStage.setScene(tableViewScene);
-            pointsStage.setTitle("Verdo's Shop");
-            pointsStage.getIcons().add(new Image("/logo.jpg"));
-            pointsStage.show();
-        } catch (IOException e) {
-            System.out.println("Error loading fidelity card");
-        }
-    }
-
-    public void search() {
+    public void search(ActionEvent event) {
         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
             DBProduct dbProductController = new DBProduct(con);
             String col = typeSearch.getSelectionModel().getSelectedItem();
@@ -123,23 +99,17 @@ public class HomeController {
             else
                 filteredProducts = dbProductController.searchProducts(col, searchParameter.getText());
 
-            ObservableList<Product> data = productTable.getItems();
+            ObservableList<Product> data = productsTable.getItems();
             data.removeAll(data);
             data.addAll(filteredProducts);
+
             searchParameter.clear();
         } catch (SQLException e) {
             System.out.println("Error connecting with db");
         }
     }
 
-    public void click(MouseEvent event) {
-        if(event.getClickCount() >= 2) {
-            state.addProduct(productTable.getSelectionModel().getSelectedItem());
-            AlertBox.display("Cart", "Product added to cart!", true);
-        }
-    }
-
-    public void logOutButtonPushed(ActionEvent event) throws IOException, ClassNotFoundException {
+    public void logOut(ActionEvent event) throws IOException, ClassNotFoundException {
         state.reset();
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("/Login.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
@@ -147,4 +117,5 @@ public class HomeController {
         window.setScene(tableViewScene);
         window.show();
     }
+
 }

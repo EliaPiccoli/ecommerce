@@ -113,9 +113,9 @@
                   <PropertyValueFactory property="marca" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="colDate21" prefWidth="173.0" text="Quantity">
+            <TableColumn fx:id="colDate21" prefWidth="173.0" text="Totale">
                <cellValueFactory>
-                  <PropertyValueFactory property="quantita" />
+                  <PropertyValueFactory property="totale" />
                </cellValueFactory>
             </TableColumn>
          </columns>

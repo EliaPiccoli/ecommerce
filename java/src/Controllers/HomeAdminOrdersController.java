@@ -33,11 +33,9 @@ import java.util.List;
 public class HomeAdminOrdersController {
     @FXML TableView<Order> ordersTable = new TableView<>();
     @FXML TableView<ProductInOrder> ordersTable1 = new TableView<>();
-    @FXML Button userLogged;
     @FXML TextField user;
     @FXML ComboBox<String> typeSearch;
     @FXML TextField searchParameter;
-    @FXML Button logOutButton;
     @FXML TextField pointsBalanceText;
     @FXML TextField nameText;
     @FXML TextField phoneText;
@@ -75,8 +73,6 @@ public class HomeAdminOrdersController {
 
     private void newScene(ActionEvent event, String path) {
         try {
-            System.out.println(path);
-
             Parent tableViewParent = FXMLLoader.load(getClass().getResource(path));
             Scene tableViewScene = new Scene(tableViewParent);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
