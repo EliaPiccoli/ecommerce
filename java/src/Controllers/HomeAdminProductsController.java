@@ -86,7 +86,17 @@ public class HomeAdminProductsController {
     }
 
     public void addProduct(ActionEvent event) {
-        // TODO
+        try {
+            Parent tableViewParent = FXMLLoader.load(getClass().getResource("/PopupAdminProductAdd.fxml"));
+            Scene tableViewScene = new Scene(tableViewParent);
+            Stage pointsStage = new Stage();
+            pointsStage.setScene(tableViewScene);
+            pointsStage.setTitle("Verdo's Shop");
+            pointsStage.getIcons().add(new Image("/logo.jpg"));
+            pointsStage.show();
+        } catch (IOException e) {
+            System.out.println("Error loading fidelity card");
+        }
     }
 
     public void search(ActionEvent event) {

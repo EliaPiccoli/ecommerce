@@ -24,6 +24,8 @@ public class Product {
         this.prezzo=prezzo;
     }
 
+    public Product() { }
+
     public void setProduct(String tipo, String nome, String marca, String descrizione, Integer quantita, Integer quantita_conf, BigDecimal prezzo){
         this.tipo=tipo;
         this.nome=nome;
