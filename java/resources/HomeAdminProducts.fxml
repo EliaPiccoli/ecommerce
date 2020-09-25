@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="1054.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.OrderHistory_Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="1054.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomeAdminProductsController">
    <children>
       <Label layoutX="32.0" layoutY="21.0" prefHeight="59.0" prefWidth="184.0" text="Super" textFill="#02048a">
          <font>
             <Font name="Ubuntu" size="47.0" />
          </font>
       </Label>
-      <Button layoutX="270.0" layoutY="35.0" mnemonicParsing="false" onAction="#search" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #02448a;" text="Logged as:" textFill="WHITE">
+      <Button layoutX="270.0" layoutY="35.0" mnemonicParsing="false" onAction="#editProfile" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #02448a;" text="Logged as:" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -25,12 +25,12 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <TextField fx:id="infoLbl" editable="false" layoutX="390.0" layoutY="35.0" opacity="0.51" prefHeight="32.0" prefWidth="192.0" style="-fx-background-color: ffde7d;">
+      <TextField fx:id="user" editable="false" layoutX="390.0" layoutY="35.0" opacity="0.51" prefHeight="32.0" prefWidth="192.0" style="-fx-background-color: ffde7d;">
          <font>
             <Font name="Constantia" size="14.0" />
          </font>
       </TextField>
-      <Button layoutX="748.0" layoutY="36.0" mnemonicParsing="false" onAction="#refresh" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #0a960a;" text="ADD" textFill="WHITE">
+      <Button layoutX="748.0" layoutY="36.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #0a960a;" text="ADD" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -38,7 +38,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="895.0" layoutY="35.0" mnemonicParsing="false" onAction="#close" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #9d0901;" text="ID Orders" textFill="WHITE">
+      <Button layoutX="895.0" layoutY="35.0" mnemonicParsing="false" onAction="#seeOrders" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #9d0901;" text="ID Orders" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -55,15 +55,15 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TextField fx:id="IDtoSearch" alignment="CENTER" layoutX="378.0" layoutY="104.0" prefHeight="40.0" prefWidth="651.0" promptText="Type, Name, Brand" style="-fx-background-color: white;">
+      <TextField fx:id="searchParameter" alignment="CENTER" layoutX="378.0" layoutY="104.0" prefHeight="40.0" prefWidth="651.0" promptText="Type, Name, Brand" style="-fx-background-color: white;">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TableView fx:id="ordersTable" layoutX="39.0" layoutY="160.0" prefHeight="529.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
+      <TableView fx:id="productsTable" layoutX="39.0" layoutY="160.0" prefHeight="529.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
         <columns>
             <TableColumn fx:id="colID1" prefWidth="154.0" text="Unit" />
-          <TableColumn fx:id="colID" prefWidth="159.0" text="Name" />
+            <TableColumn fx:id="colID" prefWidth="159.0" text="Name" />
             <TableColumn fx:id="colDescr" prefWidth="188.0" text="Brand" />
             <TableColumn fx:id="colPonts1" prefWidth="127.0" text="Description" />
             <TableColumn fx:id="colPonts" prefWidth="132.0" text="Quantity" />
@@ -71,7 +71,7 @@
             <TableColumn fx:id="colStat" prefWidth="113.0" text="Status" />
         </columns>
       </TableView>
-      <ComboBox layoutX="203.0" layoutY="104.0" prefHeight="40.0" prefWidth="150.0" />
-      <Button mnemonicParsing="false" text="Log Out" />
+      <ComboBox fx:id="typeSearch" layoutX="203.0" layoutY="104.0" prefHeight="40.0" prefWidth="150.0" />
+      <Button onAction="#logOut" mnemonicParsing="false" text="Log Out" />
    </children>
 </Pane>
