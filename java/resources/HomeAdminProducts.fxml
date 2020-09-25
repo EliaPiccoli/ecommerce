@@ -31,7 +31,7 @@
             <Font name="Constantia" size="14.0" />
          </font>
       </TextField>
-      <Button layoutX="748.0" layoutY="36.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #0a960a;" text="ADD" textFill="WHITE">
+      <Button layoutX="748.0" layoutY="36.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #0a960a;" text="Add Product" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -39,7 +39,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="895.0" layoutY="35.0" mnemonicParsing="false" onAction="#seeOrders" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #9d0901;" text="ID Orders" textFill="WHITE">
+      <Button layoutX="895.0" layoutY="35.0" mnemonicParsing="false" onAction="#seeOrders" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #9d0901;" text="Orders" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -61,7 +61,7 @@
             <Font size="18.0" />
          </font>
       </TextField>
-      <TableView fx:id="productTable" layoutX="39.0" layoutY="160.0" prefHeight="529.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
+      <TableView fx:id="productTable" onMouseClicked="#click" layoutX="39.0" layoutY="160.0" prefHeight="529.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
         <columns>
             <TableColumn fx:id="colID1" prefWidth="154.0" text="Unit">
                 <cellValueFactory>

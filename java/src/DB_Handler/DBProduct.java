@@ -51,7 +51,7 @@ public class DBProduct {
         }
     }
 
-    public void updateProduct(Product prod){
+    public Product updateProduct(Product prod){
         try(PreparedStatement st = con.prepareStatement("UPDATE prodotto SET tipo = ?, nome = ?, marca = ?, descrizione = ?, quantita = ?, quantita_conf = ?, prezzo = ? WHERE id = ?;")){
             st.setString(1, prod.getTipo());
             st.setString(2, prod.getNome());
@@ -61,11 +61,14 @@ public class DBProduct {
             st.setInt(6, prod.getQuantita_conf());
             st.setBigDecimal(7, prod.getPrezzo());
             st.setInt(8, prod.getId());
+
             int update = st.executeUpdate();
             if(update == 0) throw new SQLException("\nProduct update failed!\n");
+            else return getProduct(prod.getId().toString());
         }
         catch(SQLException e){
             System.out.println(e);
+            return null;
         }
     }
 

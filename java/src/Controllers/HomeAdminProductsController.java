@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import obj.Product;
 
@@ -80,7 +82,7 @@ public class HomeAdminProductsController {
     }
 
     public void seeOrders(ActionEvent event) {
-        newScene(event, "/HomeAdminProducts.fxml");
+        newScene(event, "/HomeAdminOrders.fxml");
     }
 
     public void addProduct(ActionEvent event) {
@@ -114,6 +116,42 @@ public class HomeAdminProductsController {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();
+    }
+
+    public void click(MouseEvent event) {
+        /*if(event.getClickCount() >= 2) {
+            try {
+                Parent tableViewParent = FXMLLoader.load(getClass().getResource("/PopupAdminProductSetup.fxml"));
+                Scene tableViewScene = new Scene(tableViewParent);
+                Stage pointsStage = new Stage();
+                pointsStage.setScene(tableViewScene);
+                pointsStage.setTitle("Verdo's Shop");
+                pointsStage.getIcons().add(new Image("/logo.jpg"));
+                pointsStage.show();
+            } catch (IOException e) {
+                System.out.println("Error loading product setup");
+            }
+        }*/
+
+        if (event.getClickCount() >= 2) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/PopupAdminProductSetup.fxml"));
+                Parent root = loader.load();
+
+                //The following both lines are the only addition we need to pass the arguments
+                PopupAdminProductSetupController controller2 = loader.getController();
+                Product myProduct = productTable.getSelectionModel().getSelectedItem();
+                controller2.setProduct(myProduct);
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Product modify");
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
