@@ -31,8 +31,8 @@ public class ClientBasketController {
     @FXML private ComboBox<String> typeSearch;
     @FXML private TextField searchParameter;
     @FXML private TableView<ProductInOrder> productsTable;
-    @FXML private Label points;
-    @FXML private Label total;
+    @FXML private TextField points;
+    @FXML private TextField total;
 
     private final State state = State.getInstance();
 
@@ -43,8 +43,13 @@ public class ClientBasketController {
         data.removeAll(data);
         data.addAll(state.getCurrentOrder().getProdottiOrdine());
 
+        System.out.print(String.valueOf(state.getCurrentOrder().getTotalOfOrder().toBigInteger()));
+        System.out.print(state.getCurrentOrder().getTotalOfOrder() + " €");
+
         points.setText(String.valueOf(state.getCurrentOrder().getTotalOfOrder().toBigInteger()));
+        points.setDisable(true);
         total.setText(state.getCurrentOrder().getTotalOfOrder() + " €");
+        total.setDisable(true);
 
         ObservableList<String> data2 = typeSearch.getItems();
         data2.removeAll(data2);

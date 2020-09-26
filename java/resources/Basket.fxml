@@ -141,22 +141,22 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="points" layoutX="868.0" layoutY="562.0" prefHeight="39.0" prefWidth="120.0" text="0000000" textFill="#100aa7">
+      <TextField fx:id="points" layoutX="868.0" layoutY="562.0" prefHeight="39.0" prefWidth="120.0" text="0000000">
          <font>
             <Font size="24.0" />
          </font>
-      </Label>
+      </TextField>
       <Separator layoutX="647.0" layoutY="600.0" prefHeight="5.0" prefWidth="376.0" />
       <Label layoutX="647.0" layoutY="609.0" prefHeight="39.0" prefWidth="108.0" text="TOTAL" textFill="#45439e">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="total" layoutX="870.0" layoutY="609.0" prefHeight="39.0" prefWidth="108.0" text="000.00 €" textFill="#45439e">
+      <TextField fx:id="total" layoutX="870.0" layoutY="609.0" prefHeight="39.0" prefWidth="108.0" text="000.00 €">
          <font>
             <Font size="24.0" />
          </font>
-      </Label>
+      </TextField>
       <Button layoutX="897.0" layoutY="665.0" mnemonicParsing="false" onAction="#buy" prefHeight="40.0" prefWidth="132.0" style="-fx-background-color: #008f39;" text="Buy now" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
