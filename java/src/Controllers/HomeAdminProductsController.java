@@ -1,6 +1,5 @@
 package Controllers;
 
-import DB_Handler.DBOrder;
 import DB_Handler.DBProduct;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,8 +11,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import obj.Order;
 import obj.Product;
 
 import java.io.IOException;
@@ -30,7 +30,7 @@ public class HomeAdminProductsController {
     @FXML TextField user;
     @FXML ComboBox<String> typeSearch;
     @FXML TextField searchParameter;
-    @FXML TableView<Product> productsTable = new TableView<>();
+    @FXML TableView<Product> productTable = new TableView<>();
 
     State state = State.getInstance();
 
@@ -39,7 +39,7 @@ public class HomeAdminProductsController {
             DBProduct dbProductController = new DBProduct(con);
             List<Product> products = dbProductController.getProducts();
             if (products != null) {
-                ObservableList<Product> data = productsTable.getItems();
+                ObservableList<Product> data = productTable.getItems();
                 data.removeAll(data);
                 data.addAll(products);
             } else {
@@ -82,11 +82,21 @@ public class HomeAdminProductsController {
     }
 
     public void seeOrders(ActionEvent event) {
-        newScene(event, "/HomeAdminProducts.fxml");
+        newScene(event, "/HomeAdminOrders.fxml");
     }
 
     public void addProduct(ActionEvent event) {
-        // TODO
+        try {
+            Parent tableViewParent = FXMLLoader.load(getClass().getResource("/PopupAdminProductAdd.fxml"));
+            Scene tableViewScene = new Scene(tableViewParent);
+            Stage pointsStage = new Stage();
+            pointsStage.setScene(tableViewScene);
+            pointsStage.setTitle("Verdo's Shop");
+            pointsStage.getIcons().add(new Image("/logo.jpg"));
+            pointsStage.show();
+        } catch (IOException e) {
+            System.out.println("Error loading fidelity card");
+        }
     }
 
     public void search(ActionEvent event) {
@@ -99,7 +109,7 @@ public class HomeAdminProductsController {
             else
                 filteredProducts = dbProductController.searchProducts(col, searchParameter.getText());
 
-            ObservableList<Product> data = productsTable.getItems();
+            ObservableList<Product> data = productTable.getItems();
             data.removeAll(data);
             data.addAll(filteredProducts);
 
@@ -116,6 +126,42 @@ public class HomeAdminProductsController {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();
+    }
+
+    public void click(MouseEvent event) {
+        /*if(event.getClickCount() >= 2) {
+            try {
+                Parent tableViewParent = FXMLLoader.load(getClass().getResource("/PopupAdminProductSetup.fxml"));
+                Scene tableViewScene = new Scene(tableViewParent);
+                Stage pointsStage = new Stage();
+                pointsStage.setScene(tableViewScene);
+                pointsStage.setTitle("Verdo's Shop");
+                pointsStage.getIcons().add(new Image("/logo.jpg"));
+                pointsStage.show();
+            } catch (IOException e) {
+                System.out.println("Error loading product setup");
+            }
+        }*/
+
+        if (event.getClickCount() >= 2) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/PopupAdminProductSetup.fxml"));
+                Parent root = loader.load();
+
+                //The following both lines are the only addition we need to pass the arguments
+                PopupAdminProductSetupController controller2 = loader.getController();
+                Product myProduct = productTable.getSelectionModel().getSelectedItem();
+                controller2.setProduct(myProduct);
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Product modify");
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

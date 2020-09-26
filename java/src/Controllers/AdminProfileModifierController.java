@@ -123,7 +123,7 @@ public class AdminProfileModifierController {
             User updatedUser = dbUserController.updateUser(newUserData);
             if(updatedUser != null) {
                 state.setCurrentUser(updatedUser);
-                Parent tableViewParent =  FXMLLoader.load(getClass().getResource("/Home.fxml"));
+                Parent tableViewParent =  FXMLLoader.load(getClass().getResource("/HomeAdminOrders.fxml"));
                 Scene tableViewScene = new Scene(tableViewParent);
                 Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
                 window.setScene(tableViewScene);

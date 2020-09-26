@@ -1,25 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.geometry.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="422.0" prefWidth="622.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Store.RegisterController">
+<AnchorPane prefHeight="422.0" prefWidth="622.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.PopupAdminProductAddController">
    <children>
       <Label layoutX="169.0" layoutY="21.0" prefHeight="29.0" prefWidth="259.0" text="New product insertion" textFill="#4727ea">
          <font>
@@ -27,51 +16,45 @@
          </font>
       </Label>
       <Separator layoutX="17.0" layoutY="57.0" prefHeight="3.0" prefWidth="588.0" style="-fx-background-color: #000000;" />
-      <Label layoutX="22.0" layoutY="78.0" prefHeight="17.0" prefWidth="53.0" text="Unit:" textFill="#4727ea">
+      <Label layoutX="22.0" layoutY="78.0" prefHeight="17.0" prefWidth="53.0" text="Type:" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="name2" layoutX="121.0" layoutY="73.0" promptText="Frutta" />
+      <TextField fx:id="tipo" layoutX="121.0" layoutY="73.0" promptText="Frutta" />
       <Label layoutX="22.0" layoutY="116.0" prefHeight="17.0" prefWidth="53.0" text="Name:" textFill="#270cc3">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font></Label>
-      <TextField fx:id="name" layoutX="121.0" layoutY="111.0" promptText="Mela" />
+      <TextField fx:id="nome" layoutX="121.0" layoutY="111.0" promptText="Mela" />
       <Label layoutX="22.0" layoutY="158.0" text="Brand:" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font></Label>
-      <TextField fx:id="name21" layoutX="121.0" layoutY="152.0" promptText="Melinda" />
-      <Label layoutX="22.0" layoutY="204.0" prefHeight="15.0" prefWidth="90.0" text="Price per pack:" textFill="#4727ea">
+      <TextField fx:id="marca" layoutX="121.0" layoutY="152.0" promptText="Melinda" />
+      <Label layoutX="22.0" layoutY="204.0" prefHeight="15.0" prefWidth="90.0" text="Quantity per pack:" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font></Label>
-      <TextField fx:id="name22" layoutX="121.0" layoutY="198.0" promptText="-" />
+      <TextField fx:id="quantita_conf" layoutX="121.0" layoutY="198.0" promptText="-" />
       <Label layoutX="24.0" layoutY="244.0" prefHeight="17.0" prefWidth="47.0" text="Price:" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="name221" layoutX="121.0" layoutY="239.0" promptText="0,1" />
+      <TextField fx:id="prezzo" layoutX="121.0" layoutY="239.0" promptText="0,1" />
       <Label layoutX="24.0" layoutY="281.0" prefHeight="17.0" prefWidth="74.0" text="Desciption:" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font></Label>
-      <ChoiceBox layoutX="121.0" layoutY="281.0" prefHeight="27.0" prefWidth="167.0" AnchorPane.bottomAnchor="94.0" AnchorPane.leftAnchor="121.0" AnchorPane.rightAnchor="334.0" AnchorPane.topAnchor="281.0">
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-      </ChoiceBox>
+      <TextArea fx:id="descrizione" layoutX="121.0" layoutY="275.0" prefHeight="63.0" prefWidth="161.0" />
       <Label layoutX="24.0" layoutY="350.0" prefHeight="17.0" prefWidth="90.0" text="Units in stock:" textFill="#4727ea">
          <font>
             <Font name="Open Sans Semibold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="name2211" layoutX="121.0" layoutY="345.0" promptText="100" />
-      <Button layoutX="445.0" layoutY="358.0" mnemonicParsing="false" onAction="#handleAddButton" prefHeight="37.0" prefWidth="139.0" style="    -fx-background-color:         #090a0c,         linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),         linear-gradient(#20262b, #191d22),         radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));     -fx-background-radius: 5,4,3,5;     -fx-background-insets: 0,1,2,0;     -fx-text-fill: white;     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Add product" textFill="WHITE" />
+      <TextField fx:id="quantita" layoutX="121.0" layoutY="345.0" promptText="100" />
+      <Button layoutX="445.0" layoutY="161.0" mnemonicParsing="false" onAction="#cancelButtonPressed" prefHeight="37.0" prefWidth="139.0" style="    -fx-background-color:         #090a0c,         linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),         linear-gradient(#20262b, #191d22),         radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));     -fx-background-radius: 5,4,3,5;     -fx-background-insets: 0,1,2,0;     -fx-text-fill: white;     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Cancel" textFill="WHITE" />
+      <Button layoutX="445.0" layoutY="234.0" mnemonicParsing="false" onAction="#addButtonPressed" prefHeight="37.0" prefWidth="139.0" style="    -fx-background-color:         #090a0c,         linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),         linear-gradient(#20262b, #191d22),         radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));     -fx-background-radius: 5,4,3,5;     -fx-background-insets: 0,1,2,0;     -fx-text-fill: white;     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Add product" textFill="WHITE" />
    </children>
 </AnchorPane>
