@@ -90,6 +90,7 @@ public class Order {
             }
         }
         prodottiOrdine.add(new ProductInOrder(prodotto.getId(), prodotto.getNome(), prodotto.getMarca(), prodotto.getDescrizione(), 1, prodotto.getQuantita_conf(), prodotto.getPrezzo()));
+        System.out.print(prodottiOrdine);
     }
 
     public void removeProduct(Product prodotto) {
@@ -115,6 +116,13 @@ public class Order {
             saldoPunti=saldoPuntiBase+totale.intValue();
             prodottiOrdine.remove(p);
         }
+    }
+
+    public BigDecimal getTotalOfOrder(){
+        BigDecimal total = BigDecimal.ZERO;
+        for(ProductInOrder p : prodottiOrdine)
+            total.add(p.getTotale());
+        return total;
     }
 
     @Override

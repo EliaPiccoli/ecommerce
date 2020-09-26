@@ -33,6 +33,14 @@ public class State {
         this.currentOrder = new Order(null, null, null, currentUser.getEmail(), BigDecimal.ZERO, currentUser.getCartaFed().getSaldo(), new ArrayList<>(), null, null);
     }
 
+    public Order getCurrentOrder() {
+        return currentOrder;
+    }
+
+    public void setCurrentOrder(Order currentOrder) {
+        this.currentOrder = currentOrder;
+    }
+
     public void addProduct(Product prod) {
         this.currentOrder.addProduct(prod);
     }

@@ -1,26 +1,55 @@
 package Controllers;
 
+import DB_Handler.DBProduct;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 import System.State;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import obj.Product;
+import obj.ProductInOrder;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClientBasketController {
     @FXML private TextField user;
+    @FXML private ComboBox<String> typeSearch;
+    @FXML private TextField searchParameter;
+    @FXML private TableView<ProductInOrder> productsTable;
+    @FXML private Label points;
+    @FXML private Label total;
 
     private final State state = State.getInstance();
 
     public void initialize() {
         user.setText(state.getCurrentUser().getEmail());
+
+        ObservableList<ProductInOrder> data = productsTable.getItems();
+        data.removeAll(data);
+        data.addAll(state.getCurrentOrder().getProdottiOrdine());
+
+        points.setText(String.valueOf(state.getCurrentOrder().getTotalOfOrder().toBigInteger()));
+        total.setText(state.getCurrentOrder().getTotalOfOrder() + " €");
+
+        ObservableList<String> data2 = typeSearch.getItems();
+        data2.removeAll(data2);
+        data2.addAll("Show All", "Nome", "Marca");
+        typeSearch.getSelectionModel().selectFirst();
     }
 
     private void newScene(ActionEvent event, String path) {
@@ -54,7 +83,28 @@ public class ClientBasketController {
     }
 
     public void search() {
-        System.out.println("Search");
+        ObservableList<ProductInOrder> data = productsTable.getItems();
+        data.removeAll(data);
+        switch (typeSearch.getSelectionModel().getSelectedItem()) {
+            case "Show All" -> {
+                data.addAll(state.getCurrentOrder().getProdottiOrdine());
+                break;
+            }
+            case "Nome" -> {
+                state.getCurrentOrder().getProdottiOrdine().forEach(p -> {
+                    if (p.getNome().toLowerCase().equals(searchParameter.getText().toLowerCase()))
+                        data.add(p);
+                });
+                break;
+            }
+            case "Marca" -> {
+                state.getCurrentOrder().getProdottiOrdine().forEach(p -> {
+                    if (p.getMarca().toLowerCase().equals(searchParameter.getText().toLowerCase()))
+                        data.add(p);
+                });
+                break;
+            }
+        }
     }
 
     public void products(ActionEvent e) {

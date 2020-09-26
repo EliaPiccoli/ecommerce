@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.*?>
 
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="1054.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ClientBasketController">
    <children>
       <Label layoutX="40.0" layoutY="26.0" prefHeight="59.0" prefWidth="184.0" text="Super" textFill="#02048a">
@@ -66,7 +67,7 @@
          </font>
       </Button>
       <ComboBox fx:id="typeSearch" layoutX="203.0" layoutY="104.0" prefHeight="40.0" prefWidth="150.0" />
-      <TextField layoutX="372.0" layoutY="104.0" prefHeight="40.0" prefWidth="419.0" promptText="Type, Name, Brand" />
+      <TextField fx:id="searchParameter" layoutX="372.0" layoutY="104.0" prefHeight="40.0" prefWidth="419.0" promptText="Name, Brand" />
       <Button layoutX="842.0" layoutY="104.0" mnemonicParsing="false" onAction="#products" prefHeight="34.0" prefWidth="180.0" style="-fx-background-color: #003399;" text="Keep choosing" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -75,15 +76,28 @@
             <Font name="Ubuntu" size="20.0" />
          </font>
       </Button>
-      <TableView fx:id="ordersTable" layoutX="39.0" layoutY="159.0" prefHeight="332.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
+      <TableView fx:id="productsTable" layoutX="39.0" layoutY="159.0" prefHeight="332.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
         <columns>
-            <TableColumn fx:id="colID1" prefWidth="154.0" text="Type" />
-          <TableColumn fx:id="colID" prefWidth="98.0" text="Name" />
-            <TableColumn fx:id="colDescr" prefWidth="143.0" text="Brand" />
-            <TableColumn fx:id="colPonts1" prefWidth="107.0" text="Description" />
-            <TableColumn fx:id="colPonts" prefWidth="103.0" text="Quantity" />
-            <TableColumn fx:id="colDate" prefWidth="174.0" text="Price" />
-            <TableColumn fx:id="colStat" prefWidth="168.0" text="Status" />
+            <TableColumn fx:id="colID1" prefWidth="154.0" text="Name">
+               <cellValueFactory>
+                  <PropertyValueFactory property="nome" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="colID" prefWidth="98.0" text="Brand">
+               <cellValueFactory>
+                  <PropertyValueFactory property="marca" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="colDescr" prefWidth="143.0" text="Quantity">
+               <cellValueFactory>
+                  <PropertyValueFactory property="quantita" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="colPonts1" prefWidth="107.0" text="Total">
+               <cellValueFactory>
+                  <PropertyValueFactory property="totale" />
+               </cellValueFactory>
+            </TableColumn>
         </columns>
       </TableView>
       <Text layoutX="39.0" layoutY="552.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shopping delivery date:" wrappingWidth="173.72885131835938">
@@ -127,7 +141,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="totalLabel1" layoutX="868.0" layoutY="562.0" prefHeight="39.0" prefWidth="120.0" text="0000000" textFill="#100aa7">
+      <Label fx:id="points" layoutX="868.0" layoutY="562.0" prefHeight="39.0" prefWidth="120.0" text="0000000" textFill="#100aa7">
          <font>
             <Font size="24.0" />
          </font>
@@ -138,7 +152,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="totalLabel" layoutX="870.0" layoutY="609.0" prefHeight="39.0" prefWidth="108.0" text="000.00 €" textFill="#45439e">
+      <Label fx:id="total" layoutX="870.0" layoutY="609.0" prefHeight="39.0" prefWidth="108.0" text="000.00 €" textFill="#45439e">
          <font>
             <Font size="24.0" />
          </font>
