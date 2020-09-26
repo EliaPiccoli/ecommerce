@@ -136,6 +136,7 @@ public class DBOrder {
         }
     }
 
+    // TODO not all orders are retrieved
     public List<Order> getOrdersOfUser(String loggedUser){
         ordersStatusUpdate(); //aggiorno gli status
         try(PreparedStatement st = con.prepareStatement("SELECT dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, pagamento, stato, po.quantita, id_ordine, id_prodotto, tipo, nome, marca, descrizione, quantita_conf, prezzo FROM ordine o JOIN prodotto_in_ordine po ON o.id=po.id_ordine JOIN prodotto p ON p.id=po.id_prodotto WHERE LOWER(emailCliente) = LOWER(?) ORDER BY id_ordine;")){
@@ -171,6 +172,8 @@ public class DBOrder {
                 }while(rs.next()&&rs.getInt("id_ordine")==id_ordine);
                 orderList.add(new Order(id_ordine, dataConsegna, oraConsegna, emailCliente, totale, saldoPunti, prodottiOrdine, pagamento, stato));
             }while(rs.next());
+
+            System.out.println(orderList);
 
             return orderList;
         }
