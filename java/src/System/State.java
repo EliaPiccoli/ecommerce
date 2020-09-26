@@ -49,4 +49,8 @@ public class State {
         this.currentUser = null;
         this.currentOrder = null;
     }
+
+    public void resetOrder() {
+        this.currentOrder = new Order(null, null, null, currentUser.getEmail(), BigDecimal.ZERO, currentUser.getCartaFed().getSaldo(), new ArrayList<>(), null, null);
+    }
 }

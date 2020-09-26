@@ -133,7 +133,7 @@ public class ClientBasketController {
         newScene(e, "/Home.fxml");
     }
 
-    public void buy() {
+    public void buy(ActionEvent e) {
         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
             System.out.println("Buy");
             Order current = state.getCurrentOrder();
@@ -146,6 +146,8 @@ public class ClientBasketController {
                     s.setInt(1, state.getCurrentUser().getCartaFed().getId());
                     if(s.executeUpdate() == 1) {
                         System.out.println("SUCCESS");
+                        state.resetOrder();
+                        newScene(e, "/Home.fxml");
                     } else {
                         System.out.println("/ff");
                     }
@@ -153,7 +155,7 @@ public class ClientBasketController {
             } else {
                 System.out.println("/ff");
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
             System.out.println("Error connecting to db");
         }
     }
