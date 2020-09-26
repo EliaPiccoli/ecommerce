@@ -33,7 +33,7 @@ public class HomeController {
     @FXML private ComboBox<String> typeSearch;
     @FXML private TextField user;
 
-    State state = State.getInstance();
+    private final State state = State.getInstance();
 
     public void initialize() {
         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
