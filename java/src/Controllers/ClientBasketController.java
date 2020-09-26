@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 
 import System.State;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ import java.io.IOException;
 public class ClientBasketController {
     @FXML private TextField user;
 
-    private State state = State.getInstance();
+    private final State state = State.getInstance();
 
     public void initialize() {
         user.setText(state.getCurrentUser().getEmail());
@@ -35,19 +36,29 @@ public class ClientBasketController {
     }
 
     public void orders(ActionEvent e) {
-        System.out.println("Orders");
+        newScene(e, "/ClientOrderHistory.fxml");
     }
 
     public void points() {
-        System.out.println("Points");
+        try {
+            Parent tableViewParent = FXMLLoader.load(getClass().getResource("/FidelityPoints.fxml"));
+            Scene tableViewScene = new Scene(tableViewParent);
+            Stage pointsStage = new Stage();
+            pointsStage.setScene(tableViewScene);
+            pointsStage.setTitle("Verdo's Shop");
+            pointsStage.getIcons().add(new Image("/logo.jpg"));
+            pointsStage.show();
+        } catch (IOException e) {
+            System.out.println("Error loading fidelity card");
+        }
     }
 
     public void search() {
         System.out.println("Search");
     }
 
-    public void products() {
-        System.out.println("Products");
+    public void products(ActionEvent e) {
+        newScene(e, "/Home.fxml");
     }
 
     public void buy() {
