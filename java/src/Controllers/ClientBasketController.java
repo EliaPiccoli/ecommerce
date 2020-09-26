@@ -8,10 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import System.State;
 import javafx.scene.image.Image;
@@ -23,6 +20,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +31,9 @@ public class ClientBasketController {
     @FXML private TableView<ProductInOrder> productsTable;
     @FXML private TextField points;
     @FXML private TextField total;
+    @FXML private DatePicker date;
+    @FXML private ComboBox<String> hourDelivery;
+    @FXML private ComboBox<String> payment;
 
     private final State state = State.getInstance();
 
@@ -43,9 +44,6 @@ public class ClientBasketController {
         data.removeAll(data);
         data.addAll(state.getCurrentOrder().getProdottiOrdine());
 
-        System.out.print(String.valueOf(state.getCurrentOrder().getTotalOfOrder().toBigInteger()));
-        System.out.print(state.getCurrentOrder().getTotalOfOrder() + " €");
-
         points.setText(String.valueOf(state.getCurrentOrder().getTotalOfOrder().toBigInteger()));
         points.setDisable(true);
         total.setText(state.getCurrentOrder().getTotalOfOrder() + " €");
@@ -55,6 +53,25 @@ public class ClientBasketController {
         data2.removeAll(data2);
         data2.addAll("Show All", "Nome", "Marca");
         typeSearch.getSelectionModel().selectFirst();
+
+        date.setDayCellFactory(picker -> new DateCell() {
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                LocalDate today = LocalDate.now();
+
+                setDisable(empty || date.compareTo(today) < 0 );
+            }
+        });
+
+        ObservableList<String> data3 = hourDelivery.getItems();
+        data3.removeAll(data2);
+        data3.addAll("9:00:00", "10:00:00", "11:00:00", "12:00:00");
+        hourDelivery.getSelectionModel().selectFirst();
+
+        ObservableList<String> data4 = payment.getItems();
+        data4.removeAll(data2);
+        data4.addAll("Carta di Credito", "PayPal", "Consegna");
+        payment.getSelectionModel().selectFirst();
     }
 
     private void newScene(ActionEvent event, String path) {

@@ -122,7 +122,6 @@ public class Order {
         BigDecimal total = BigDecimal.ZERO;
         for(ProductInOrder p : prodottiOrdine) {
             total = total.add(p.getTotale());
-            System.out.println(total + " " + p.getTotale());
         }
         return total;
     }
