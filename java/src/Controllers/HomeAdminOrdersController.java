@@ -31,18 +31,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeAdminOrdersController {
-    @FXML TableView<Order> ordersTable = new TableView<>();
-    @FXML TableView<ProductInOrder> ordersTable1 = new TableView<>();
-    @FXML TextField user;
-    @FXML ComboBox<String> typeSearch;
-    @FXML TextField searchParameter;
-    @FXML TextField pointsBalanceText;
-    @FXML TextField nameText;
-    @FXML TextField phoneText;
-    @FXML TextField addressText;
-    @FXML TextField paymentText;
-    @FXML TextField surnameText;
-    @FXML TextField emailText;
+    @FXML private TableView<Order> ordersTable = new TableView<>();
+    @FXML private TableView<ProductInOrder> ordersTable1 = new TableView<>();
+    @FXML private TextField user;
+    @FXML private ComboBox<String> typeSearch;
+    @FXML private TextField searchParameter;
+    @FXML private TextField pointsBalanceText;
+    @FXML private TextField nameText;
+    @FXML private TextField phoneText;
+    @FXML private TextField addressText;
+    @FXML private TextField paymentText;
+    @FXML private TextField surnameText;
+    @FXML private TextField emailText;
 
     State state = State.getInstance();
 

@@ -12,12 +12,12 @@ import obj.FidelityCard;
 import obj.User;
 
 public class FidelityPointsController {
-    @FXML Button close;
-    @FXML TextField mail;
-    @FXML TextField points_tot;
-    @FXML TextField IDcardtxt;
-    @FXML TextField DateCardtxt;
-    @FXML Button log;
+    @FXML private Button close;
+    @FXML private TextField mail;
+    @FXML private TextField points_tot;
+    @FXML private TextField IDcardtxt;
+    @FXML private TextField DateCardtxt;
+    @FXML private Button log;
 
     State state = State.getInstance();
 

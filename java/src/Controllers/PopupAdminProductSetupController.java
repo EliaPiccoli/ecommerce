@@ -34,13 +34,13 @@ public class PopupAdminProductSetupController {
 
     private Product product;
 
-    @FXML TextField tipo;
-    @FXML TextField nome;
-    @FXML TextField marca;
-    @FXML TextArea descrizione;
-    @FXML TextField quantita;
-    @FXML TextField quantita_conf;
-    @FXML TextField prezzo;
+    @FXML private TextField tipo;
+    @FXML private TextField nome;
+    @FXML private TextField marca;
+    @FXML private TextArea descrizione;
+    @FXML private TextField quantita;
+    @FXML private TextField quantita_conf;
+    @FXML private TextField prezzo;
 
     public void initialize() {
         /*

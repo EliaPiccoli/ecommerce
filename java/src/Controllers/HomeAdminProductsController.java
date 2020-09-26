@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -27,10 +28,10 @@ import System.State;
 
 public class HomeAdminProductsController {
 
-    @FXML TextField user;
-    @FXML ComboBox<String> typeSearch;
-    @FXML TextField searchParameter;
-    @FXML TableView<Product> productTable = new TableView<>();
+    @FXML private TextField user;
+    @FXML private ComboBox<String> typeSearch;
+    @FXML private TextField searchParameter;
+    @FXML private TableView<Product> productTable = new TableView<>();
 
     State state = State.getInstance();
 
@@ -57,9 +58,9 @@ public class HomeAdminProductsController {
         }
     }
 
-    public void editProfile(ActionEvent event) {
+    private void newScene(ActionEvent event, String path) {
         try {
-            Parent tableViewParent = FXMLLoader.load(getClass().getResource("/AdminProfileModifier.fxml"));
+            Parent tableViewParent = FXMLLoader.load(getClass().getResource(path));
             Scene tableViewScene = new Scene(tableViewParent);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(tableViewScene);
@@ -69,9 +70,9 @@ public class HomeAdminProductsController {
         }
     }
 
-    private void newScene(ActionEvent event, String path) {
+    public void editProfile(ActionEvent event) {
         try {
-            Parent tableViewParent = FXMLLoader.load(getClass().getResource(path));
+            Parent tableViewParent = FXMLLoader.load(getClass().getResource("/AdminProfileModifier.fxml"));
             Scene tableViewScene = new Scene(tableViewParent);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(tableViewScene);

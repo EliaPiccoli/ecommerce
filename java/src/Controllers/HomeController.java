@@ -27,11 +27,12 @@ import java.util.List;
 import System.State;
 
 public class HomeController {
-    @FXML TableView<Product> productTable = new TableView<>();
-    @FXML Button userLogged;
-    @FXML TextField searchParameter;
-    @FXML ComboBox<String> typeSearch;
-    @FXML TextField user;
+    @FXML private TableView<Product> productTable = new TableView<>();
+    @FXML private Button userLogged;
+    @FXML private TextField searchParameter;
+    @FXML private ComboBox<String> typeSearch;
+    @FXML private TextField user;
+
     State state = State.getInstance();
 
     public void initialize() {

@@ -28,12 +28,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClientOrderHistoryController {
-    @FXML Button log;
-    @FXML TextField user;
-    @FXML ComboBox<String> typeSearch;
-    @FXML TableView<Order> ordersTable;
-    @FXML TableView<ProductInOrder> productsInOrder;
-    @FXML TextField searchParameter;
+    @FXML private Button log;
+    @FXML private TextField user;
+    @FXML private ComboBox<String> typeSearch;
+    @FXML private TableView<Order> ordersTable;
+    @FXML private TableView<ProductInOrder> productsInOrder;
+    @FXML private TextField searchParameter;
 
     State state = State.getInstance();
 
