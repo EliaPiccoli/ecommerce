@@ -1,5 +1,6 @@
 package Controllers;
 
+import DB_Handler.DBOrder;
 import DB_Handler.DBProduct;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,13 +14,12 @@ import javafx.scene.control.*;
 import System.State;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import obj.Order;
 import obj.Product;
 import obj.ProductInOrder;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -134,6 +134,27 @@ public class ClientBasketController {
     }
 
     public void buy() {
-        System.out.println("Buy");
+        try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
+            System.out.println("Buy");
+            Order current = state.getCurrentOrder();
+            current.setDataConsegna(Date.valueOf(date.getValue()));
+            current.setOraConsegna(Time.valueOf(hourDelivery.getSelectionModel().getSelectedItem()));
+            current.setPagamento(payment.getSelectionModel().getSelectedItem());
+            DBOrder dbOrderController = new DBOrder(con);
+            if(dbOrderController.insertOrder(current)) {
+                try (PreparedStatement s = con.prepareStatement(String.format("UPDATE cartafed SET saldo = saldo + %d WHERE id = ?", Integer.valueOf(points.getText())))) {
+                    s.setInt(1, state.getCurrentUser().getCartaFed().getId());
+                    if(s.executeUpdate() == 1) {
+                        System.out.println("SUCCESS");
+                    } else {
+                        System.out.println("/ff");
+                    }
+                }
+            } else {
+                System.out.println("/ff");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error connecting to db");
+        }
     }
 }

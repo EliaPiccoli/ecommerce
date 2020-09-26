@@ -40,8 +40,8 @@ public class DBOrder {
                 if(timeDiff < 0)
                     status = "Consegnato";
                 else if(timeDiff < 24*60*60*1000L)
-                    status = "Confermato";
-                else status = "In preparazione";
+                    status = "In preparazione";
+                else status = "Confermato";
 
                 st.setString(1, status);
                 st.setInt(2, ordine.getId());
