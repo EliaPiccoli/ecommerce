@@ -16,7 +16,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.sql.*;
 
-import static java.lang.System.exit;
+import System.State;
 
 public class SignUpController {
     @FXML private Button registerButton;
@@ -29,7 +29,8 @@ public class SignUpController {
     @FXML private TextField telNum;
     @FXML private TextField email;
     @FXML private TextField password;
-    @FXML private TextField cardCode;
+
+    private final State state = State.getInstance();
 
     private boolean verifyTextField() {
         if (name.getText() == null || name.getText().trim().isEmpty())
@@ -101,9 +102,15 @@ public class SignUpController {
         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
             DBUser dbUserConnector = new DBUser(con);
             if (!dbUserConnector.checkUser(email.getText(), password.getText())) {
-                boolean insert = dbUserConnector.insertUser(new User(email.getText(), name.getText(), surname.getText(), address.getText(), city.getText(), cap.getText(), telNum.getText(), password.getText(), "Cliente"));
+                User newUser = new User(email.getText(), name.getText(), surname.getText(), address.getText(), city.getText(), cap.getText(), telNum.getText(), password.getText(), "Cliente");
+                boolean insert = dbUserConnector.insertUser(newUser);
                 if (insert) {
                     System.out.println("User added to db");
+                    User completeUser = dbUserConnector.getUser(newUser.getEmail());
+                    if(completeUser != null)
+                        state.setCurrentUser(completeUser);
+                    else
+                        System.out.println("/ff");
                     Parent tableViewParent = FXMLLoader.load(getClass().getResource("/Home.fxml"));
                     Scene tableViewScene = new Scene(tableViewParent);
                     Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
