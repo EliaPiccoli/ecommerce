@@ -108,18 +108,18 @@ public class ClientBasketController {
         ObservableList<ProductInOrder> data = productsTable.getItems();
         data.removeAll(data);
         switch (typeSearch.getSelectionModel().getSelectedItem()) {
-            case "Show All" -> {
+            case "Show All" : {
                 data.addAll(state.getCurrentOrder().getProdottiOrdine());
                 break;
             }
-            case "Nome" -> {
+            case "Nome" : {
                 state.getCurrentOrder().getProdottiOrdine().forEach(p -> {
                     if (p.getNome().toLowerCase().equals(searchParameter.getText().toLowerCase()))
                         data.add(p);
                 });
                 break;
             }
-            case "Marca" -> {
+            case "Marca" : {
                 state.getCurrentOrder().getProdottiOrdine().forEach(p -> {
                     if (p.getMarca().toLowerCase().equals(searchParameter.getText().toLowerCase()))
                         data.add(p);
