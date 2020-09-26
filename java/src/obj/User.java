@@ -1,18 +1,17 @@
 package obj;
 
 public class User {
-
-    String email;
-    String matricola;
-    String nome;
-    String cognome;
-    String indirizzo;
-    String citta;
-    String cap;
-    String telefono;
-    String password;
-    FidelityCard cartaFedelta;
-    String ruolo;
+    private String email;
+    private String matricola;
+    private String nome;
+    private String cognome;
+    private String indirizzo;
+    private String citta;
+    private String cap;
+    private String telefono;
+    private String password;
+    private FidelityCard cartaFedelta;
+    private String ruolo;
 
     public User(String email, String nome, String cognome, String indirizzo, String citta, String cap, String telefono, String password, String ruolo) {
         this.email = email;

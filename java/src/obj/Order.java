@@ -7,16 +7,16 @@ import java.util.List;
 
 public class Order {
 
-    Integer id;
-    Date dataConsegna;
-    Time oraConsegna;
-    String emailCliente;
-    BigDecimal totale;
-    Integer saldoPuntiBase;
-    Integer saldoPunti;
-    List<ProductInOrder> prodottiOrdine;
-    String pagamento;
-    String stato;
+    private Integer id;
+    private Date dataConsegna;
+    private Time oraConsegna;
+    private String emailCliente;
+    private BigDecimal totale;
+    private Integer saldoPuntiBase;
+    private Integer saldoPunti;
+    private List<ProductInOrder> prodottiOrdine;
+    private String pagamento;
+    private String stato;
 
 
     public Order(Integer id, Date dataConsegna, Time oraConsegna, String emailCliente, BigDecimal totale, Integer saldoPunti, List<ProductInOrder> prodottiOrdine, String pagamento, String stato){

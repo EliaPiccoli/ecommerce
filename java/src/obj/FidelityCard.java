@@ -4,9 +4,9 @@ import java.sql.Date;
 
 public class FidelityCard {
 
-    Integer id;
-    Date dataEmissione;
-    Integer saldo;
+    private Integer id;
+    private Date dataEmissione;
+    private Integer saldo;
 
     public FidelityCard(Integer id, Date dataEmissione, Integer saldo) {
         this.id=id;

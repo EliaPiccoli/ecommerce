@@ -3,11 +3,11 @@ package obj;
 import java.math.BigDecimal;
 
 public class ProductInOrder {
-    Integer id;
-    String nome;
-    String marca;
-    Integer quantita;
-    BigDecimal totale;
+    private Integer id;
+    private String nome;
+    private String marca;
+    private Integer quantita;
+    private BigDecimal totale;
 
     public ProductInOrder(Integer id, String nome, String marca, String descrizione, Integer quantita, Integer quantita_conf, BigDecimal prezzo) {
         this.id = id;
