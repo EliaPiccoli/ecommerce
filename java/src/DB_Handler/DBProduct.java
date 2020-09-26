@@ -93,7 +93,7 @@ public class DBProduct {
         }
     }
 
-    private Boolean insertProduct(String tipo, String nome, String marca, String descrizione, Integer quantita, Integer quantita_conf, BigDecimal prezzo){
+    public Boolean insertProduct(String tipo, String nome, String marca, String descrizione, Integer quantita, Integer quantita_conf, BigDecimal prezzo){
         try(PreparedStatement st = con.prepareStatement("INSERT INTO prodotto (tipo, nome, marca, descrizione, quantita, quantita_conf, prezzo) VALUES(?, ?, ?, ?, ?, ?, ?);")){
             st.setString(1, tipo);
             st.setString(2, nome);

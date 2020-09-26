@@ -242,7 +242,7 @@ INSERT INTO CARTAFED(DataEmissione, Saldo)
 VALUES('2001-09-11','000000'),
       ('2012-12-12','000000'),
       ('2018-01-20','000000'),
-      ('2020-09-19','000000');
+      ('2020-09-19','23');
 
 INSERT INTO UTENTE(Matricola, Nome, Cognome, Indirizzo, Citta, Cap, Email, Telefono, Password, CartaFed, Ruolo)
 VALUES

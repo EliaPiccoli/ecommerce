@@ -98,9 +98,9 @@
       </Label>
       <TableView fx:id="productsInOrder" layoutX="195.0" layoutY="383.0" prefHeight="318.0" prefWidth="836.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
          <columns>
-            <TableColumn fx:id="colDate11" minWidth="0.0" prefWidth="172.0" text="Unit">
+            <TableColumn fx:id="colDate11" minWidth="0.0" prefWidth="172.0" text="Units">
                <cellValueFactory>
-                  <PropertyValueFactory property="id" />
+                  <PropertyValueFactory property="quantita" />
                </cellValueFactory>
             </TableColumn>
             <TableColumn fx:id="colID1" prefWidth="245.0" text="Name">
@@ -113,7 +113,7 @@
                   <PropertyValueFactory property="marca" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="colDate21" prefWidth="173.0" text="Totale">
+            <TableColumn fx:id="colDate21" prefWidth="173.0" text="Total">
                <cellValueFactory>
                   <PropertyValueFactory property="totale" />
                </cellValueFactory>

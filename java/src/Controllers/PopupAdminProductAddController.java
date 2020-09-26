@@ -27,23 +27,13 @@ public class PopupAdminProductAddController {
 
     public void initialize() { }
 
+    // TODO price error
     public void addButtonPressed(ActionEvent event) throws IOException {
-
-        /*if (!vefifyTextField()) {
-            AlertBox.display("Error", "All field must be filled", false);
-            return;
-        }
-        if (!checkRightFormat()) return;
-        */
-
         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
             DBProduct dbProductController = new DBProduct(con);
-            //Product newProduct = new Product(null, tipo.getText(), nome.getText(), marca.getText(), descrizione.getText(), Integer.parseInt(quantita.getText()), Integer.parseInt(quantita_conf.getText()), new BigDecimal(11.0)); //BigDecimal.valueOf(Double.valueOf(prezzo.getText()))
             Product newProduct = new Product();
-            //newProduct.setProduct(tipo.getText(), nome.getText(), marca.getText(), descrizione.getText(), Integer.parseInt(quantita.getText()), Integer.parseInt(quantita_conf.getText()), new BigDecimal(11.0));
-            //Product newProduct = new Product(this.product.getId(), "myTipo", "myNome", "myMarca", "myDescrizione", 1, 5, new BigDecimal(11.0));
-            Product updatedProduct = dbProductController.insertProduct(tipo.getText(), nome.getText(), marca.getText(), descrizione.getText(), Integer.parseInt(quantita.getText()), Integer.parseInt(quantita_conf.getText()), new BigDecimal(11.0));
-            if(updatedProduct) {
+            boolean insertProduct = dbProductController.insertProduct(tipo.getText(), nome.getText(), marca.getText(), descrizione.getText(), Integer.parseInt(quantita.getText()), Integer.parseInt(quantita_conf.getText()), new BigDecimal(11.0));
+            if(insertProduct) {
                 Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 window.close();
             }

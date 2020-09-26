@@ -87,9 +87,9 @@
       </Label>
       <TableView fx:id="ordersTable1" layoutX="214.0" layoutY="325.0" prefHeight="127.0" prefWidth="817.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
          <columns>
-            <TableColumn fx:id="idProd" minWidth="0.0" prefWidth="172.0" text="Unit">
+            <TableColumn fx:id="idProd" minWidth="0.0" prefWidth="172.0" text="Units">
                <cellValueFactory>
-                  <PropertyValueFactory property="id" />
+                  <PropertyValueFactory property="quantita" />
                </cellValueFactory>
             </TableColumn>
             <TableColumn fx:id="nome" prefWidth="245.0" text="Name">
