@@ -109,12 +109,14 @@ public class Order {
         System.out.println("\n!!!ERROR!!! You are trying to remove a product that is not in your cart!\n");
     }
 
-    // ?????? should get a list or products ??????
     public void removeAllProducts(Product prodotto) {
         for(ProductInOrder p : prodottiOrdine) {
-            totale=totale.subtract(prodotto.getPrezzo().multiply(BigDecimal.valueOf(prodotto.getQuantita())));
-            saldoPunti=saldoPuntiBase+totale.intValue();
-            prodottiOrdine.remove(p);
+            if(p.getId() == prodotto.getId()) {
+                totale = totale.subtract(prodotto.getPrezzo().multiply(BigDecimal.valueOf(prodotto.getQuantita())));
+                saldoPunti = saldoPuntiBase + totale.intValue();
+                prodottiOrdine.remove(p);
+                break;
+            }
         }
     }
 
