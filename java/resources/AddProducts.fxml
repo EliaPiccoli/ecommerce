@@ -11,7 +11,14 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="181.0" prefWidth="615.0" style="-fx-background-color: #bdc3c7; -fx-border-color: #02048a;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="48.0" layoutY="20.0" prefHeight="41.0" prefWidth="520.0" style="-fx-background-color: #ffffff;">
+      <Text layoutX="50.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="44.71875" />
+      <Label layoutX="97.0" layoutY="20.0" prefHeight="41.0" prefWidth="171.0" style="-fx-background-color: #ffffff;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Text layoutX="308.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity: " wrappingWidth="66.71875" />
+      <Label layoutX="375.0" layoutY="20.0" prefHeight="41.0" prefWidth="73.0" style="-fx-background-color: #ffffff;">
          <font>
             <Font size="18.0" />
          </font>
@@ -22,12 +29,17 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="260.0" layoutY="90.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="-">
+      <Button layoutX="200.0" layoutY="90.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="-">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="470.0" layoutY="90.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="X">
+      <Button layoutX="348.0" layoutY="90.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="X">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="501.0" layoutY="132.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="100.0" style="-fx-background-color: red;" text="Close" textFill="#f8f6f6">
          <font>
             <Font size="18.0" />
          </font>
