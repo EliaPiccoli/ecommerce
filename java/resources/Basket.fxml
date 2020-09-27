@@ -77,7 +77,7 @@
             <Font name="Ubuntu" size="20.0" />
          </font>
       </Button>
-      <TableView fx:id="productsTable" layoutX="39.0" layoutY="159.0" prefHeight="332.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
+      <TableView fx:id="productsTable" onMouseClicked="#click" layoutX="39.0" layoutY="159.0" prefHeight="332.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
         <columns>
             <TableColumn fx:id="colID1" prefWidth="154.0" text="Name">
                <cellValueFactory>

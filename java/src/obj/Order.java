@@ -84,17 +84,20 @@ public class Order {
         totale=totale.add(prodotto.getPrezzo());
         saldoPunti=saldoPuntiBase+totale.intValue();
         for(ProductInOrder p : prodottiOrdine) {
+            p.updateTotal();
             if(p.getId().equals(prodotto.getId())) {
                 p.setQuantita(p.getQuantita()+1);
                 return;
             }
+            p.updateTotal();
         }
         prodottiOrdine.add(new ProductInOrder(prodotto.getId(), prodotto.getNome(), prodotto.getMarca(), prodotto.getDescrizione(), 1, prodotto.getQuantita_conf(), prodotto.getPrezzo()));
         System.out.print(prodottiOrdine);
     }
 
-    public void removeProduct(Product prodotto) {
+    public void removeOneProduct(Product prodotto) {
         for(ProductInOrder p : prodottiOrdine) {
+            p.updateTotal();
             if(p.getId().equals(prodotto.getId())) {
                 totale=totale.subtract(prodotto.getPrezzo());
                 saldoPunti=saldoPuntiBase+totale.intValue();
@@ -105,11 +108,12 @@ public class Order {
                     prodottiOrdine.remove(p);
                 return;
             }
+            p.updateTotal();
         }
         System.out.println("\n!!!ERROR!!! You are trying to remove a product that is not in your cart!\n");
     }
 
-    public void removeAllProducts(Product prodotto) {
+    public void removeProductFromOrder(Product prodotto) {
         for(ProductInOrder p : prodottiOrdine) {
             if(p.getId() == prodotto.getId()) {
                 totale = totale.subtract(prodotto.getPrezzo().multiply(BigDecimal.valueOf(prodotto.getQuantita())));

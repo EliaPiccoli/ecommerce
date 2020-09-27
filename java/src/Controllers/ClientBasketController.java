@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 
 import System.State;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import obj.Order;
 import obj.Product;
@@ -157,6 +158,29 @@ public class ClientBasketController {
             }
         } catch (SQLException ex) {
             System.out.println("Error connecting to db");
+        }
+    }
+
+    public void click(MouseEvent event) {
+        if (event.getClickCount() >= 2) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/AddProducts.fxml"));
+                Parent root = loader.load();
+
+                //The following both lines are the only addition we need to pass the arguments
+                AddProductsController controller2 = loader.getController();
+                ProductInOrder myProduct = productsTable.getSelectionModel().getSelectedItem();
+                controller2.changeProduct(myProduct);
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Product modify");
+                stage.setOnHidden(windowEvent -> { initialize(); });
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

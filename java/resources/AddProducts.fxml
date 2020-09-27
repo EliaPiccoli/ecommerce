@@ -1,48 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="181.0" prefWidth="615.0" style="-fx-background-color: #bdc3c7; -fx-border-color: #02048a;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="615.0" style="-fx-background-color: #bdc3c7; -fx-border-color: #02048a;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddProductsController">
    <children>
-      <Text layoutX="50.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="44.71875" />
-      <Label layoutX="97.0" layoutY="20.0" prefHeight="41.0" prefWidth="171.0" style="-fx-background-color: #ffffff;">
+      <Label fx:id="name" layoutX="28.0" layoutY="20.0" prefHeight="41.0" prefWidth="420.0" style="-fx-background-color: #ffffff;">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Text layoutX="308.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity: " wrappingWidth="66.71875" />
-      <Label layoutX="375.0" layoutY="20.0" prefHeight="41.0" prefWidth="73.0" style="-fx-background-color: #ffffff;">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
+      <Label fx:id="quantita" layoutX="470.0" layoutY="20.0" prefHeight="41.0" prefWidth="120.0" style="-fx-background-color: #ffffff;" />
       <Separator layoutY="73.0" prefHeight="3.0" prefWidth="615.0" style="-fx-background-color: #02048a;" />
-      <Button layoutX="50.0" layoutY="90.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="+">
+      <Button layoutX="50.0" layoutY="90.0" mnemonicParsing="false" onAction="#addOne" prefHeight="50.0" prefWidth="100.0" text="+">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="200.0" layoutY="90.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="-">
+      <Button layoutX="260.0" layoutY="90.0" mnemonicParsing="false" onAction="#removeOne" prefHeight="50.0" prefWidth="100.0" text="-">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="348.0" layoutY="90.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="X">
+      <Button layoutX="470.0" layoutY="90.0" mnemonicParsing="false" onAction="#deleteFromCart" prefHeight="50.0" prefWidth="100.0" text="X">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="501.0" layoutY="132.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="100.0" style="-fx-background-color: red;" text="Close" textFill="#f8f6f6">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
+      <Button onAction="#close" layoutX="260.0" layoutY="156.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Close" />
    </children>
 </Pane>

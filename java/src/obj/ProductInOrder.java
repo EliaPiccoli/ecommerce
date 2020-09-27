@@ -8,12 +8,18 @@ public class ProductInOrder {
     private String marca;
     private Integer quantita;
     private BigDecimal totale;
+    private BigDecimal prezzo;
 
     public ProductInOrder(Integer id, String nome, String marca, String descrizione, Integer quantita, Integer quantita_conf, BigDecimal prezzo) {
         this.id = id;
         this.nome = nome;
         this.marca = marca;
         this.quantita = quantita;
+        this.totale = prezzo.multiply(BigDecimal.valueOf(quantita));
+        this.prezzo = prezzo;
+    }
+
+    public void updateTotal() {
         this.totale = prezzo.multiply(BigDecimal.valueOf(quantita));
     }
 
@@ -35,6 +41,10 @@ public class ProductInOrder {
 
     public BigDecimal getTotale() {
         return totale;
+    }
+
+    public BigDecimal getPrezzo() {
+        return prezzo;
     }
 
     public void setQuantita(Integer quantita) {
