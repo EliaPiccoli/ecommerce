@@ -28,11 +28,10 @@ public class PopupAdminProductAddController {
     public void initialize() { }
 
     // TODO price error
-    public void addButtonPressed(ActionEvent event) throws IOException {
+    public void addButtonPressed(ActionEvent event) {
         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
             DBProduct dbProductController = new DBProduct(con);
-            Product newProduct = new Product();
-            boolean insertProduct = dbProductController.insertProduct(tipo.getText(), nome.getText(), marca.getText(), descrizione.getText(), Integer.parseInt(quantita.getText()), Integer.parseInt(quantita_conf.getText()), new BigDecimal(11.0));
+            boolean insertProduct = dbProductController.insertProduct(tipo.getText(), nome.getText(), marca.getText(), descrizione.getText(), Integer.parseInt(quantita.getText()), Integer.parseInt(quantita_conf.getText()), BigDecimal.valueOf(Double.parseDouble(prezzo.getText())));
             if(insertProduct) {
                 Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 window.close();
@@ -46,5 +45,4 @@ public class PopupAdminProductAddController {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.close();
     }
-
 }
