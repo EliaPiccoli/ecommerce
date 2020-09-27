@@ -77,7 +77,7 @@
             <Font name="Ubuntu" size="20.0" />
          </font>
       </Button>
-      <TableView fx:id="productsTable" onMouseClicked="#click" layoutX="39.0" layoutY="159.0" prefHeight="332.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
+      <TableView fx:id="productsTable" layoutX="39.0" layoutY="159.0" onMouseClicked="#click" prefHeight="332.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
         <columns>
             <TableColumn fx:id="colID1" prefWidth="154.0" text="Name">
                <cellValueFactory>
@@ -119,7 +119,7 @@
          </font>
       </Text>
       <ComboBox fx:id="payment" layoutX="215.0" layoutY="648.0" prefHeight="34.0" prefWidth="206.0" />
-      <Label layoutX="644.0" layoutY="503.0" prefHeight="44.0" prefWidth="165.0" text="Checkout" textFill="#45439e">
+      <Label layoutX="644.0" layoutY="500.0" prefHeight="44.0" prefWidth="165.0" text="Checkout" textFill="#45439e">
          <font>
             <Font name="ATROX normal" size="36.0" />
          </font>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.cell.*?>
 <?import java.lang.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.layout.*?>
@@ -7,8 +8,8 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.*?>
-
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="1054.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ClientOrderHistoryController">
    <children>
       <Label layoutX="39.0" layoutY="22.0" text="Super" textFill="#02048a">
@@ -16,7 +17,7 @@
             <Font name="Ubuntu" size="47.0" />
          </font>
       </Label>
-      <Label layoutX="43.0" layoutY="72.0" text="Orders History" textFill="#02048a">
+      <Label layoutX="44.0" layoutY="75.0" text="Orders History" textFill="#02048a">
          <font>
             <Font size="14.0" />
          </font>
@@ -57,7 +58,7 @@
             <Font name="Ubuntu" size="20.0" />
          </font>
       </TextField>
-      <TableView fx:id="ordersTable" onMouseClicked="#click" layoutX="39.0" layoutY="160.0" prefHeight="208.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
+      <TableView fx:id="ordersTable" layoutX="39.0" layoutY="160.0" onMouseClicked="#click" prefHeight="208.0" prefWidth="990.0" style="-fx-border-color: #02048a; -fx-background-color: #bdc3c7;">
         <columns>
           <TableColumn fx:id="id" prefWidth="167.0" text="Order ID">
            <cellValueFactory>
