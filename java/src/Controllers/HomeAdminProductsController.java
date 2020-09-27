@@ -3,6 +3,7 @@ package Controllers;
 import DB_Handler.DBProduct;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -15,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import obj.Product;
 
 import java.io.IOException;
@@ -94,6 +96,9 @@ public class HomeAdminProductsController {
             pointsStage.setScene(tableViewScene);
             pointsStage.setTitle("Verdo's Shop");
             pointsStage.getIcons().add(new Image("/logo.jpg"));
+            pointsStage.setOnHidden(window -> {
+                initialize();
+            });
             pointsStage.show();
         } catch (IOException e) {
             System.out.println("Error loading fidelity card");
