@@ -22,6 +22,7 @@ import obj.ProductInOrder;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,13 +56,14 @@ public class ClientBasketController {
         data2.addAll("Show All", "Nome", "Marca");
         typeSearch.getSelectionModel().selectFirst();
 
-        date.setValue(LocalDate.now());
+        date.setValue(LocalDate.now().plus(1, ChronoUnit.DAYS));
         date.setDayCellFactory(picker -> new DateCell() {
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
                 LocalDate today = LocalDate.now();
+                LocalDate tomorrow = today.plus(1, ChronoUnit.DAYS);
 
-                setDisable(empty || date.compareTo(today) < 0 );
+                setDisable(empty || date.compareTo(tomorrow) < 0 );
             }
         });
 
