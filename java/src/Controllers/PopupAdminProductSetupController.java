@@ -53,7 +53,7 @@ public class PopupAdminProductSetupController {
     public void saveButtonPressed(ActionEvent event) throws IOException {
         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce", "postgres", "postgres")) {
             DBProduct dbProductController = new DBProduct(con);
-            Product newProduct = new Product(this.product.getId(), tipo.getText(), nome.getText(), marca.getText(), descrizione.getText(), Integer.parseInt(quantita.getText()), Integer.parseInt(quantita_conf.getText()), BigDecimal.valueOf(Double.parseDouble(prezzo.getText())));
+            Product newProduct = new Product(this.product.getId(), tipo.getText(), nome.getText(), marca.getText(), descrizione.getText(), Integer.parseInt(quantita.getText()), Integer.parseInt(quantita_conf.getText()), BigDecimal.valueOf(Double.parseDouble(prezzo.getText().replace(",", "."))));
             Product updatedProduct = dbProductController.updateProduct(newProduct);
             if(updatedProduct != null) {
                 Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
