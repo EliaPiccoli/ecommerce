@@ -24,7 +24,7 @@ public class AddProductsController {
 
     private final State state = State.getInstance();
 
-    ProductInOrder myProduct;
+    private ProductInOrder myProduct;
 
     public void initialize() {
     }

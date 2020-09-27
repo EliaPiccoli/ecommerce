@@ -83,16 +83,17 @@ public class Order {
     public void addProduct(Product prodotto) {
         totale=totale.add(prodotto.getPrezzo());
         saldoPunti=saldoPuntiBase+totale.intValue();
+        boolean newProduct = true;
         for(ProductInOrder p : prodottiOrdine) {
             p.updateTotal();
             if(p.getId().equals(prodotto.getId())) {
                 p.setQuantita(p.getQuantita()+1);
-                return;
+                newProduct = false;
             }
             p.updateTotal();
         }
-        prodottiOrdine.add(new ProductInOrder(prodotto.getId(), prodotto.getNome(), prodotto.getMarca(), prodotto.getDescrizione(), 1, prodotto.getQuantita_conf(), prodotto.getPrezzo()));
-        System.out.print(prodottiOrdine);
+        if(newProduct)
+            prodottiOrdine.add(new ProductInOrder(prodotto.getId(), prodotto.getNome(), prodotto.getMarca(), prodotto.getDescrizione(), 1, prodotto.getQuantita_conf(), prodotto.getPrezzo()));
     }
 
     public void removeOneProduct(Product prodotto) {
@@ -106,7 +107,6 @@ public class Order {
                     p.setQuantita(q-1);
                 else
                     prodottiOrdine.remove(p);
-                return;
             }
             p.updateTotal();
         }
