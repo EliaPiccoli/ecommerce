@@ -55,6 +55,7 @@ public class ClientBasketController {
         data2.addAll("Show All", "Nome", "Marca");
         typeSearch.getSelectionModel().selectFirst();
 
+        date.setValue(LocalDate.now());
         date.setDayCellFactory(picker -> new DateCell() {
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);

@@ -135,20 +135,6 @@ public class HomeAdminProductsController {
     }
 
     public void click(MouseEvent event) {
-        /*if(event.getClickCount() >= 2) {
-            try {
-                Parent tableViewParent = FXMLLoader.load(getClass().getResource("/PopupAdminProductSetup.fxml"));
-                Scene tableViewScene = new Scene(tableViewParent);
-                Stage pointsStage = new Stage();
-                pointsStage.setScene(tableViewScene);
-                pointsStage.setTitle("Verdo's Shop");
-                pointsStage.getIcons().add(new Image("/logo.jpg"));
-                pointsStage.show();
-            } catch (IOException e) {
-                System.out.println("Error loading product setup");
-            }
-        }*/
-
         if (event.getClickCount() >= 2) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/PopupAdminProductSetup.fxml"));
@@ -162,6 +148,7 @@ public class HomeAdminProductsController {
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.setTitle("Product modify");
+                stage.setOnHidden(windowEvent -> initialize());
                 stage.show();
 
             } catch (IOException e) {
@@ -169,5 +156,4 @@ public class HomeAdminProductsController {
             }
         }
     }
-
 }
