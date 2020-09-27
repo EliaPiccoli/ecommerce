@@ -17,13 +17,13 @@ public class DBProduct {
         this.con = con;
     }
 
-    public Product getProduct(String id){
+    public Product getProduct(int id){
         try(PreparedStatement st = con.prepareStatement("SELECT * FROM Prodotto WHERE id = ?;")){
-            st.setString(1, id);
+            st.setInt(1, id);
 
             ResultSet rs = st.executeQuery();
             if(rs.next() != false){
-                Product prod = new Product(rs.getInt("id"), rs.getString("tipo"), rs.getString("nome"), rs.getString("marca"), rs.getString("descrizioni"), rs.getInt("quantita"), rs.getInt("quantita_conf"), rs.getBigDecimal("prezzo"));
+                Product prod = new Product(rs.getInt("id"), rs.getString("tipo"), rs.getString("nome"), rs.getString("marca"), rs.getString("descrizione"), rs.getInt("quantita"), rs.getInt("quantita_conf"), rs.getBigDecimal("prezzo"));
                 return prod;
             }
             else{
@@ -64,7 +64,7 @@ public class DBProduct {
 
             int update = st.executeUpdate();
             if(update == 0) throw new SQLException("\nProduct update failed!\n");
-            else return getProduct(prod.getId().toString());
+            else return getProduct(prod.getId());
         }
         catch(SQLException e){
             System.out.println(e);
@@ -85,7 +85,7 @@ public class DBProduct {
 
             int update = st.executeUpdate();
             if(update == 0) throw new SQLException("\nProduct update failed!\n");
-            else return getProduct(prod.getId().toString());
+            else return getProduct(prod.getId());
         }
         catch(SQLException e){
             System.out.println(e);

@@ -150,7 +150,6 @@ public class HomeAdminProductsController {
                 stage.setTitle("Product modify");
                 stage.setOnHidden(windowEvent -> initialize());
                 stage.show();
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
