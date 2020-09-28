@@ -20,7 +20,7 @@ public class Main extends Application {
             Pane root = login.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Verdo's Shop");
+            primaryStage.setTitle("Online Shop");
             primaryStage.getIcons().add(new Image("/logo.jpg"));
             primaryStage.show();
         }

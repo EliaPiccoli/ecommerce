@@ -106,7 +106,7 @@ public class HomeController {
             Scene tableViewScene = new Scene(tableViewParent);
             Stage pointsStage = new Stage();
             pointsStage.setScene(tableViewScene);
-            pointsStage.setTitle("Verdo's Shop");
+            pointsStage.setTitle("Online Shop");
             pointsStage.getIcons().add(new Image("/logo.jpg"));
             pointsStage.show();
         } catch (IOException e) {
